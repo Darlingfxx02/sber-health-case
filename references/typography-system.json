@@ -1,0 +1,101 @@
+{
+  "font": "Open Runde",
+  "weights": [
+    400,
+    500,
+    600
+  ],
+  "implementation": "prototype/typography.css",
+  "principles": [
+    "Естественный межбуквенный интервал для текста",
+    "Иерархия через размер и насыщенность, без лишних подписей",
+    "Серые единицы измерения читаются рядом с числом",
+    "12 px — только короткие подписи графиков, 14 px — вторичная информация, 16 px — основной текст"
+  ],
+  "roles": [
+    {
+      "role": "Подпись графика",
+      "size": 12,
+      "lineHeight": 16,
+      "weight": 400
+    },
+    {
+      "role": "Вторичный текст",
+      "size": 14,
+      "lineHeight": 20,
+      "weight": 400
+    },
+    {
+      "role": "Кнопка / короткая подпись",
+      "size": 14,
+      "lineHeight": 20,
+      "weight": 500
+    },
+    {
+      "role": "Основной текст",
+      "size": 16,
+      "lineHeight": 24,
+      "weight": 400
+    },
+    {
+      "role": "Название карточки",
+      "size": 16,
+      "lineHeight": 22,
+      "weight": 500
+    },
+    {
+      "role": "Единица измерения",
+      "size": 18,
+      "lineHeight": 24,
+      "weight": 500,
+      "color": "#697380"
+    },
+    {
+      "role": "Заголовок раздела",
+      "size": 20,
+      "lineHeight": 26,
+      "weight": 600
+    },
+    {
+      "role": "Заголовок экрана",
+      "size": 28,
+      "lineHeight": 34,
+      "weight": 600
+    },
+    {
+      "role": "Значение метрики",
+      "size": 36,
+      "lineHeight": 40,
+      "weight": 500,
+      "narrowScreen": "30/38 при ширине до 360 px"
+    }
+  ],
+  "cards": {
+    "layout": "2 колонки",
+    "surface": "Белая, без декоративных изображений и градиентов",
+    "content": "Название, последнее значение с единицей, график за неделю",
+    "data": "Демонстрационные; даты совпадают с фиксированной неделей центра активности"
+  },
+  "sources": [
+    {
+      "title": "Open Runde — официальный репозиторий",
+      "url": "https://github.com/lauridskern/open-runde"
+    },
+    {
+      "title": "Material — Typography",
+      "url": "https://m1.material.io/style/typography.html"
+    },
+    {
+      "title": "Material Web — Typography tokens",
+      "url": "https://github.com/material-components/material-web/blob/main/docs/theming/typography.md"
+    },
+    {
+      "title": "Google Health (Fitbit) — основной визуальный референс, подтверждён пользователем",
+      "url": "https://mobbin.com/screens/7aa64874-832e-467e-afcc-7e7ee6f11f0d"
+    },
+    {
+      "title": "MacroFactor — исследование иерархии показателей",
+      "url": "https://mobbin.com/screens/ebffde36-4c1a-407f-9551-1ba794fe3c8e"
+    }
+  ]
+}

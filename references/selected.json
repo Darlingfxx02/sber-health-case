@@ -1,0 +1,95 @@
+{
+  "fileKey": "aizNMC6YoCzmeYVBKOD4dS",
+  "criteria": "Только заполненные главные экраны трекеров. Исключены онбординг, пустые и заблокированные состояния, деталки, виджеты, рекламные и чат-оверлеи.",
+  "references": [
+    {
+      "id": "2d3e8d5f-f3f1-4370-8b34-f914c8eb31ed",
+      "image_url": "https://mobbin.com/api/mcp/short/CPp8p0LR",
+      "mobbin_url": "https://mobbin.com/screens/2d3e8d5f-f3f1-4370-8b34-f914c8eb31ed",
+      "app_name": "Bevel",
+      "platform": "ios",
+      "app": "Bevel",
+      "file": "references/mobbin/2d3e8d5f-f3f1-4370-8b34-f914c8eb31ed.jpg",
+      "group": "home",
+      "note": "Смотрим: три заполненных показателя и текст о сегодняшней нагрузке. За: данные связаны с событием дня. Против: свечение и фон снижают контраст. Не переносим: собственную методику индексов без объяснения.",
+      "width": 1179,
+      "height": 2676
+    },
+    {
+      "id": "3328a9e4-f4a3-4f43-a0fc-7d029c884c85",
+      "image_url": "https://mobbin.com/api/mcp/short/qxg0UyWE",
+      "mobbin_url": "https://mobbin.com/screens/3328a9e4-f4a3-4f43-a0fc-7d029c884c85",
+      "app_name": "Oura",
+      "platform": "ios",
+      "app": "Oura",
+      "file": "references/mobbin/3328a9e4-f4a3-4f43-a0fc-7d029c884c85.jpg",
+      "group": "home",
+      "note": "Смотрим: Today с оценками 83 / 77 / 95, дневным результатом и текстом. За: один основной акцент. Против: фото конкурирует с данными. Не переносим: привязку концепта к умному кольцу.",
+      "width": 1179,
+      "height": 2676
+    },
+    {
+      "id": "3e0d9ab3-1658-4490-8738-6c7f90940729",
+      "image_url": "https://mobbin.com/api/mcp/short/PqQTCI1v",
+      "mobbin_url": "https://mobbin.com/screens/3e0d9ab3-1658-4490-8738-6c7f90940729",
+      "app_name": "Withings Health Mate",
+      "platform": "ios",
+      "app": "Withings Health Mate",
+      "slug": "3e0d9ab3-1658-4490-8738-6c7f90940729",
+      "file": "references/mobbin/3e0d9ab3-1658-4490-8738-6c7f90940729.jpg",
+      "group": "home",
+      "note": "Смотрим: заполненную Home с весом, составом тела, пульсом и ходьбой. За: число, статус и миниграфик рядом. Против: все карточки одинаково заметны. Не переносим: медицинские трактовки без контекста.",
+      "width": 1180,
+      "height": 2676
+    },
+    {
+      "id": "668b7896-8d50-4a07-abaa-83de54f1f850",
+      "image_url": "https://mobbin.com/api/mcp/short/535LRPg9",
+      "mobbin_url": "https://mobbin.com/screens/668b7896-8d50-4a07-abaa-83de54f1f850",
+      "app_name": "Lifesum",
+      "platform": "ios",
+      "app": "Lifesum",
+      "file": "references/mobbin/668b7896-8d50-4a07-abaa-83de54f1f850.jpg",
+      "group": "home",
+      "note": "Смотрим: заполненный дневник и Morning check-in под сводкой. За: числа дополнены текстом. Против: длинный текст отодвигает историю. Не переносим: структуру пищевого дневника целиком.",
+      "width": 1179,
+      "height": 2676
+    },
+    {
+      "id": "32b82d20-deb0-493f-a643-c170d9e46b8b",
+      "image_url": "https://mobbin.com/api/mcp/short/85T5Roki",
+      "mobbin_url": "https://mobbin.com/screens/32b82d20-deb0-493f-a643-c170d9e46b8b",
+      "app_name": "MyFitnessPal",
+      "platform": "ios",
+      "app": "MyFitnessPal",
+      "slug": "32b82d20-deb0-493f-a643-c170d9e46b8b",
+      "file": "references/mobbin/32b82d20-deb0-493f-a643-c170d9e46b8b.jpg",
+      "group": "home",
+      "note": "Смотрим: Today с 963 калориями, макросами и дневником. За: виден факт, цель и прогресс недели. Против: сводка требует интерпретации. Не переносим: питание как единственную модель здоровья.",
+      "width": 1179,
+      "height": 2676
+    },
+    {
+      "slug": "yazio-calories",
+      "app": "Yazio",
+      "id": "3f98c39d-fd18-4cc8-b3b4-6b85582dffc5",
+      "group": "home",
+      "note": "Смотрим: дневную сводку с 356 съеденными калориями и макросами. За: компактная иерархия. Против: игровые счётчики отвлекают. Не переносим: геймификацию автоматически.",
+      "file": "references/mobbin/yazio-calories.jpg",
+      "mobbin_url": "https://mobbin.com/screens/3f98c39d-fd18-4cc8-b3b4-6b85582dffc5",
+      "width": 1180,
+      "height": 2676
+    },
+    {
+      "slug": "yazio-water",
+      "app": "Yazio",
+      "id": "4de789bb-e2fa-4434-953d-abb535fe8245",
+      "group": "home",
+      "note": "Смотрим: трекер воды с 1,50 л из 2 л, рядом вес и активность. За: прогресс понятен без легенды. Против: равный вес соседних блоков. Не переносим: стаканы на показатели с другой шкалой.",
+      "file": "references/mobbin/yazio-water.jpg",
+      "mobbin_url": "https://mobbin.com/screens/4de789bb-e2fa-4434-953d-abb535fe8245",
+      "width": 1180,
+      "height": 2676
+    }
+  ]
+}

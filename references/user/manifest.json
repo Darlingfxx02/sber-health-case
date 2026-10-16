@@ -1,0 +1,68 @@
+[
+  {
+    "slug": "ultrahuman-event-types",
+    "app": "Ultrahuman",
+    "title": "Выбор события",
+    "note": "Модальная панель с сеткой действий, скруглениями и объёмом кнопок.",
+    "file": "references/user/ultrahuman-event-types.png",
+    "width": 1179,
+    "height": 2676,
+    "source": "Изображение приложено пользователем",
+    "source_url": "https://mobbin.com/apps/ultrahuman-ios-9adfcd9a-7f95-467a-985d-9c4664f6ebf2/81bc6b50-4885-4e3f-99b4-2c50e433ec29/flows"
+  },
+  {
+    "slug": "ultrahuman-timeline",
+    "app": "Ultrahuman",
+    "title": "Лента событий",
+    "note": "Карточки событий со временем, типом записи и переходом к деталям.",
+    "file": "references/user/ultrahuman-timeline.png",
+    "width": 1179,
+    "height": 2676,
+    "source": "Изображение приложено пользователем",
+    "source_url": "https://mobbin.com/apps/ultrahuman-ios-9adfcd9a-7f95-467a-985d-9c4664f6ebf2/81bc6b50-4885-4e3f-99b4-2c50e433ec29/flows"
+  },
+  {
+    "slug": "ultrahuman-sleep-index",
+    "app": "Ultrahuman",
+    "title": "Индекс сна",
+    "note": "Выделенный столбец графика, цветной фон и карточки факторов с короткими статусами.",
+    "file": "references/user/ultrahuman-sleep-index.png",
+    "width": 1179,
+    "height": 2676,
+    "source": "Изображение приложено пользователем",
+    "source_url": "https://mobbin.com/apps/ultrahuman-ios-9adfcd9a-7f95-467a-985d-9c4664f6ebf2/81bc6b50-4885-4e3f-99b4-2c50e433ec29/flows"
+  },
+  {
+    "slug": "ultrahuman-calendar",
+    "app": "Ultrahuman",
+    "title": "Календарь показателей",
+    "note": "Три кольца на каждый день, цветовая легенда и обзор месяца.",
+    "file": "references/user/ultrahuman-calendar.png",
+    "width": 1179,
+    "height": 2676,
+    "source": "Изображение приложено пользователем",
+    "source_url": "https://mobbin.com/apps/ultrahuman-ios-9adfcd9a-7f95-467a-985d-9c4664f6ebf2/81bc6b50-4885-4e3f-99b4-2c50e433ec29/flows"
+  },
+  {
+    "slug": "fitbit-today",
+    "app": "Fitbit",
+    "title": "Обзор Today",
+    "note": "Одно крупное кольцо, три вторичных показателя и карточка восстановления.",
+    "file": "references/user/fitbit-today.png",
+    "width": 1179,
+    "height": 2676,
+    "source": "Изображение приложено пользователем",
+    "source_url": "https://mobbin.com/apps/fitbit-ios-abf13d9a-fc71-454d-a8ed-569b65e09c2d/b994d1aa-4535-468c-89c6-d5d7ab600342/screens"
+  },
+  {
+    "slug": "fitbit-activity",
+    "app": "Fitbit",
+    "title": "Карточки активности",
+    "note": "Крупные числа, кольца справа, небольшой график в карточке и мягкие цветовые подложки.",
+    "file": "references/user/fitbit-activity.png",
+    "width": 1179,
+    "height": 2676,
+    "source": "Изображение приложено пользователем",
+    "source_url": "https://mobbin.com/apps/fitbit-ios-abf13d9a-fc71-454d-a8ed-569b65e09c2d/b994d1aa-4535-468c-89c6-d5d7ab600342/screens"
+  }
+]

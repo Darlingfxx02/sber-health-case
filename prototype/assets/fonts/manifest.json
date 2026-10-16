@@ -1,0 +1,17 @@
+{
+  "family": "Inter",
+  "source": "/Users/darlingfxx/Library/Fonts",
+  "opticalSize": "18pt",
+  "weights": {
+    "400": "Regular",
+    "500": "Medium",
+    "600": "SemiBold",
+    "700": "Bold"
+  },
+  "format": "woff2",
+  "scripts": [
+    "Latin",
+    "Cyrillic"
+  ],
+  "documentPreviews": "Embedded Inter subsets, weights 400/600/700"
+}

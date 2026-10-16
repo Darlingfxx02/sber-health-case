@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f1f1f1"><title>Помощник по здоровью · прототип</title>
+  <link rel="preload" href="assets/fonts/open-runde/OpenRunde-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/open-runde/OpenRunde-Medium.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="health-overview.css">
+  <link rel="stylesheet" href="typography.css">
+</head>
+<body>
+  <header class="workbench">
+    <div><p class="overline">СБЕРЗДОРОВЬЕ / КОНЦЕПТ 01</p><p class="workbench-note">Демо</p></div>
+    <div class="workbench-actions"><div class="mode-switch" aria-label="Отображение прототипа"><button data-mode="wireframe" aria-pressed="false">Каркас</button><button data-mode="content" aria-pressed="true">С данными</button></div><button class="reset" id="reset">Сбросить</button></div>
+  </header>
+  <main class="stage">
+    <div class="device-size"><section class="device" id="device" aria-label="Мобильный прототип помощника">
+      <img class="status-bar" src="assets/status-bar.png" width="400" height="62" alt="9:41, мобильная сеть, Wi-Fi, заряд батареи">
+      <div class="page-surface" id="page-surface" tabindex="-1">
+      <div class="home-scroll" id="home-scroll">
+        <div class="section-heading" id="section-heading" hidden><h1 id="section-title"></h1><button id="add-file" aria-label="Добавить документ" title="Добавить документ" hidden><span class="icon" data-icon="add"></span></button></div>
+        <div class="overview-row" id="overview-row">
+        <div class="home-header"><button class="circle header-circle" id="profile" aria-label="Профиль" title="Профиль"><span class="content-label icon" data-icon="user"></span></button></div>
+        <button class="overview-toggle" id="overview-toggle" aria-expanded="false" aria-controls="health-overview" aria-label="Раскрыть обзор здоровья"><span class="overview-heading-content"><span class="overview-label">Обзор здоровья</span><span class="overview-chevron icon" data-icon="chevron-down"></span></span></button>
+        <div class="card-grid one" id="insights"></div>
+        </div>
+        <div class="health-overview" id="health-overview" hidden>
+          <div class="card-grid three" id="metrics"></div>
+          <div class="card-grid two" id="actions"></div>
+          <div class="card-grid one" id="documents"></div>
+        </div>
+      <section class="chat-panel" id="chat-panel" aria-label="Чат с помощником">
+        <div class="chat-body" id="chat-body">
+          <div class="conversation" id="conversation" aria-live="polite" aria-relevant="additions"></div>
+          <div class="empty-chat" id="empty-chat"><p>Чем помочь?</p></div>
+        </div>
+        <div class="context-zone" id="context-zone" aria-label="Контекст разговора" hidden>
+          <div id="context-filled" hidden><div class="context-heading"><span id="context-count">Контекст · 0</span><button id="clear-context" aria-label="Убрать весь контекст" title="Убрать весь контекст"><span class="icon" data-icon="trash"></span></button></div><div class="context-list" id="context-list"></div></div>
+        </div>
+        <div class="suggestions" id="suggestions"></div>
+      </section>
+      </div>
+      <div class="chat-dock" id="chat-dock">
+        <div class="chat-control">
+          <form id="chat-form" class="composer" aria-label="Сообщение AI-помощнику"><button type="button" id="attach-in-chat" aria-label="Прикрепить файл" title="Прикрепить файл"><span class="icon" data-icon="attach"></span></button><input id="message-input" autocomplete="off" placeholder="Спросить помощника…" aria-label="Сообщение помощнику"><button type="submit" id="send-message" aria-label="Отправить сообщение" title="Отправить сообщение" disabled><span class="icon" data-icon="up"></span></button></form>
+          <button class="chat-launcher" id="open-chat" aria-label="Вернуться к AI-помощнику" title="AI-помощник"><span class="icon" data-icon="assistant"></span><span class="dock-count" id="dock-count" hidden></span></button>
+        </div>
+      </div>
+      <section class="detail-panel" id="detail-panel" aria-label="Подробности" aria-hidden="true" inert></section>
+      <div class="toast" id="toast" role="status"></div>
+      </div>
+      <div class="history-layer" id="history-layer" aria-hidden="true" hidden>
+        <section class="history-drawer" id="history-drawer" role="dialog" aria-modal="true" aria-labelledby="history-title" tabindex="-1" inert>
+          <div class="history-heading"><h2 id="history-title">Разделы и чаты</h2><button id="close-history" aria-label="Закрыть панель"><span class="icon" data-icon="close"></span></button></div>
+          <div class="history-sections" aria-label="Разделы приложения">
+            <button data-section="home"><span class="icon" data-icon="home"></span><span>Обзор здоровья</span></button>
+            <button data-section="records"><span class="icon" data-icon="record"></span><span>Медкарта</span></button>
+          </div>
+          <button class="new-chat" id="new-chat"><span class="icon" data-icon="add"></span><span>Новый чат</span></button>
+          <div class="history-list-heading">Чаты</div>
+          <div class="history-list" id="history-list"></div>
+        </section>
+      </div>
+      <img class="home-indicator" src="assets/home-indicator.png" width="400" height="34" alt="">
+      <input id="file-input" type="file" multiple accept=".pdf,.txt,.csv,.jpg,.jpeg,.png,.webp" hidden>
+    </section></div>
+  </main>
+  <script type="module" src="app.js"></script>
+</body></html>

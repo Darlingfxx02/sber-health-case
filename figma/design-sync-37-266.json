@@ -1,0 +1,61 @@
+{
+  "fileKey": "aizNMC6YoCzmeYVBKOD4dS",
+  "nodeId": "37:266",
+  "components": {
+    "date": "37:582",
+    "activityAction": "37:634",
+    "results": "37:350"
+  },
+  "referenceWidth": 374.371,
+  "prototypeContentWidth": 400,
+  "date": {
+    "referenceSize": [
+      64,
+      92
+    ],
+    "prototypeSize": [
+      68.38,
+      98.3
+    ],
+    "outerGradient": [
+      "#f9f9f9",
+      "#efefef"
+    ],
+    "innerBase": "#ffffff",
+    "innerGradient": [
+      "rgba(255,255,255,0)",
+      "#3c83e7"
+    ],
+    "numberColor": "#ffffff",
+    "fontWeight": 600
+  },
+  "surface": {
+    "screen": "white at 29.327% -> #f5f6f7",
+    "results": "#ffffff -> #f4f6f8"
+  },
+  "fonts": {
+    "family": "Inter",
+    "weights": [
+      400,
+      500,
+      600,
+      700
+    ],
+    "source": "local installed Inter 18pt, subset WOFF2",
+    "documentThumbnails": "embedded Inter"
+  },
+  "assets": {
+    "activityChevron": {
+      "path": "prototype/assets/figma/activity-chevron-fill.svg",
+      "sourceNode": "37:634",
+      "rootSize": [
+        17.7826,
+        17.7826
+      ],
+      "rotation": 180,
+      "scale": 1.06846
+    },
+    "reused": "Existing Iconsax, status bar, home indicator and result-sheet geometry match their imported design slots."
+  },
+  "behavior": "History dates remain dynamic; component accent defaults to the reference blue. Earlier colour-mixing model remains in activity-model.js."
+}

@@ -1,0 +1,29 @@
+{
+  "library": "Iconsax",
+  "style": "free / rounded / linear",
+  "source": "/Users/darlingfxx/Projects/Neyrokey/iconsax/Icons collection/free/rounded",
+  "files": {
+    "user": "users/linear/user.svg",
+    "record": "content-edit/linear/clipboard-text.svg",
+    "moon": "weather/linear/moon.svg",
+    "pulse": "business/linear/health.svg",
+    "activity": "business/linear/activity.svg",
+    "assistant": "support-like-question/linear/magic-star.svg",
+    "labs": "school-learning/linear/clipboard.svg",
+    "calendar": "time/linear/calendar-2.svg",
+    "document": "content-edit/linear/document-text.svg",
+    "chat": "emails-messages/linear/message-text.svg",
+    "add": "essential/linear/add.svg",
+    "close": "essential/linear/close-square.svg",
+    "trash": "essential/linear/trash.svg",
+    "up": "arrow/linear/arrow-up2.svg",
+    "down": "arrow/linear/arrow-down2.svg",
+    "back": "arrow/linear/arrow-left2.svg",
+    "attach": "type-paragraph-character/linear/paperclip-2.svg",
+    "check": "essential/linear/tick-circle.svg",
+    "home": "essential/linear/home-2.svg",
+    "plan": "content-edit/linear/task-square.svg",
+    "chevron-down": "arrow/linear/arrow-down4.svg",
+    "chevron-right": "arrow/linear/arrow-right4.svg"
+  }
+}

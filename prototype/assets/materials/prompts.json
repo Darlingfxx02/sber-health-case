@@ -1,0 +1,15 @@
+{
+  "common": "Use case: stylized-concept. Asset type: one premium 3D illustration for a light health app card. Input image is STYLE AND MATERIAL REFERENCE ONLY, not a layout to reproduce. Create a new single isolated object, not a sheet. Match the reference's beautiful softly translucent resin / frosted glass, rounded substantial volumes, subtle subsurface scattering, luminous broad highlights, realistic thickness and refraction, studio product rendering, sophisticated tactile material. Camera three-quarter view, orthographic, top-left large softbox lighting, delicate self-shadow. Centered square composition, object fills 80% of the canvas with comfortable clear margin. Actual transparent background, no grey plane, no background, no text, no watermark, no UI, no vector outlines. Restrained detail readable at 100px. ",
+  "subjects": {
+    "pulse": "Subject: two softly inflated sculptural pink torus forms gently stacked at different angles, inspired by the bottom-left pink reference object. Smooth rose-pink glossy frosted resin, one slightly more transparent. Rich pink edges with soft pale milky highlights, not metallic. This is an abstract heart-rate/wellbeing accent; no anatomical heart, no heartbeat line.",
+    "oxygen": "Subject: two overlapping sculptural rounded discs, one substantial opaque rounded blue/cyan disc and a smaller thin translucent glass disc tilted in front, with one tiny translucent sphere beside them. Inspired by the pink disc arrangement middle-right in the reference, but in pale cornflower blue and icy cyan. Clearly visible thickness, beautiful refraction and luminous glossy edges.",
+    "sleep": "Subject: a rounded thick crescent moon made of soft lavender translucent resin with an offset pale blue glass crescent layer behind it. Gentle substantial inflated edges, dreamy violet and periwinkle colour. One tiny glass sphere as a quiet accent, no stars field. Refined minimal composition with realistic material physics.",
+    "care": "Subject: three offset overlapping translucent mint-green rounded-square glass tiles, arranged in a short diagonal stack with visible depth, inspired by upper-left green layered reference. The foremost tile has a subtle raised rounded medical plus sign made of milky glass, no text. Mint and emerald translucent body, luminous refracted edges, soft broad reflections. Premium calm healthcare object, not a flat icon."
+  },
+  "reference": "references/user/health-materials-reference.png",
+  "mode": "built-in image_gen",
+  "replacedSubjects": {
+    "pulse": "prompts-v2.json",
+    "oxygen": "prompts-v2.json"
+  }
+}

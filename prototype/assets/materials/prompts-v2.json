@@ -1,0 +1,13 @@
+{
+  "common": "Use case: stylized-concept. Asset: a single easily recognizable 3D icon for a light medical app, rendered as a premium raster product illustration. Use the supplied image only as a reference for materials and lighting, not its abstract subjects. Soft translucent resin and frosted glass, substantial rounded volume, luminous broad reflections, subtle subsurface scattering, coherent soft studio light from top left, high-end 3D product rendering. Near-frontal three-quarter orthographic view so the symbol reads instantly at 80px. Centered square framing, 80 percent canvas coverage, all edges within frame, no extra objects. Genuinely transparent background, no floor, no baked rectangular shadow, no watermark, no UI. ",
+  "subjects": {
+    "pulse": "Subject: one unmistakable puffy rose-pink heart symbol, with a simple thick white raised heartbeat/ECG zigzag embedded across its front face. The heart silhouette must be immediately recognizable; two rounded lobes and tapered bottom. Material pink glossy frosted resin, gently translucent at edges, soft milky highlights. The white rhythm line is bold enough to read at small size. No rings, no torus, no abstract blobs, no anatomical organs, no letters.",
+    "oxygen": "Subject: one clearly recognizable upright rounded droplet of frosted ice-blue glass, representing blood oxygen, with the exact readable white embossed inscription 'O₂' on its front face. The O is uppercase Latin O; 2 is subscript. Strong simple silhouette with pointed top and rounded bottom. The O₂ occupies about half the droplet face and is high contrast, thick simple sans-serif. Pale cyan and cornflower blue body with luminous glass edges. No orbiting spheres, no abstract discs, no molecule models, no other text."
+  },
+  "mode": "built-in image_gen",
+  "reference": "references/user/health-materials-reference.png",
+  "outputs": {
+    "pulse": "pulse.png",
+    "oxygen": "oxygen.png"
+  }
+}

@@ -1,0 +1,726 @@
+{
+  "createdNodeIds": [
+    "30:54",
+    "30:55",
+    "30:56",
+    "30:57",
+    "30:58",
+    "30:61",
+    "30:62",
+    "30:72",
+    "30:73",
+    "30:74",
+    "30:75",
+    "30:76",
+    "30:77",
+    "30:78",
+    "30:80",
+    "30:81",
+    "30:82",
+    "30:83",
+    "30:84",
+    "30:85",
+    "30:90",
+    "30:91",
+    "30:92",
+    "30:93",
+    "30:97",
+    "30:101",
+    "30:102",
+    "30:103",
+    "30:104",
+    "30:106",
+    "30:111",
+    "30:112",
+    "30:114",
+    "30:116",
+    "30:117",
+    "30:118",
+    "30:121",
+    "30:122",
+    "30:132",
+    "30:133",
+    "30:134",
+    "30:135",
+    "30:136",
+    "30:137",
+    "30:138",
+    "30:140",
+    "30:141",
+    "30:142",
+    "30:143",
+    "30:144",
+    "30:145",
+    "30:150",
+    "30:151",
+    "30:152",
+    "30:153",
+    "30:157",
+    "30:161",
+    "30:162",
+    "30:163",
+    "30:164",
+    "30:166",
+    "30:171",
+    "30:172",
+    "30:174",
+    "30:176",
+    "30:177",
+    "30:178",
+    "30:179",
+    "30:181",
+    "30:182",
+    "30:183",
+    "30:184",
+    "30:185",
+    "30:186",
+    "30:188",
+    "30:189",
+    "30:191",
+    "30:193",
+    "30:194",
+    "30:195",
+    "30:198",
+    "30:199",
+    "30:209",
+    "30:210",
+    "30:211",
+    "30:212",
+    "30:213",
+    "30:214",
+    "30:215",
+    "30:217",
+    "30:218",
+    "30:219",
+    "30:220",
+    "30:221",
+    "30:222",
+    "30:227",
+    "30:228",
+    "30:229",
+    "30:230",
+    "30:234",
+    "30:238",
+    "30:239",
+    "30:240",
+    "30:241",
+    "30:243",
+    "30:248",
+    "30:249",
+    "30:251",
+    "30:253",
+    "30:254",
+    "30:255",
+    "30:256",
+    "30:258",
+    "30:259",
+    "30:260",
+    "30:261",
+    "30:262",
+    "30:263",
+    "30:265",
+    "30:266",
+    "30:268",
+    "30:270",
+    "30:271",
+    "30:272",
+    "30:273",
+    "30:274",
+    "30:275",
+    "30:278",
+    "30:279",
+    "30:289",
+    "30:290",
+    "30:291",
+    "30:292",
+    "30:293",
+    "30:294",
+    "30:295",
+    "30:297",
+    "30:298",
+    "30:299",
+    "30:300",
+    "30:301",
+    "30:302",
+    "30:307",
+    "30:308",
+    "30:309",
+    "30:310",
+    "30:314",
+    "30:318",
+    "30:319",
+    "30:320",
+    "30:321",
+    "30:323",
+    "30:328",
+    "30:329",
+    "30:331",
+    "30:333",
+    "30:334",
+    "30:335",
+    "30:336",
+    "30:338",
+    "30:339",
+    "30:340",
+    "30:342",
+    "30:347",
+    "30:349",
+    "30:350",
+    "30:352",
+    "30:353",
+    "30:355",
+    "30:357",
+    "30:358",
+    "30:359",
+    "30:362",
+    "30:363",
+    "30:373",
+    "30:374",
+    "30:375",
+    "30:377",
+    "30:378",
+    "30:379",
+    "30:384",
+    "30:385",
+    "30:386",
+    "30:387",
+    "30:388",
+    "30:389",
+    "30:390",
+    "30:391",
+    "30:392",
+    "30:394",
+    "30:395",
+    "30:396",
+    "30:397",
+    "30:399",
+    "30:400",
+    "30:402",
+    "30:404",
+    "30:405",
+    "30:406",
+    "30:407",
+    "30:408",
+    "30:409",
+    "30:410",
+    "30:411",
+    "30:412",
+    "30:413",
+    "30:414",
+    "30:415",
+    "30:416",
+    "30:417",
+    "30:418",
+    "30:419"
+  ],
+  "mutatedNodeIds": [
+    "26:80",
+    "26:54",
+    "30:112",
+    "30:145",
+    "30:198",
+    "30:259",
+    "30:347",
+    "30:179",
+    "30:256",
+    "30:336",
+    "I30:342;27:105",
+    "30:375"
+  ],
+  "wrapperId": "26:80",
+  "pageId": "26:54",
+  "screens": [
+    {
+      "id": "30:61",
+      "name": "01 · Главная",
+      "width": 402,
+      "height": 874,
+      "labCard": "30:85",
+      "chatPanel": null,
+      "chatButton": "30:112"
+    },
+    {
+      "id": "30:121",
+      "name": "02 · Открыли чат",
+      "width": 402,
+      "height": 874,
+      "labCard": "30:145",
+      "chatPanel": {
+        "id": "30:176",
+        "y": 637,
+        "height": 237
+      },
+      "chatButton": "30:172",
+      "dropzone": "30:182"
+    },
+    {
+      "id": "30:198",
+      "name": "03 · Переносим карточку",
+      "width": 402,
+      "height": 874,
+      "labCard": "30:222",
+      "chatPanel": {
+        "id": "30:253",
+        "y": 635,
+        "height": 239
+      },
+      "chatButton": "30:249",
+      "dropzone": "30:259"
+    },
+    {
+      "id": "30:278",
+      "name": "04 · Контекст добавлен",
+      "width": 402,
+      "height": 874,
+      "labCard": "30:302",
+      "chatPanel": {
+        "id": "30:333",
+        "y": 577,
+        "height": 297
+      },
+      "chatButton": "30:329",
+      "contextItem": "30:342"
+    },
+    {
+      "id": "30:362",
+      "name": "05 · Разговор по делу",
+      "width": 402,
+      "height": 874,
+      "chatPanel": null,
+      "contextItem": "30:379"
+    }
+  ],
+  "descendantCount": 366,
+  "nodeTypes": {
+    "TEXT": 168,
+    "FRAME": 102,
+    "INSTANCE": 63,
+    "VECTOR": 15,
+    "RECTANGLE": 18
+  },
+  "imageNodes": [],
+  "prototypeLinks": [
+    {
+      "id": "30:112",
+      "reactions": [
+        {
+          "action": {
+            "type": "NODE",
+            "destinationId": "30:121",
+            "navigation": "NAVIGATE",
+            "transition": {
+              "type": "SMART_ANIMATE",
+              "easing": {
+                "type": "EASE_OUT"
+              },
+              "duration": 0.25
+            },
+            "resetVideoPosition": false
+          },
+          "actions": [
+            {
+              "type": "NODE",
+              "destinationId": "30:121",
+              "navigation": "NAVIGATE",
+              "transition": {
+                "type": "SMART_ANIMATE",
+                "easing": {
+                  "type": "EASE_OUT"
+                },
+                "duration": 0.25
+              },
+              "resetVideoPosition": false
+            }
+          ],
+          "trigger": {
+            "type": "ON_CLICK"
+          }
+        }
+      ]
+    },
+    {
+      "id": "30:145",
+      "reactions": [
+        {
+          "action": {
+            "type": "NODE",
+            "destinationId": "30:198",
+            "navigation": "NAVIGATE",
+            "transition": {
+              "type": "SMART_ANIMATE",
+              "easing": {
+                "type": "EASE_OUT"
+              },
+              "duration": 0.20000000298023224
+            },
+            "resetVideoPosition": false
+          },
+          "actions": [
+            {
+              "type": "NODE",
+              "destinationId": "30:198",
+              "navigation": "NAVIGATE",
+              "transition": {
+                "type": "SMART_ANIMATE",
+                "easing": {
+                  "type": "EASE_OUT"
+                },
+                "duration": 0.20000000298023224
+              },
+              "resetVideoPosition": false
+            }
+          ],
+          "trigger": {
+            "type": "ON_DRAG"
+          }
+        },
+        {
+          "action": {
+            "type": "NODE",
+            "destinationId": "30:278",
+            "navigation": "NAVIGATE",
+            "transition": {
+              "type": "SMART_ANIMATE",
+              "easing": {
+                "type": "EASE_OUT"
+              },
+              "duration": 0.20000000298023224
+            },
+            "resetVideoPosition": false
+          },
+          "actions": [
+            {
+              "type": "NODE",
+              "destinationId": "30:278",
+              "navigation": "NAVIGATE",
+              "transition": {
+                "type": "SMART_ANIMATE",
+                "easing": {
+                  "type": "EASE_OUT"
+                },
+                "duration": 0.20000000298023224
+              },
+              "resetVideoPosition": false
+            }
+          ],
+          "trigger": {
+            "type": "ON_CLICK"
+          }
+        }
+      ]
+    },
+    {
+      "id": "30:179",
+      "reactions": [
+        {
+          "action": {
+            "type": "NODE",
+            "destinationId": "30:61",
+            "navigation": "NAVIGATE",
+            "transition": {
+              "type": "SMART_ANIMATE",
+              "easing": {
+                "type": "EASE_OUT"
+              },
+              "duration": 0.25
+            },
+            "resetVideoPosition": false
+          },
+          "actions": [
+            {
+              "type": "NODE",
+              "destinationId": "30:61",
+              "navigation": "NAVIGATE",
+              "transition": {
+                "type": "SMART_ANIMATE",
+                "easing": {
+                  "type": "EASE_OUT"
+                },
+                "duration": 0.25
+              },
+              "resetVideoPosition": false
+            }
+          ],
+          "trigger": {
+            "type": "ON_CLICK"
+          }
+        }
+      ]
+    },
+    {
+      "id": "30:198",
+      "reactions": [
+        {
+          "action": {
+            "type": "NODE",
+            "destinationId": "30:278",
+            "navigation": "NAVIGATE",
+            "transition": {
+              "type": "SMART_ANIMATE",
+              "easing": {
+                "type": "EASE_OUT"
+              },
+              "duration": 0.20000000298023224
+            },
+            "resetVideoPosition": false
+          },
+          "actions": [
+            {
+              "type": "NODE",
+              "destinationId": "30:278",
+              "navigation": "NAVIGATE",
+              "transition": {
+                "type": "SMART_ANIMATE",
+                "easing": {
+                  "type": "EASE_OUT"
+                },
+                "duration": 0.20000000298023224
+              },
+              "resetVideoPosition": false
+            }
+          ],
+          "trigger": {
+            "type": "AFTER_TIMEOUT",
+            "timeout": 0.800000011920929
+          }
+        }
+      ]
+    },
+    {
+      "id": "30:256",
+      "reactions": [
+        {
+          "action": {
+            "type": "NODE",
+            "destinationId": "30:61",
+            "navigation": "NAVIGATE",
+            "transition": {
+              "type": "SMART_ANIMATE",
+              "easing": {
+                "type": "EASE_OUT"
+              },
+              "duration": 0.25
+            },
+            "resetVideoPosition": false
+          },
+          "actions": [
+            {
+              "type": "NODE",
+              "destinationId": "30:61",
+              "navigation": "NAVIGATE",
+              "transition": {
+                "type": "SMART_ANIMATE",
+                "easing": {
+                  "type": "EASE_OUT"
+                },
+                "duration": 0.25
+              },
+              "resetVideoPosition": false
+            }
+          ],
+          "trigger": {
+            "type": "ON_CLICK"
+          }
+        }
+      ]
+    },
+    {
+      "id": "30:259",
+      "reactions": [
+        {
+          "action": {
+            "type": "NODE",
+            "destinationId": "30:278",
+            "navigation": "NAVIGATE",
+            "transition": {
+              "type": "SMART_ANIMATE",
+              "easing": {
+                "type": "EASE_OUT"
+              },
+              "duration": 0.25
+            },
+            "resetVideoPosition": false
+          },
+          "actions": [
+            {
+              "type": "NODE",
+              "destinationId": "30:278",
+              "navigation": "NAVIGATE",
+              "transition": {
+                "type": "SMART_ANIMATE",
+                "easing": {
+                  "type": "EASE_OUT"
+                },
+                "duration": 0.25
+              },
+              "resetVideoPosition": false
+            }
+          ],
+          "trigger": {
+            "type": "ON_CLICK"
+          }
+        }
+      ]
+    },
+    {
+      "id": "30:336",
+      "reactions": [
+        {
+          "action": {
+            "type": "NODE",
+            "destinationId": "30:61",
+            "navigation": "NAVIGATE",
+            "transition": {
+              "type": "SMART_ANIMATE",
+              "easing": {
+                "type": "EASE_OUT"
+              },
+              "duration": 0.25
+            },
+            "resetVideoPosition": false
+          },
+          "actions": [
+            {
+              "type": "NODE",
+              "destinationId": "30:61",
+              "navigation": "NAVIGATE",
+              "transition": {
+                "type": "SMART_ANIMATE",
+                "easing": {
+                  "type": "EASE_OUT"
+                },
+                "duration": 0.25
+              },
+              "resetVideoPosition": false
+            }
+          ],
+          "trigger": {
+            "type": "ON_CLICK"
+          }
+        }
+      ]
+    },
+    {
+      "id": "I30:342;27:105",
+      "reactions": [
+        {
+          "action": {
+            "type": "NODE",
+            "destinationId": "30:121",
+            "navigation": "NAVIGATE",
+            "transition": {
+              "type": "SMART_ANIMATE",
+              "easing": {
+                "type": "EASE_OUT"
+              },
+              "duration": 0.25
+            },
+            "resetVideoPosition": false
+          },
+          "actions": [
+            {
+              "type": "NODE",
+              "destinationId": "30:121",
+              "navigation": "NAVIGATE",
+              "transition": {
+                "type": "SMART_ANIMATE",
+                "easing": {
+                  "type": "EASE_OUT"
+                },
+                "duration": 0.25
+              },
+              "resetVideoPosition": false
+            }
+          ],
+          "trigger": {
+            "type": "ON_CLICK"
+          }
+        }
+      ]
+    },
+    {
+      "id": "30:347",
+      "reactions": [
+        {
+          "action": {
+            "type": "NODE",
+            "destinationId": "30:362",
+            "navigation": "NAVIGATE",
+            "transition": {
+              "type": "SMART_ANIMATE",
+              "easing": {
+                "type": "EASE_OUT"
+              },
+              "duration": 0.25
+            },
+            "resetVideoPosition": false
+          },
+          "actions": [
+            {
+              "type": "NODE",
+              "destinationId": "30:362",
+              "navigation": "NAVIGATE",
+              "transition": {
+                "type": "SMART_ANIMATE",
+                "easing": {
+                  "type": "EASE_OUT"
+                },
+                "duration": 0.25
+              },
+              "resetVideoPosition": false
+            }
+          ],
+          "trigger": {
+            "type": "ON_CLICK"
+          }
+        }
+      ]
+    },
+    {
+      "id": "30:375",
+      "reactions": [
+        {
+          "action": {
+            "type": "NODE",
+            "destinationId": "30:278",
+            "navigation": "NAVIGATE",
+            "transition": {
+              "type": "SMART_ANIMATE",
+              "easing": {
+                "type": "EASE_OUT"
+              },
+              "duration": 0.25
+            },
+            "resetVideoPosition": false
+          },
+          "actions": [
+            {
+              "type": "NODE",
+              "destinationId": "30:278",
+              "navigation": "NAVIGATE",
+              "transition": {
+                "type": "SMART_ANIMATE",
+                "easing": {
+                  "type": "EASE_OUT"
+                },
+                "duration": 0.25
+              },
+              "resetVideoPosition": false
+            }
+          ],
+          "trigger": {
+            "type": "ON_CLICK"
+          }
+        }
+      ]
+    }
+  ],
+  "textFonts": [
+    "Inter",
+    "SF Pro"
+  ],
+  "bounds": {
+    "width": 2282,
+    "height": 1345
+  }
+}

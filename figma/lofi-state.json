@@ -1,0 +1,161 @@
+{
+  "createdNodeIds": [
+    "27:85",
+    "27:86",
+    "27:87",
+    "27:88",
+    "27:89",
+    "27:90",
+    "27:91",
+    "27:92",
+    "27:93",
+    "27:94",
+    "27:95",
+    "27:96",
+    "27:97",
+    "27:98",
+    "27:99",
+    "27:100",
+    "27:101",
+    "27:102",
+    "27:103",
+    "27:104",
+    "27:105",
+    "27:106",
+    "27:107",
+    "27:108"
+  ],
+  "collectionId": "VariableCollectionId:27:56",
+  "variableIds": [
+    "VariableID:27:57",
+    "VariableID:27:58",
+    "VariableID:27:59",
+    "VariableID:27:60",
+    "VariableID:27:61",
+    "VariableID:27:62",
+    "VariableID:27:63",
+    "VariableID:27:64",
+    "VariableID:27:65",
+    "VariableID:27:66",
+    "VariableID:27:67",
+    "VariableID:27:68",
+    "VariableID:27:69",
+    "VariableID:27:70",
+    "VariableID:27:71",
+    "VariableID:27:72",
+    "VariableID:27:73",
+    "VariableID:27:74",
+    "VariableID:27:75",
+    "VariableID:27:76",
+    "VariableID:27:77"
+  ],
+  "styleIds": [
+    "S:03907aef1946ff2a2d288d02c5c1323e1e1d78cc,",
+    "S:53f0cd50f43c1d2ddb5169a41b8326f6fb00096a,",
+    "S:f0eb613569a813ce16b6d89d0240d2fe53d27b03,",
+    "S:46fe0266c375c8c90cd8b1bde0cce886fd484e3d,",
+    "S:01204210a805b6fd30c91ff0c747cf47e4670f8d,",
+    "S:f79d3b877721d83a3b88d0bb1f42bb20333cd222,",
+    "S:6f5b075d17fd287a5f16c3ea966fcd84f54355e2,"
+  ],
+  "componentBoardId": "27:85",
+  "components": {
+    "Button primary": {
+      "id": "27:86",
+      "props": {
+        "Label": "Label#27:0"
+      },
+      "width": 127,
+      "height": 100
+    },
+    "Button secondary": {
+      "id": "27:88",
+      "props": {
+        "Label": "Label#27:1"
+      },
+      "width": 175,
+      "height": 100
+    },
+    "Text action": {
+      "id": "27:90",
+      "props": {
+        "Label": "Label#27:2"
+      },
+      "width": 63,
+      "height": 26
+    },
+    "Medical card": {
+      "id": "27:92",
+      "props": {
+        "Eyebrow": "Eyebrow#27:3",
+        "Title": "Title#27:4",
+        "Detail": "Detail#27:5",
+        "Source": "Source#27:6"
+      },
+      "width": 354,
+      "height": 138
+    },
+    "Metric": {
+      "id": "27:97",
+      "props": {
+        "Label": "Label#27:7",
+        "Value": "Value#27:8",
+        "Detail": "Detail#27:9"
+      },
+      "width": 171,
+      "height": 126
+    },
+    "Context item": {
+      "id": "27:101",
+      "props": {
+        "Title": "Title#27:10",
+        "Detail": "Detail#27:11"
+      },
+      "width": 124,
+      "height": 100
+    },
+    "Flow label": {
+      "id": "27:106",
+      "props": {
+        "Title": "Title#27:12",
+        "Detail": "Detail#27:13"
+      },
+      "width": 402,
+      "height": 79
+    }
+  },
+  "variables": {
+    "primitive/ink": "VariableID:27:57",
+    "color/ink": "VariableID:27:58",
+    "primitive/paper": "VariableID:27:59",
+    "color/paper": "VariableID:27:60",
+    "primitive/muted": "VariableID:27:61",
+    "color/muted": "VariableID:27:62",
+    "primitive/line": "VariableID:27:63",
+    "color/line": "VariableID:27:64",
+    "space/4": "VariableID:27:65",
+    "space/8": "VariableID:27:66",
+    "space/12": "VariableID:27:67",
+    "space/16": "VariableID:27:68",
+    "space/20": "VariableID:27:69",
+    "space/24": "VariableID:27:70",
+    "space/32": "VariableID:27:71",
+    "space/40": "VariableID:27:72",
+    "space/48": "VariableID:27:73",
+    "radius/12": "VariableID:27:74",
+    "radius/16": "VariableID:27:75",
+    "radius/24": "VariableID:27:76",
+    "radius/99": "VariableID:27:77"
+  },
+  "styles": {
+    "caption": "S:03907aef1946ff2a2d288d02c5c1323e1e1d78cc,",
+    "small": "S:53f0cd50f43c1d2ddb5169a41b8326f6fb00096a,",
+    "body": "S:f0eb613569a813ce16b6d89d0240d2fe53d27b03,",
+    "label": "S:46fe0266c375c8c90cd8b1bde0cce886fd484e3d,",
+    "title": "S:01204210a805b6fd30c91ff0c747cf47e4670f8d,",
+    "heading": "S:f79d3b877721d83a3b88d0bb1f42bb20333cd222,",
+    "number": "S:6f5b075d17fd287a5f16c3ea966fcd84f54355e2,"
+  },
+  "pageId": "26:54",
+  "wrapperId": "26:80"
+}

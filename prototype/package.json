@@ -1,0 +1,6 @@
+{
+  "name": "health-assistant-prototype",
+  "private": true,
+  "type": "module",
+  "scripts": {"start": "node server.mjs", "check": "node --check app.js && node --check activity.js && node --check activity-model.js && node --check document-morph.js && node --check history-gesture.js && node --check health-overview.js && node --check server.mjs"}
+}

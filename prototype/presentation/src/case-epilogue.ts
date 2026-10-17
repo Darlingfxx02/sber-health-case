@@ -2,7 +2,7 @@ import {agentText} from './agent-text';
 import {createStarfield} from './starfield';
 import {createCrawlAudio} from './crawl-audio';
 import {epilogueAudioUrl} from './epilogue-audio-config';
-import {AUTO_RESUME_MS,SCRUB_AUDIO_TAIL_MS,RESUME_RAMP_MS,wheelPixels,seekCrawl} from './crawl-playback.mjs';
+import {createScrollPause,SCRUB_AUDIO_TAIL_MS,RESUME_RAMP_MS,wheelPixels,seekCrawl} from './crawl-playback.mjs';
 import './epilogue.css';
 const icon=(name:string,extra='')=>`<span class="case-icon ${extra}" style="--icon:url('assets/iconsax/${name}.svg')" aria-hidden="true"></span>`;
 
@@ -30,7 +30,7 @@ export function createCaseEpilogue(root:HTMLElement){
   let animation:Animation|null=null,surfaceAnimation:Animation|null=null,paused=false,overflow='',openToken=0,resizeFrame=0;
   let phase:'closed'|'opening'|'open'|'closing'='closed';
   function setPhase(value:typeof phase){phase=value;dialog.dataset.phase=value;}
-  let scrubbing=false,resumeTimer=0,scrubSoundTimer=0,travel=1,duration=1,rateFrame=0;
+  let travel=1,duration=1,rateFrame=0,scrubSoundTimer=0,pointer:{id:number;y:number}|null=null;
   const music=createCrawlAudio(state=>{
     const silent=state.muted||state.volume===0;
     const label=state.status==='empty'?'Добавить музыку':state.status==='loading'?'Музыка загружается':state.status==='error'?'Выбрать аудиофайл':silent?'Включить музыку':'Выключить музыку';
@@ -40,14 +40,22 @@ export function createCaseEpilogue(root:HTMLElement){
     dialog.dataset.audio=state.status;dialog.dataset.audioDirection=String(state.direction);dialog.dataset.audioPlaying=String(state.playing);
   });
   const motion=matchMedia('(prefers-reduced-motion: reduce)');
+  const scrollPause=createScrollPause((holding:boolean)=>{
+    dialog.dataset.scrubbing='true';stopRateRamp();animation?.pause();entryStars.setActive(false);
+    if(holding){clearTimeout(scrubSoundTimer);music.stop();}
+    scrollStatus.textContent=paused?'Пауза':'Автопрокрутка после паузы';
+  },()=>{dialog.dataset.scrubbing='false';syncPlayback(true);});
   const words=agentText.split(/\s+/u).length;
   let audioBytes:Promise<ArrayBuffer>|null=null;
   function prepareAudio(){
-    audioBytes??=fetch(epilogueAudioUrl,{signal:AbortSignal.timeout(15000)}).then(response=>{if(!response.ok)throw new Error('Audio unavailable');return response.arrayBuffer();});
+    audioBytes??=fetch(epilogueAudioUrl,{signal:AbortSignal.timeout(60000)}).then(response=>{if(!response.ok)throw new Error('Audio unavailable');return response.arrayBuffer();});
     // Preloading is optional. The transport reports failures after an explicit open.
     void audioBytes.catch(()=>{audioBytes=null;});
     return audioBytes;
   }
+  // Fetch with the page, but create/resume the audio transport only on a user gesture.
+  void prepareAudio();
+  void document.fonts.load('700 48px "Roboto Condensed"','Что обо мне думает агент').catch(()=>{});
   button.addEventListener('pointerenter',prepareAudio);button.addEventListener('focus',prepareAudio);
   function entryShape(){
     const box=card.getBoundingClientRect();
@@ -64,7 +72,7 @@ export function createCaseEpilogue(root:HTMLElement){
   function stopRateRamp(){cancelAnimationFrame(rateFrame);rateFrame=0;dialog.dataset.resuming='false';if(animation)animation.playbackRate=1;}
   function syncPlayback(smooth=false){
     const finished=animation?.playState==='finished';
-    const stopped=paused||scrubbing||document.hidden||!dialog.open||phase!=='open'||finished;
+    const stopped=paused||scrollPause.active||document.hidden||!dialog.open||phase!=='open'||finished;
     if(stopped){stopRateRamp();if(animation&&animation.playState!=='finished')animation.pause();}
     else if(animation&&smooth){
       stopRateRamp();animation.playbackRate=0;animation.play();dialog.dataset.resuming='true';
@@ -76,7 +84,7 @@ export function createCaseEpilogue(root:HTMLElement){
     if(stopped)music.stop();else music.play(Number(animation?.currentTime??0)/1000,1,false,smooth?RESUME_RAMP_MS/1000:0);
     scrollStatus.textContent=paused?'Пауза':finished?'Эпилог окончен':'Эпилог';
   }
-  function clearScrub(){clearTimeout(resumeTimer);clearTimeout(scrubSoundTimer);scrubbing=false;dialog.dataset.scrubbing='false';scrollStatus.textContent='Эпилог';}
+  function clearScrub(){scrollPause.reset();clearTimeout(scrubSoundTimer);pointer=null;dialog.dataset.scrubbing='false';scrollStatus.textContent='Эпилог';}
   function start(progress=0){
     if(!dialog.open||phase!=='open')return;
     stopRateRamp();
@@ -95,11 +103,9 @@ export function createCaseEpilogue(root:HTMLElement){
     music.resume();
     if(!music.ready)void music.load(prepareAudio()).then(()=>{if(dialog.open&&token===openToken)syncPlayback();});
     clearScrub();paused=motion.matches;
+    // Font loading never holds the player here; font-display:swap supplies a fallback.
     // The same star canvas expands from the card bounds; start the crawl once it fills the viewport.
-    await Promise.all([
-      morphSurface({left:'0px',top:'0px',width:'100%',height:'100%',borderRadius:'0px'},700),
-      document.fonts.load('700 48px "Roboto Condensed"','Что обо мне думает агент').catch(()=>{})
-    ]);
+    await morphSurface({left:'0px',top:'0px',width:'100%',height:'100%',borderRadius:'0px'},700);
     if(dialog.open&&token===openToken){setPhase('open');close.focus({preventScroll:true});start();}
   };
   async function closePlayer(){
@@ -116,26 +122,23 @@ export function createCaseEpilogue(root:HTMLElement){
   audioFile.onchange=async()=>{const file=audioFile.files?.[0];if(!file)return;await music.load(file.arrayBuffer());audioFile.value='';syncPlayback();};
   function scrub(delta:number){
     if(!animation||!dialog.open||phase!=='open'||!delta)return;
-    stopRateRamp();animation.pause();animation.currentTime=seekCrawl(Number(animation.currentTime??0),delta,travel-64,duration);
-    scrubbing=true;dialog.dataset.scrubbing='true';scrollStatus.textContent=paused?'Пауза':'Автопрокрутка через 3 с';
-    entryStars.setActive(false);
-    if(!document.hidden)music.play(Number(animation.currentTime)/1000,delta<0?-1:1,true);
+    scrollPause.move();animation.pause();animation.currentTime=seekCrawl(Number(animation.currentTime??0),delta,travel-64,duration);
+    if(!document.hidden)music.play(Number(animation.currentTime)/1000,delta<0?-1:1,delta<0);
     clearTimeout(scrubSoundTimer);scrubSoundTimer=window.setTimeout(()=>music.stop(),SCRUB_AUDIO_TAIL_MS);
-    clearTimeout(resumeTimer);resumeTimer=window.setTimeout(()=>{clearScrub();syncPlayback(true);},AUTO_RESUME_MS);
   }
   viewport.addEventListener('wheel',event=>{if(event.ctrlKey)return;event.preventDefault();scrub(wheelPixels(event.deltaY,event.deltaMode,viewport.clientHeight));},{passive:false});
   // Finger dragging follows the same timeline on compact screens.
-  let pointerY:number|null=null;
-  viewport.addEventListener('pointerdown',event=>{if(event.pointerType==='mouse')return;pointerY=event.clientY;viewport.setPointerCapture(event.pointerId);});
-  viewport.addEventListener('pointermove',event=>{if(pointerY===null)return;scrub(pointerY-event.clientY);pointerY=event.clientY;});
-  viewport.addEventListener('pointerup',()=>{pointerY=null;});viewport.addEventListener('pointercancel',()=>{pointerY=null;});
+  viewport.addEventListener('pointerdown',event=>{if(event.pointerType==='mouse'||!event.isPrimary||phase!=='open')return;pointer={id:event.pointerId,y:event.clientY};viewport.setPointerCapture(event.pointerId);scrollPause.hold();});
+  viewport.addEventListener('pointermove',event=>{if(pointer?.id!==event.pointerId)return;scrub(pointer.y-event.clientY);pointer.y=event.clientY;});
+  const releasePointer=(event:PointerEvent)=>{if(pointer?.id!==event.pointerId)return;pointer=null;scrollPause.release();};
+  viewport.addEventListener('pointerup',releasePointer);viewport.addEventListener('pointercancel',releasePointer);viewport.addEventListener('lostpointercapture',releasePointer);
   dialog.addEventListener('keydown',event=>{if(event.target instanceof HTMLInputElement)return;if(event.code==='Space'&&event.target===viewport){event.preventDefault();clearScrub();if(animation?.playState==='finished'){paused=false;start();}else{paused=!paused;syncPlayback(!paused);}}if(['ArrowUp','ArrowDown','PageUp','PageDown'].includes(event.key)){event.preventDefault();scrub((event.key.endsWith('Up')?-1:1)*(event.key.startsWith('Page')?viewport.clientHeight*.7:90));}});
   document.addEventListener('visibilitychange',()=>syncPlayback(!document.hidden));
   const motionChanged=()=>{if(dialog.open&&motion.matches){surfaceAnimation?.finish();paused=true;clearScrub();syncPlayback();}};motion.addEventListener('change',motionChanged);
   const resize=new ResizeObserver(()=>{
     cancelAnimationFrame(resizeFrame);
     resizeFrame=requestAnimationFrame(()=>{if(!dialog.open||phase!=='open'||!animation)return;const timing=animation.effect!.getComputedTiming();start(Number(timing.progress??0));});
-  });resize.observe(viewport);
+  });resize.observe(viewport);resize.observe(copy);
   // Fade the phone before the CTA reaches its lower edge, also when scrolling backwards.
   const device=root.querySelector<HTMLElement>('.live-device')!;
   let departureFrame=0;

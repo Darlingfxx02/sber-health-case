@@ -211,9 +211,10 @@
 
 /* Figma 88:725: day history and a vector mascot in the empty conversation. */
 .chat-activity-strip{flex:none;min-width:0}
-.activity-history-track{gap:10px;padding-inline:16px;scroll-padding-inline:16px}
+.activity-history-track{gap:10px;padding-inline:16px;scroll-padding-inline:16px;touch-action:pan-x pan-y;cursor:grab;user-select:none;-webkit-user-select:none}
+.activity-history-track.is-dragging,.activity-history-track.is-dragging .activity-ring-day{cursor:grabbing}
 .activity-center-track{padding-inline:20px;scroll-padding-inline:20px}
-.activity-ring-day{display:flex;flex:0 0 44px;flex-direction:column;align-items:center;gap:6px;height:74px;padding:4px 2px;border:0;border-radius:12px;background:transparent;scroll-snap-align:start;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.activity-ring-day{display:flex;flex:0 0 52px;flex-direction:column;align-items:center;gap:6px;height:74px;padding:4px 2px;border:0;border-radius:12px;background:transparent;scroll-snap-align:start;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .activity-date-number{font:500 14px/20px var(--font-app);font-variant-numeric:tabular-nums;color:var(--text-secondary)}
 .activity-ring-day[aria-pressed=true]{background:#fff}
 .activity-ring-day[aria-pressed=true] .activity-date-number{font-weight:600;color:var(--brand-blue)}

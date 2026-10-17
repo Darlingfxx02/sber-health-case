@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useLayoutEffect,useRef,useState} from 'react';
 import {canOpenDetail} from '../case-scope.js';
 import {ACTIVITY_DAYS,CARDS,RESULTS,activityContext,formatHealthValue,metricsForDay} from '../data.js';
 import {Icon} from './Icon.jsx';
@@ -22,8 +22,16 @@ function ActivityRings({progress}){
 }
 
 export function ActivityStrip({selected=ACTIVITY_DAYS[0].id,onOpen,onSelect,detail=false,compact=false}){
-  return <div className={`activity-history-track${detail?' activity-center-track':''}${compact?' activity-chat-track':''}`} aria-label="Выбрать день">
-    {ACTIVITY_DAYS.map(day=><button className="activity-ring-day" key={day.id} aria-pressed={selected===day.id} aria-label={`${day.date}. Показать данные`} aria-description={GOALS.map((goal,i)=>`${goal.title}: ${day.values[i]}`).join('. ')} onClick={()=>onSelect?onSelect(day):onOpen(activityContext(day))}>
+  const railRef=useRef(null),drag=useHorizontalDrag({nativeTouch:true});
+  useLayoutEffect(()=>{
+    const rail=railRef.current,day=rail.querySelector('[aria-pressed="true"]');
+    if(!day)return;
+    const padding=parseFloat(getComputedStyle(rail).scrollPaddingLeft)||0;
+    if(day.offsetLeft<rail.scrollLeft+padding)rail.scrollLeft=day.offsetLeft-padding;
+    else if(day.offsetLeft+day.offsetWidth>rail.scrollLeft+rail.clientWidth-padding)rail.scrollLeft=day.offsetLeft+day.offsetWidth-rail.clientWidth+padding;
+  },[selected]);
+  return <div ref={railRef} className={`activity-history-track${detail?' activity-center-track':''}${compact?' activity-chat-track':''}`} role="region" aria-label="Выбрать день" tabIndex={0} {...drag}>
+    {[...ACTIVITY_DAYS].sort((a,b)=>a.id.localeCompare(b.id)).map(day=><button className="activity-ring-day" key={day.id} aria-pressed={selected===day.id} aria-label={`${day.date}. Показать данные`} aria-description={GOALS.map((goal,i)=>`${goal.title}: ${day.values[i]}`).join('. ')} onClick={()=>onSelect?onSelect(day):onOpen(activityContext(day))}>
       <span className="activity-date-number">{day.shortDate}</span><ActivityRings progress={day.progress}/>
     </button>)}
   </div>;

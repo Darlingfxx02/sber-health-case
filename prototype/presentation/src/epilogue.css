@@ -20,7 +20,7 @@
 .agent-epilogue[data-phase=opening] .agent-transition-label{animation:agent-label-out 260ms ease forwards}
 .agent-epilogue[data-phase=closing] .agent-transition-label{animation:agent-label-in 300ms 140ms ease both}
 .agent-toolbar,.agent-crawl-window{transition:opacity 220ms ease}
-.agent-epilogue[data-phase=opening] :is(.agent-toolbar,.agent-crawl-window),.agent-epilogue[data-phase=closing] :is(.agent-toolbar,.agent-crawl-window){opacity:0;pointer-events:none}
+.agent-epilogue[data-phase=opening] .agent-crawl-window,.agent-epilogue[data-phase=closing] :is(.agent-toolbar,.agent-crawl-window){opacity:0;pointer-events:none}
 @keyframes agent-label-out{0%,15%{opacity:1}100%{opacity:0}}
 @keyframes agent-label-in{from{opacity:0}to{opacity:1}}
 .agent-toolbar{position:absolute;inset:0 0 auto;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:24px 28px;background:linear-gradient(#030407c9,transparent);font-size:13px;color:#ffffff80}

@@ -1,6 +1,6 @@
 import {useRef} from 'react';
 
-export function useHorizontalDrag(){
+export function useHorizontalDrag({nativeTouch=false}={}){
   const gesture=useRef(null),suppressClick=useRef(false);
   function finish(event){
     if(gesture.current?.pointerId!==event.pointerId)return;
@@ -12,7 +12,7 @@ export function useHorizontalDrag(){
   return {
     onPointerDown(event){
       suppressClick.current=false;
-      if(event.button!==0||!event.isPrimary)return;
+      if(event.button!==0||!event.isPrimary||nativeTouch&&event.pointerType==='touch')return;
       const rail=event.currentTarget;
       if(rail.scrollWidth<=rail.clientWidth)return;
       gesture.current={pointerId:event.pointerId,x:event.clientX,y:event.clientY,left:rail.scrollLeft,scale:rail.getBoundingClientRect().width/rail.offsetWidth,active:false};

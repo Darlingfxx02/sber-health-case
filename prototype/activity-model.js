@@ -1,7 +1,7 @@
 export const GOALS = [
-  {id:'movement',title:'Активность',color:'#FF9776',target:600,unit:'ккал',initial:72},
-  {id:'training',title:'Тренировки',color:'#AD9AFF',target:45,unit:'мин',initial:40},
-  {id:'nutrition',title:'Питание',color:'#8EE3BB',target:100,unit:'%',initial:65}
+  {id:'movement',title:'Сожжено',color:'#F78742',target:600,unit:'ккал',initial:72},
+  {id:'distance',title:'Дистанция',color:'#269AE2',target:6,unit:'км',initial:40},
+  {id:'nutrition',title:'Съедено',color:'#2FBC90',target:2000,unit:'ккал',initial:65}
 ];
 
 const clamp = value => Math.min(100,Math.max(0,Number(value)||0));

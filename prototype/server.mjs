@@ -1,4 +1,5 @@
 import http from 'node:http';
+import {handleMascotEvents} from './mascot-event-log.mjs';
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
@@ -7,6 +8,7 @@ const types = {'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-
 http.createServer(async (req,res) => {
   try {
     let name = decodeURIComponent(new URL(req.url,'http://localhost').pathname);
+    if (name === '/api/mascot-events') return await handleMascotEvents(req,res,path.join(root,'history/mascot-events.jsonl'));
     if (name === '/') name = '/index.html';
     const file = path.resolve(root,'.'+name);
     if (!file.startsWith(root)) {res.writeHead(403);return res.end();}

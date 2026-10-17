@@ -354,6 +354,984 @@
       "validation": "Проверка синтаксиса пройдена. Фактическая загрузка OpenRunde-Medium подтверждена браузером. На ширине 320 px карточки без горизонтального переполнения.",
       "spec": "references/typography-system.json",
       "reference": "references/user/fitbit-metric-cards-reference.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Сохранён предыдущий концепт и упрощена навигация",
+      "why": "Пользователь отказался от морфинга обзора и инпута: неочевидный сценарий и визуальная сложность",
+      "result": "Коммит 5faca65 и метка concept-collapsible-overview-2026-10-17 сохраняют старую версию. Новая: Чат / Виджеты, история по кнопке и свайпу. Аргументация и прежние экраны в prototype/history/index.html."
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Прототип перенесён на React и подключён Liquid Glass",
+      "why": "Переиспользуемые компоненты и материал элементов управления по запросу пользователя",
+      "result": "React владеет состоянием интерфейса; Glass-HQ используется для шапки. Сегмент имеет ширину по содержимому; слева две полоски меню, справа профиль."
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Добавлена поддержка scale в локальной сборке Liquid Glass",
+      "why": "Пользователь предпочёл исправить библиотеку и сохранить масштабируемый телефон",
+      "result": "Нормализованы координаты SVG-фильтров и взаимодействия; обновление при изменении масштаба родителей. Вернул адаптивный scale. Патч переживает npm install и проверяет SHA-256 исходников.",
+      "validation": "npm run check: 8 tests passed, build passed. Chromium: 60/80/100/125%, nested 64%, click and held drag; header at 320px; history button/swipe, new/switch chat, draft and metric context.",
+      "limits": "Локальный патч, не опубликован upstream. Вращение, perspective и другие браузеры не проверены."
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Уточнён светлый материал сегмента по референсу пользователя",
+      "why": "Внешняя стеклянная плашка должна быть почти белой, активная вкладка — светло-серой",
+      "result": "Navigation material tint #ffffff; selection tint #eeeeee. Fallback uses the same light hierarchy. Размер, расположение и масштабирование не менялись.",
+      "validation": "npm run build passed. Повторная визуальная проверка не выполнена: политика безопасности браузера заблокировала обновление вкладки."
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Подвижная плашка сегмента приведена к цвету основного фона",
+      "why": "Пользователь отметил, что активная вкладка темнее экрана",
+      "result": "Целевой цвет — canvas #f5f6f7. Tint #f7f8f9 компенсирует затемнение стеклянного фильтра; fallback использует var(--canvas). Внешний почти белый материал сохранён.",
+      "validation": "Build passed. Chromium: rendered fill and canvas sampled as RGB(245,246,248) in screenshot; switching Chat/Widgets verified."
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Концепт Figma 88:725 перенесён в React-прототип",
+      "why": "Пользователь попросил векторного маскота и исходные три дуги активности",
+      "result": "Создан редактируемый SVG из кругов, эллипсов, градиентов и путей. Все три контура и цвета дуг сохранены из Figma. В чат добавлена история дней; маскот открывает центр активности. Дуги показывают статичное демонстрационное состояние."
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Кнопки меню и профиля переведены на Liquid Glass",
+      "why": "Единый материал с переключателем Чат / Виджеты",
+      "result": "GlassButton из @glass-sdk/liquid-glass, светлый материал regular, белый tint, 44×44. Проверены готовность всех четырёх стеклянных поверхностей, открытие истории и демонстрационного профиля."
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Оранжевая дуга перенесена над маскотом",
+      "why": "Последнее уточнение пользователя: огибать аватарку сверху",
+      "result": "Исходный контур отражён вертикально, сохранены цвет, толщина и круглые концы. SVG viewBox расширен, чтобы дуга не обрезалась."
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Три дуги выровнены по одной окружности",
+      "why": "Пользователь уточнил одинаковую кривизну и зазоры между оранжевой, зелёной и синей дугами",
+      "result": "Оранжевая дуга построена с радиусом 90 в системе SVG и центром существующих боковых дуг. Между всеми круглыми концами одинаковый зазор ≈2 единицы SVG; толщина 8.91089 сохранена."
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Дуги подписаны цветными иконками IconSax Bold",
+      "why": "Уточнены значения графиков и начало каждого сегмента",
+      "result": "Оранжевая: сожжённые калории, пламя слева. Синяя: дистанция, кроссовок сверху. Зелёная: съеденные калории, вилка и нож снизу. Иконки взяты из локальной библиотеки Нейроключа, уменьшены на 20% по уточнению пользователя. Под иконки освобождено начало дуг, сохранены общий радиус, толщина и круглые концы."
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Иконки приближены к своим дугам",
+      "why": "В равном отступе между соседними дугами принадлежность иконки была неочевидна",
+      "result": "Все три иконки сдвинуты на 4° по окружности к началу дуги своего цвета. Размер, цвета и сами дуги сохранены; отступ до соседней дуги стал больше."
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Сокращены промежутки между дугами активности",
+      "why": "После привязки иконок к своим дугам пользователь попросил сделать разрывы компактнее",
+      "result": "Конец каждой дуги продлён на 4° к следующему сегменту. Иконки сохранили размеры и положение; расстояние до своей дуги по-прежнему меньше, чем до соседней."
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Дуги активности сделаны равными по длине",
+      "why": "Пользователь попросил убрать большую длину оранжевого сегмента",
+      "result": "Один и тот же SVG-контур повторён с поворотами 0°, 120° и 240°. Все три дуги имеют одинаковый радиус 90 и угол 97.0412°. Сохранены суммарная длина линий, промежутки и более близкая привязка иконок к своей дуге."
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Градиентные карточки дат заменены тремя кольцами активности",
+      "why": "Пользователь выбрал спортивный паттерн из приложенного референса, без дней недели",
+      "result": "Дата сверху, три концентрических SVG-кольца снизу. Цвета: оранжевый — сожжено, синий — дистанция, зелёный — съедено. Заполнение берётся из демонстрационных значений за день, пустое и полное состояния поддерживаются. Общий компонент используется в чате, виджетах и центре активности; значения деталки согласованы с назначением цветов."
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Уменьшен ряд колец активности",
+      "why": "Пользователь попросил значительно уменьшить блоки",
+      "result": "Диаметр колец 64 → 40 px, ширина дня 72 → 44 px, высота ряда 104 → 70 px. Убраны названия дней недели; на базовом экране помещаются семь дат."
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Проверен и отклонён вариант верхней стопки уведомлений",
+      "why": "Пользователь решил убрать отдельный блок и перенести уведомления в центрального маскота",
+      "result": "Демо-стопка с раскрытием и переходами работала; сохранены скриншоты notifications-collapsed.png и notifications-expanded.png. Компонент и стили удалены из текущего интерфейса."
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Центральный маскот стал точкой входа в новый документ",
+      "why": "Важное событие должно заменять персонажа файликом, без отдельного верхнего блока",
+      "result": "При новом результате внутри синего круга отображается редактируемый SVG-документ вместо глаз, под ним «Анализы готовы» и название анализа. Нажатие открывает нужный результат. После просмотра возвращается обычный маскот; кнопка «Сбросить» повторяет демо-событие. Все данные демонстрационные, реальных push-уведомлений нет."
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Уточнено уведомление в маскоте: шар остаётся, лицо исчезает",
+      "why": "Пользователь уточнил, что нужно убрать внутреннюю светлую форму лица, а исходный синий шар сохранить. Файл должен быть объёмным и под наклоном, в материале маскота.",
+      "result": "Вернули синий шар с исходным градиентом, убрали внутренний светлый круг и глаза. Поверх — голубой SVG-файл с загнутым уголком, мягкими бликами и наклоном 10°. Появляется снизу справа за 360 мс; шар и дуги неподвижны. Reduced motion отключает появление. Нажатие по-прежнему открывает анализ."
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Файл смещён вправо-вниз и обрезан синим кругом",
+      "why": "Документ должен заходить за границы круга, а не выступать наружу. Наклон — влево.",
+      "result": "Наклон −12°, смещение (20, 25) в координатах SVG. Постоянная круглая маска совпадает с синим шаром и обрезает файл вместе с его тенью на протяжении всей анимации. Дуги активности не изменены."
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Убрана подпись с названием анализа под маскотом",
+      "result": "На главной остаётся только «Анализы готовы». Название документа сохраняется в доступной подписи кнопки и на странице результата."
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Уточнены поверхности и акценты поля ввода",
+      "result": "Скрепка Iconsax: штрих 2 вместо 1.5. Поле и подсказки используют общий белый фон и едва заметную обводку #f0f2f4. Кнопка отправки — синий #008cff из маскота; при пустом поле остаётся синей с приглушённой стрелкой, отправка недоступна. Фокус поля отмечен мягкой голубой обводкой."
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Утолщена стрелка отправки",
+      "result": "Штрих SVG-иконки увеличен с 1.5 до 2.25; размер, форма и положение кнопки сохранены."
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Поле ввода и подсказки переведены на Liquid Glass",
+      "result": "Использована установленная @glass-sdk/liquid-glass: форма на GlassSurface, подсказки на GlassButton. Общий regular/light материал с белым tint и refraction 12 вынесен из шапки в Glass.jsx. У каждой поверхности отдельная ограниченная сцена с диагностикой и светлым fallback. Синяя отправка, утолщённые иконки и размеры сохранены.",
+      "verification": "npm run check: 8 тестов масштабирования и сборка прошли. В браузере все 3 новые сцены ready, каждая 1/1 карта/поверхность. Проверены ввод, отправка, нажатие подсказки, скрытие во вкладке виджетов и восстановление после возврата. Ошибок и предупреждений в консоли нет.",
+      "preview": "prototype/history/glass-composer.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Три последовательных экрана и упрощённое меню чатов",
+      "why": "Пользователь хочет переходить пальцем: история → чат → виджеты, сохранив верхний сегмент. В списке диалогов нужны названия слева, даты справа и отдельный круглый Новый чат.",
+      "result": "Общий контроллер ведёт жест на один соседний экран. Два свайпа влево из истории открывают виджеты; вправо — обратный путь. Страницы следуют за пальцем, переключаются после 22% ширины или короткого уверенного свайпа. Вертикальный скролл, поля ввода и горизонтальные списки не перехватываются; на экране подробностей навигационные свайпы отключены. Шапка сохраняется между чатом и виджетами. Меню: один заголовок Чаты, Медкарта, строки без повторяющихся иконок с датой справа и стеклянная круглая кнопка с плюсом справа снизу.",
+      "verification": "15 автоматических проверок и сборка прошли. В браузере проверена полная цепочка горизонтальными drag-жестами, нажатия сегмента, вертикальный скролл, сохранение его позиции 504px и черновика, создание нового чата, переход в Медкарту. Консоль без ошибок/предупреждений. Физическое touch-устройство не использовалось.",
+      "preview": "prototype/history/chat-history-navigation.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Уплотнён список чатов",
+      "result": "Минимальная высота строки 64 → 52 px, вертикальные отступы 14 → 10 px, промежуток между строками 4 → 2 px. Горизонтальные отступы и типографика сохранены."
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Подбор минималистичных виджетов для согласования",
+      "result": "Просмотрены UI-референсы в Figma 10:30 и дополнительные экраны Mobbin. Отобраны MacroFactor, Withings и Bevel. Картинки и предложения сохранены в references/widget-directions/selection.json; ждём выбора пользователя, прототип не изменён."
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Согласован и внедрён компактный вариант виджетов по Bevel",
+      "result": "Высота карточек уменьшена с 224 до 124 px. Убраны повторяющиеся оси дней и миниграфики. Короткое название, крупное значение и узкая шкала фактического диапазона недели с точкой последнего измерения. Общий спокойный мятный акцент, без оценки нормы. Блок врача сокращён до «Записи» и «К врачу».",
+      "validation": "Сборка и git diff --check прошли. В браузере проверены четыре карточки без переполнения, открытие подробностей и выбор дня; ошибок консоли нет.",
+      "preview": "prototype/history/widgets-bevel.png",
+      "before": "prototype/history/widgets-before-bevel.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Усилен зелёный в шкалах показателей",
+      "result": "Цвет #7cb5a3 → #52b892, непрозрачность основного диапазона 0.75 → 0.9. Проверено в превью; сборка успешна.",
+      "preview": "prototype/history/widgets-bevel-green.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Добавлены иконки и полноразмерные боковые шкалы показателей",
+      "result": "Залитые иконки IconSax из локальной библиотеки рядом с названиями. Шкала вынесена в правую колонку на всю высоту карточки с отступами 14 px сверху и снизу. SVG перестроен без растягивания круглого маркера; высота карточек 124 px сохранена.",
+      "validation": "Сборка и git diff --check успешны. В браузере проверены иконки, читаемость, отсутствие наложения чисел и названий на шкалы.",
+      "preview": "prototype/history/widgets-bevel-icons.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Вариабельность заменена на шаги",
+      "result": "Вместо сложного показателя ВСР — Шаги: 960 из 8 000, залитая иконка ходьбы IconSax и вертикальный прогресс к демонстрационной цели. Обновлены недельная история, форматирование чисел, доступные подписи и контекст обсуждения.",
+      "validation": "Сборка и git diff --check прошли; карточка и открытие недельной истории проверены в браузере.",
+      "preview": "prototype/history/widgets-steps.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Добавлены две главные страницы с общим входом в голосовой разговор",
+      "why": "Пользователь выбирает старт с чата или виджетов; помощник доступен на обоих экранах через маскота.",
+      "result": "Над разделами виджетов размещены три полукруглые дуги активности и маскот с глазами. В профиле сохраняется выбор стартового экрана. Маскот на обеих страницах открывает единый голосовой экран, а новый документ в центре чата открывает анализ. После просмотра документа возвращается маскот.",
+      "voiceBoundary": "Демонстрация интерфейса: управление состоянием микрофона и завершение. Запись, распознавание речи и голосовой AI не подключены.",
+      "validation": "18 автоматических проверок и сборка прошли. В браузере проверены обе точки входа, открытие документа, выключение микрофона, выход и Escape, возврат на исходную вкладку, сохранение черновика и фокус. Выбор стартового экрана проверен с перезагрузкой.",
+      "previews": [
+        "prototype/history/widgets-assistant.png",
+        "prototype/history/voice-conversation.png",
+        "prototype/history/start-view-settings.png"
+      ]
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Simplified the widget hero at user request",
+      "result": "Removed the microphone badge and caption below the mascot. Removed their reserved space; the mascot still opens the shared voice dialog.",
+      "preview": "prototype/history/widgets-clean-hero.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Adapted the widget mascot to a semicircle and moved activity icons to arc ends",
+      "result": "Widget-only vector semicircle, 140 by 70, aligned with the activity baseline. Eyes repositioned inside the shape. Colored icons sit at the right ends of their matching arcs with a short gap. Chat and voice artwork unchanged; voice entry verified in browser.",
+      "preview": "prototype/history/widgets-semicircle.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Reduced the inner mascot face on the widget home",
+      "result": "The inner face is now a fully visible circle inside the unchanged blue semicircle. Eyes and shadows were scaled to 70% and repositioned together, with clipping confined to the face. Confirmed in the rendered prototype.",
+      "preview": "prototype/history/widgets-smaller-face.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Expanded the widget hero to the screen width with 16px side margins",
+      "result": "Cropped unused SVG side space and scaled the arcs, icons and mascot proportionally. Browser check: 400px page, 368px hero, 16px margins on both sides.",
+      "preview": "prototype/history/widgets-full-width.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Turned the entire widget semicircle into the mascot face",
+      "result": "Removed the separate inner orb. The blue face material fills the complete semicircle, with the paired eyes positioned inside it. Outer dimensions, activity arcs and voice entry are preserved.",
+      "preview": "prototype/history/widgets-semicircle-face.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Rounded the two lower corners of the widget mascot",
+      "result": "Added tangent 5-unit fillets to the SVG semicircle, about 6px at the current screen width. Matched the focus outline; dimensions and eyes unchanged.",
+      "preview": "prototype/history/widgets-rounded-mascot.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Aligned activity arcs and icons to the mascot baseline",
+      "result": "Raised the arc starts by half the stroke width and moved icon boxes to end at y=140. Shortened the opposite arc ends to preserve clearance above the icons. Browser bounds match the mascot bottom within 0.02px.",
+      "preview": "prototype/history/widgets-aligned-baseline.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Added the My Clinic entry between activity and metrics",
+      "result": "Compact white tile with a local Iconsax hospital icon, title and a short description for doctor appointments and documents. Static visual entry only; the user explicitly excluded the clinic screen from this iteration.",
+      "preview": "prototype/history/widgets-my-clinic.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Replaced the activity heading and detail entry with a shared daily overview",
+      "result": "Removed Активность and подробнее. Date buttons now select data in place: mascot arcs, three activity values, four metric readings and range markers. Metric detail preserves the selected day; historical days do not reuse latest-day intraday samples. Clinic, appointments and document entries remain unchanged.",
+      "validation": "21 automated tests and production build passed; browser checked 15, 14 and 13 October, missing activity records, metric detail date and selection persistence through Chat/Widgets.",
+      "preview": "prototype/history/widgets-selected-day.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Moved activity history above the mascot",
+      "result": "The date-and-ring selector is the first widget block below the main header. The mascot and activity summary follow it. Date selection behavior is unchanged.",
+      "preview": "prototype/history/widgets-history-above-mascot.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Replaced activity summary labels with icons",
+      "result": "Burned calories, distance and nutrition now each show a 16px filled Iconsax icon on the left and the value on the right. Icon colors match their activity arcs. Accessible labels remain.",
+      "preview": "prototype/history/widgets-activity-icon-values.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Removed endpoint icons from the widget mascot arcs",
+      "result": "The three arc icons were removed from WidgetAssistant; colored icons beside the activity values remain. Arc geometry and chat mascot are unchanged.",
+      "preview": "prototype/history/widgets-clean-arcs.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Generated a 3D heart for My Clinic",
+      "result": "Replaced the flat hospital icon and its square background with a generated blue translucent resin heart, transparent PNG at 52px. Used the built-in image_gen tool; source asset and exact prompt saved in the project. Clinic flow remains out of scope.",
+      "asset": "prototype/assets/clinic/clinic-heart-3d.png",
+      "prompt": "prototype/assets/clinic/clinic-heart-3d.prompt.txt",
+      "preview": "prototype/history/widgets-clinic-3d-heart.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Extended widget activity arcs into the former icon space",
+      "result": "Right endpoints now mirror the left endpoints at y=136; painted round caps align with the mascot baseline at y=140. Progress is proportional to the full extended path.",
+      "preview": "prototype/history/widgets-extended-arcs.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Researched heart-rate detail references through Mobbin MCP",
+      "why": "The test assignment requires one detailed metric chart; the user selected heart rate for the next screen.",
+      "result": "Reviewed 12 screenshots from general heart-rate, Bevel and Fitbit searches. Shortlisted Eight Sleep for detail-page hierarchy, Bevel for the light chart card, and Oura for selected-day context. Original high-resolution images and source links saved under references/pulse-detail.",
+      "decision": "Proposed direction for user discussion; prototype detail implementation unchanged.",
+      "selection": "references/pulse-detail/selection.json"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Implemented the pulse detail after the user chose Bevel",
+      "result": "Dedicated pulse page with a white chart card, selected reading/time, proportional time axis, light green area, average/minimum/maximum, expandable measurement list and glass back/discuss controls.",
+      "reference": "https://mobbin.com/screens/76d28186-5f74-4995-800e-7a0b77546abc",
+      "validation": "24 automated tests and build passed. Browser checked day/week, keyboard selection, pointer drag at scaled preview, measurement list, historical entry and transfer of 77 bpm at 08:00 on 15 October into chat. No console errors.",
+      "preview": "prototype/history/pulse-detail-bevel.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Moved pulse statistics into a separate horizontal bento row",
+      "result": "Average, minimum and maximum are three equal white cards below the main chart, with 10px gaps and 22px corner radii. Values still follow the selected period.",
+      "preview": "prototype/history/pulse-detail-bento.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Moved the pulse statistics bento above the chart",
+      "result": "The three statistics cards now sit between the date/period row and the main chart.",
+      "preview": "prototype/history/pulse-detail-bento-top.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Reviewed Ultrahuman supporting content for the pulse detail through Mobbin MCP",
+      "result": "Inspected resting-heart-rate detail, the overnight heart-rate card and recovery contributors with an Add a tag action. Saved three original reference images. The resting-heart-rate screen has a separate score contribution section; its comparison values are not treated as bpm.",
+      "proposal": "Add a concise personal-history comparison and a compact event-tag row. Keep explanation on demand and retain the selected Bevel visual styling. No prototype changes in this research iteration.",
+      "selection": "references/pulse-detail/ultrahuman/selection.json"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Removed the pulse statistics bento and implemented personal dynamics and day events",
+      "result": "Average/minimum/maximum cards removed. Personal comparison uses the selected daily summary and only preceding available days, with rounded bpm, a compact scale and an explicit history count. Sleep, warm-up, walk and wellbeing demo events highlight their time on the chart and travel with the selected measurement into assistant context. Selecting another measurement or period clears the event. Selecting an event brings the graph into view.",
+      "bounds": "Fixed illustrative events for 15 October only; no medical interpretation, external device sync or AI analysis. First history day shows an honest missing-history state.",
+      "validation": "27 automated tests and build passed. Browser checked event selection/highlight, clearing an event on manual chart selection, comparison with no earlier data, day/week switching and transfer of 77 bpm at 08:00 on 15 October with the walk event to chat. No console warnings/errors.",
+      "preview": "prototype/history/pulse-detail-dynamics.png",
+      "eventsPreview": "prototype/history/pulse-detail-events.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Replaced day events with pulse-specific information and a personal-range collection state",
+      "reason": "User clarified that the detail should explain the pulse metric. Day-event tags had been adapted from the general recovery screen, not the dedicated Ultrahuman resting-heart-rate detail.",
+      "result": "Removed event data, chips, graph overlays and event context. Preserved the main chart, personal dynamics and measurements. Added Your usual range with a date-bound count of recorded days, and a collapsed About resting heart rate section covering meaning, manual measurement and influencing factors.",
+      "bounds": "Personal range deliberately remains a collection state: the prototype contains one week of demo history and has no validated baseline algorithm. No invented clinical thresholds or normal/abnormal labels.",
+      "contentSource": "https://www.heart.org/en/health-topics/high-blood-pressure/the-facts-about-high-blood-pressure/all-about-heart-rate-pulse",
+      "validation": "26 automated tests and build passed. Browser verified the collapsed/expanded information block, first selected date (1 recorded day), latest date (7 days), period switching and exact 67 bpm / 09:20 / 15 October context transfer without an event. No console warnings or errors.",
+      "preview": "prototype/history/pulse-detail-personal-range.png",
+      "aboutPreview": "prototype/history/pulse-detail-about.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Populated and condensed the pulse detail after the user rejected empty states and text-heavy cards",
+      "result": "Added 28 fictional prior daily readings. Replaced two separate insight cards with one unframed personal-range scale and a one-line comparison against the prior seven days. Default latest date shows 63–67 bpm, daily 64 and -1 bpm versus a prior seven-day mean of 65. Three recent measurements are immediately visible; All measurements expands the rest. Shortened the chart and moved the long educational content into a compact header info popover using the local Iconsax asset.",
+      "bounds": "All values are demonstration data. The range is a descriptive 10th–90th percentile interval of the preceding 28 daily values, rounded outward. This prototype computation is not a clinical reference interval. Daily summaries are compared with daily summaries, never with selected intraday peaks. Future data is excluded.",
+      "validation": "27 automated tests and build passed. Browser verified populated latest/historical date ranges, day/week switching, expanded measurement list and selection, info popover opening and Escape close without dismissing the detail. No console warnings/errors.",
+      "preview": "prototype/history/pulse-detail-populated.png",
+      "dataPreview": "prototype/history/pulse-detail-populated-readings.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Made open metric detail pages white",
+      "result": "Metric detail state applies a white local canvas to pulse, oxygen, sleep and steps, including status and home-indicator areas and glass backdrops. Closing the detail restores the gray main canvas. Metric overlays cover the bottom safe area.",
+      "validation": "Build passed. Browser visually checked pulse and oxygen details; computed background is white on both device and panel. Returning to Widgets restores rgb(245,246,247).",
+      "preview": "prototype/history/pulse-detail-white.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "График пульса растянут на всю ширину экрана",
+      "why": "Убрать пустые боковые поля и показывать значение рядом с измерением",
+      "result": "По краям 16 px плавного затухания; серая сетка пунктирная, цвет сохранён. Время остаётся снизу, выбранное значение размещается над точкой или под ней у верхней границы.",
+      "validation": "8 проверок модели графика и сборка прошли. В превью проверены выбор точки и подпись под пиком 77 уд/мин."
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Пересобрана строка выбранного измерения",
+      "why": "По уточнению пользователя: сердечко слева, время справа",
+      "result": "Иконка сердца перед числом пульса; время выровнено по правому краю в той же строке.",
+      "validation": "Сборка прошла; результат проверен в localhost-превью.",
+      "preview": "prototype/history/pulse-chart-full-width.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Adapted the pulse chart to the user-selected Oura reference",
+      "why": "Show interval ranges and activity context; right-axis labels with an equal gap to each grid line",
+      "reference": "https://mobbin.com/screens/b53b8818-c383-43c0-b9c2-754b292c41ee",
+      "source": "https://support.ouraring.com/hc/articles/4410656562579-Heart-Rate-Graph",
+      "result": "Coloured five-minute range bars and mean trace; sleep, rest and activity contexts. Selected walking window shows 92-121 bpm. Muted dashed grid remains #edf1ef. Each flex row leaves exactly 8px before its intrinsic-width label. Resting baseline stays separate.",
+      "demoData": "24 explicitly fictional observation windows. Context is authored, never inferred from pulse. Historical dates do not reuse this morning.",
+      "validation": "9 pulse tests, 3 date-binding tests and build passed. Browser: pointer/keyboard selection, walking context, day/week. Right-axis gaps for 0, 50, 100 and 150 are 8 layout px. No console warnings/errors.",
+      "preview": "prototype/history/pulse-context-ranges.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Increased pulse range-bar density to match the reference",
+      "why": "User found the previous 24 bars too far apart",
+      "result": "59 demo windows at ten-minute spacing, with the final 09:35 sample retained. Bars are 3.5px wide, 4.5px when selected; regular gaps are about 2.2px at a 400px phone width. Existing shape, colours and right-axis gaps retained.",
+      "demoData": "Only the explicitly fictional fixture is interpolated between authored anchors; actual device data is not resampled.",
+      "validation": "9 pulse-model tests and build passed. Rendered localhost screen checked.",
+      "preview": "prototype/history/pulse-context-dense.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Separate daily measurements from weekly range overlays; add period breakdowns",
+      "why": "User clarified that ranges supplement the trend and belong on the weekly timescale",
+      "result": "Day: 16 authored point readings with a continuous trend, no range bars. Week: the resting-pulse trend stays behind 27 state-range bars grouped across seven days. Selected resting pulse remains the main value; its full daily range is secondary. Four expandable rows show sleep pulse, activity pulse, stress duration and restorative duration. Totals follow the selected period; details show intervals or daily breakdowns.",
+      "demoData": "Removed dense interpolated fixtures. Separate explicitly fictional daily state summaries provide stress/recovery estimates, never inferred from pulse. Stored in src/pulse-demo.js.",
+      "validation": "10 pulse-model tests, 3 date-binding tests and build passed. Browser confirmed day has zero range bars and one trend; week has 27 range bars and one trend. Stress detail expanded correctly; period switch resets expansions and changes totals. No console warnings/errors.",
+      "preview": "prototype/history/pulse-week-ranges-line.png",
+      "breakdownPreview": "prototype/history/pulse-period-breakdown.png",
+      "sources": [
+        "https://support.ouraring.com/hc/articles/4410656562579-Heart-Rate-Graph",
+        "https://support.ouraring.com/hc/articles/21205822135315-Daytime-Stress"
+      ]
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Replaced disconnected weekly state extremes with local ranges along a continuous trend",
+      "why": "User found the separated tall bars tooth-like and unlike the reference",
+      "result": "56 chronological demo windows; each short range shares its x position and sample with the trend. Bounded cubic joins soften corners without inventing extrema. Adaptive stroke widths keep closely spaced samples distinct. Whole-day state extremes remain in summary cards; resting-pulse history remains separate.",
+      "validation": "10 pulse-model tests, 3 date-binding tests and build passed. Browser checked daily range absence, weekly line/ranges, selection at both ends and date-linked resting baseline. No console warnings/errors.",
+      "preview": "prototype/history/pulse-week-continuous.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Moved the selected weekly pulse range into the main reading row",
+      "why": "User requested the range instead of a single value and removal of the secondary context row",
+      "result": "Weekly header shows the selected interval range on the left and date/time on the right. Secondary state/range row removed for weekly mode. Daily mode retained.",
+      "validation": "Build passed; browser verified daily reading, weekly range updates and the 14 October 18:00 sample (57-63 bpm). Render checked for overlap.",
+      "preview": "prototype/history/pulse-week-range-header.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Rounded the daily pulse curve and enlarged its measurement dots",
+      "why": "User requested smooth peaks instead of sharp joins and more visible points",
+      "result": "Daily curve passes through the existing readings with shared tangents and horizontal tangents at extrema, bounded to adjacent measured values. Regular dots increased from 5px to 8px diameter; selected dot from 9px to 12px. Weekly rendering retained.",
+      "validation": "10 existing pulse model tests and build passed. Daily rendering checked in browser.",
+      "preview": "prototype/history/pulse-day-rounded.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Moved the pulse period selector below the chart and added month/year views",
+      "why": "User requested Day, Week, Month and Year beneath the graph",
+      "result": "Four-option full-width segmented selector below the time axis. Month aggregates available October records by day; year aggregates January-October records by month. Added explicit fictional archive through 15 October, reusing the existing seven authored days. Range header, axis, period totals, expandable rows and assistant context follow the selected period. Daily resting comparison remains limited to day/week. Period changes restore the top of the graph.",
+      "validation": "12 pulse tests, 3 date-binding tests and build passed. All four modes checked in browser; no console warnings/errors.",
+      "preview": "prototype/history/pulse-periods-below-chart.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Enlarged the pulse period selector",
+      "why": "User requested a larger control",
+      "result": "Selector height increased from 40px to 52px; button hit areas 44px; labels use the existing 16px medium card typography instead of 14px metadata.",
+      "validation": "Rendered weekly view checked; browser confirms 52px height, 44px buttons and 16px text.",
+      "preview": "prototype/history/pulse-periods-larger.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Removed the remaining state row and stabilized pulse chart layout",
+      "why": "User requested removal of the dot/state text below readings, consistent graph dimensions and a conventional sliding segmented control",
+      "result": "Removed the state row in every period. Chart is fixed at 220px, reading row at 58px, chart card at 310px. A single white indicator slides between equal segments in 240ms with reduced-motion support. Period changes preserve scroll position.",
+      "validation": "Browser confirmed identical chart/card heights and selector offset in all periods, and intermediate indicator transforms during movement."
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Removed the standalone date heading and simplified selected-date labels",
+      "why": "User removed the date block from all period views and specified period-dependent labels on the right",
+      "result": "Right label: HH:mm for day, calendar date for week/month, month name for year. Precise timestamps remain in the measurement list and assistant context. No standalone date block above the reading."
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Unified month/year chart styling with a continuous range envelope",
+      "why": "User found the long-period vertical range bars visually inconsistent",
+      "result": "Bounded smooth average line, a low-opacity min-max envelope, small sample markers, one highlighted selected range, and at most five time labels. Values and extrema are preserved by rendering. A slow authored cycle was added to the fictional archive to avoid identical monthly demo averages; the existing latest day and authored week are unchanged.",
+      "validation": "12 pulse model tests and build passed. Browser checked all four periods: fixed 220px plot, no unwanted heading/state rows, correct short labels, zero console warnings/errors.",
+      "preview": "prototype/history/pulse-month-consistent.png",
+      "yearPreview": "prototype/history/pulse-year-consistent.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Replaced expandable pulse summaries with horizontal range rows",
+      "why": "User requested a horizontal version of the home widget range visualization, values on the right, no icons or disclosure",
+      "result": "Four static 76px rows: label left, colored capsule scale in the center, value right. Sleep/activity share the observed pulse min-max scale; stress/recovery retain duration values on a shared zero-based time scale. No clinical reference or goal implied. Removed details/summary content and chevrons. Empty values do not draw a filled range.",
+      "validation": "Build passed. Browser checked day and year values, all four rows remain 76px without overflow, and no disclosure controls remain in the summary. No console warnings/errors.",
+      "preview": "prototype/history/pulse-horizontal-summary.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Expanded pulse-summary range pills to full card width",
+      "why": "User requested shorter sleep/activity titles, then title and value above each range pill.",
+      "result": "Во сне and При активности labels. Two-column header with title left and inline value/unit right; range or duration pill spans the full content width beneath. All four rows remain static.",
+      "validation": "Build passed. Browser verified day and year rows: graph below header, equal side padding, no horizontal overflow or wrapped titles with long yearly durations.",
+      "preview": "prototype/history/pulse-summary-full-width.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Separated the pulse chart surface from the lower summary area",
+      "why": "User requested a full-width white upper chart block with rounded bottom corners and a main-page-like grey lower area with white cards.",
+      "result": "Header and chart form a continuous white surface; chart block spans the screen with 32px lower corner radii. Period selector and summaries sit on #f5f6f7. Summary, personal-range and readings cards are white; horizontal pills have a pale-grey track.",
+      "validation": "Reloaded and visually checked localhost. Chart block equals the 400px content width, chart remains 220px high, lower cards retain 16px side margins, no horizontal overflow.",
+      "preview": "prototype/history/pulse-surface-hierarchy.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Removed the summary period heading",
+      "why": "User asked to remove the Всего за год block.",
+      "result": "Removed the redundant period heading from the shared summary component for every period; cards follow the period selector directly.",
+      "validation": "Build passed; browser verified the heading is absent in day and year views.",
+      "preview": "prototype/history/pulse-no-summary-heading.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Simplified pulse summaries and changed them to a two-column bento grid",
+      "why": "User requested consistent card headings, a simpler resting-range card and measurements, removal of the source footer, then compact bento cards with vertical ranges and slightly smaller titles.",
+      "result": "Four 164px summary cards in two columns, vertical range/duration pills, and a full-width resting-range card in the same component style. Titles are 500 weight, 15px/20px (14px on narrow screens). Resting-range metadata/comparison removed. Measurement units appear once in the header; counts, repeated units, separators and the source footer removed. All-measurements disclosure retained.",
+      "validation": "Build passed. Browser checked day and year values without overflow, all titles fit one line at 15px, and the weekly list expands to all 56 measurements.",
+      "preview": "prototype/history/pulse-bento-compact-headings.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Refined pulse summary layout, shared range indicators, generated counter art and aligned headings with home widgets",
+      "why": "User separated range metrics from duration counters, requested own range bounds and latest-measurement dots using the home component, and consistent grey headings with meaningful filled icons.",
+      "result": "Rest and sleep are the first two square cards with full-height vertical ranges; activity is a full-width horizontal range card; stress and recovery are square duration counters with bottom-aligned values. MetricRange is shared with Widgets and uses each card's own bounds. Counter illustrations were generated with built-in imagegen. Headings match home typography/color. After user feedback, rest uses an armchair, stress a lightning bolt, recovery a charging battery from local Iconsax rounded bold.",
+      "validation": "Build passed. Three widget-day tests passed after shared-range refactor. Browser verified own range bounds and latest dots, loaded illustrations, exact heading font/color match, no horizontal overflow, and final replacement icons.",
+      "preview": "prototype/history/pulse-summary-new-icons.png",
+      "assets": [
+        "prototype/assets/pulse/stress-knot-3d.png",
+        "prototype/assets/pulse/recovery-sprout-3d.png"
+      ],
+      "prompts": "prototype/assets/pulse/generation-prompts.txt"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Replaced muted pulse-detail colors with saturated mascot-aligned accents",
+      "why": "User found the pulse detail palette pale compared with the mascot on home.",
+      "result": "Sleep blue, resting green and activity orange now use the exact mascot-arc hues. Stress pink and recovery violet are more saturated. Trend line is saturated green; weekly range strokes use 95% opacity. Neutral surfaces, headings, icons and chart grid are preserved.",
+      "palette": {
+        "sleep": "#269ae2",
+        "rest": "#26e29a",
+        "activity": "#f78742",
+        "stress": "#ef5b91",
+        "recovery": "#9460ed",
+        "trend": "#1bb57e"
+      },
+      "validation": "Build passed. Browser verified rendered day chart and summary ranges; computed range colors match mascot RGB values.",
+      "preview": "prototype/history/pulse-vivid-palette.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Unified graph greens around a calmer jade hue",
+      "why": "User found the vivid green too acidic and requested the change across widgets, chat and chart details.",
+      "result": "Shared visual green is now #2FBC90 across widget ranges, activity history/semicircle arcs, activity values, chat mascot/document SVG arcs and pulse states. Pulse trend uses the deeper #239E78 variant. Blue, orange, pink and purple are preserved.",
+      "validation": "Build passed. Browser visually checked widgets and pulse; computed widget ranges, semicircle arc and resting range match rgb(47,188,144). Both chat SVG variants updated at source.",
+      "previews": [
+        "prototype/history/jade-green-widgets.png",
+        "prototype/history/jade-green-pulse.png"
+      ]
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Enlarged stress and recovery illustrations and cropped them at the lower-left card edge",
+      "why": "User requested roughly twice the image size, partially outside the left edge and anchored at the bottom.",
+      "result": "Illustrations enlarged from 64 to 128px, positioned left -40px and bottom -18px, clipped to the rounded card. Duration values remain bottom-aligned and move to the right; long durations wrap into right-aligned lines.",
+      "validation": "Build passed. Browser checked day and year counters; 402 h 30 min and 295 h 50 min fit without text overflow or visible overlap with illustrations.",
+      "preview": "prototype/history/pulse-large-counter-art.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Removed illustrations from stress and recovery counters",
+      "why": "User decided to remove both generated pictures.",
+      "result": "Cards retain grey title icons and bottom-left durations. Illustration markup and layout rules removed; generated source assets preserved in history.",
+      "validation": "Build passed and rendered cards visually verified without pictures.",
+      "preview": "prototype/history/pulse-counters-no-art.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Renamed recovery to rest and added gradient guidance meters",
+      "why": "User requested Отдых and two orange-to-green indicators of the current state relative to a norm.",
+      "result": "Stress and Rest cards now have full-height gradient capsules at right and white-ring position markers. Orange is at the bottom, jade green at the top. Durations stay bottom-left. The Rest label is updated in chart observations and chat context as well.",
+      "dataBoundary": "No clinical norm or score is inferred from pulse or duration. Explicitly authored demo guidance scores are stored alongside fictional daily records; period views average available daily mock scores. Missing scores produce a neutral track without a marker. The information popover and accessible meter labels identify the illustrative personal-guidance meaning.",
+      "validation": "All 12 pulse tests and build passed. Browser verified day/year markers change and long yearly duration values fit.",
+      "preview": "prototype/history/pulse-rest-gradient-guidance.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Added color-coded state icons to pulse measurement rows",
+      "why": "User requested an icon on the left of each measurement showing its state and matching the graph color.",
+      "result": "18px Iconsax filled icons precede each timestamp. A shared PULSE_STATES definition now provides label, color and icon for the chart observations, summary cards and measurement rows. Sleep is blue, activity orange, rest jade, stress pink and restorative rest violet. Aggregated month/year readings use a general heartbeat icon; unclassified readings use a neutral fallback. Accessible row names and tooltips include the state.",
+      "validation": "Build passed. Expanded daily readings visually verified; DOM confirmed icon/color pairs for sleep, activity, stress and rest match the graph.",
+      "preview": "prototype/history/pulse-measurement-state-icons.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Added dashed dividers between pulse measurements",
+      "why": "User found it difficult to associate each timestamp with its pulse value.",
+      "result": "Thin 1px muted grey dashed lines span each row between adjacent measurements, echoing the main chart grid. No divider before the first row.",
+      "validation": "CSS-only change; expanded measurement list visually verified in the browser.",
+      "preview": "prototype/history/pulse-measurement-dividers.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Replaced the pulse discussion pill with a round chat button",
+      "why": "User requested an icon-only circular entry for discussing the current metric.",
+      "result": "56px Liquid Glass chat button at bottom-right with a 24px blue icon. Visible label removed; accessible name and existing onDiscuss handler retained.",
+      "validation": "Build passed; browser confirmed a rendered circular glass button, 56x56 size, empty visible text, accessible label and ready glass surface.",
+      "preview": "prototype/history/pale-canvas-round-chat.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Lightened the shared application canvas",
+      "why": "User found the grey background too dark in chat, widgets and metric details.",
+      "result": "Canvas changed from #f5f6f7 to #f8f9fa across main pages, chat history and pulse lower surface. White cards and white chart header retained. Glass selection tint adjusted to #fafbfc for the lighter canvas.",
+      "validation": "Build passed. Chat, widgets and pulse visually checked; computed chat/history/pulse backgrounds equal rgb(248,249,250).",
+      "previews": [
+        "prototype/history/pale-canvas-chat.png",
+        "prototype/history/pale-canvas-widgets.png",
+        "prototype/history/pale-canvas-round-chat.png"
+      ]
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Always-visible weekly pulse history and aligned reading header",
+      "why": "User requested a full week without a collapsible list, plus heart centered below the back arrow.",
+      "result": "Initial history shows 64 existing observations across 9–15 October. Show more appends earlier available records in seven-day batches without collapsing; older daily aggregates are explicitly labelled среднее. Row selection switches to the correct chart period and point. Reading row left padding reduced from 20px to 11px; time and chart geometry unchanged.",
+      "validation": "14 pulse tests passed; build passed. Browser verified 64 initial rows, no aria-expanded on load-more, 71 rows after click, older record maps to month / 8 October. Heart and back icon centers both x=183.29437255859375 in scaled preview.",
+      "preview": "prototype/history/pulse-heart-aligned.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Increase pulse reading heart from 22px to 26px",
+      "result": "Left row inset adjusted from 11px to 9px, preserving the heart center below the back icon.",
+      "validation": "Browser computed size 26px; heart and back centers both 183.29437255859375px. Visually checked at top of pulse screen.",
+      "preview": "prototype/history/pulse-heart-26px.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Replace stress/rest right-side guidance meters with duration sparklines and a subtle downward fade",
+      "why": "User requested minimal recent-average graphs between title and duration, then a pale gradient wave under each curve.",
+      "result": "Single-column counter cards retain bottom-aligned duration. Pink stress and purple rest curves show trailing three-day mean durations across the latest seven recorded calendar days. No axes or visible labels. Area follows each curve and fades from 14% opacity to transparent. Removed right-side gradient scales; updated chart info.",
+      "validation": "15 pulse tests passed including averaging, missing/zero data and exclusion of future dates; build passed. Browser confirmed two mini charts, zero old meters, charts above duration values; visual gradient inspection passed.",
+      "preview": "prototype/history/pulse-duration-mini-trends-gradient.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Soften stress/rest sparkline area edges",
+      "result": "Horizontal opacity mask fades fill to transparent over the outer 14% on each side, combined with the existing vertical fade. Curves and endpoint dots stay crisp.",
+      "validation": "Build passed; visually verified both cards in local preview.",
+      "preview": "prototype/history/pulse-mini-trends-soft-edges.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Keep a crisp right edge on stress/rest mini-chart fill",
+      "result": "Applied user correction: right edge stays defined at the latest sample; only left side and bottom fade to transparent.",
+      "validation": "Build passed; inspected both cards in preview.",
+      "preview": "prototype/history/pulse-mini-trends-right-edge.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Refine appointment, lab result and therapist conclusion widgets on the widget landing page",
+      "scope": "Only Widgets.jsx, widget styles and matching Iconsax assets. Nested detail screens are unchanged, as clarified by the user.",
+      "result": "Appointments now use two compact white bento cards with neutral filled title icons, prominent dates and clear times. Section heading and booking action sit above the cards. Lab results use a unified white list with dashed separators, document icons and small matching document color markers. Therapist conclusion uses the same row style without an extra section heading. Side margins 16px, corner radius 22px, existing type tokens.",
+      "validation": "Build passed; visually verified against nearby metric cards. Ferritin and therapist appointment buttons open their existing correct detail screens.",
+      "preview": "prototype/history/widgets-appointments-results-refined.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Bottom-align numeric values in main metric widgets and pulse range cards",
+      "result": "Main reading groups align to the bottom; single-line headings no longer reserve a second line, so steps and its goal also fit. Pulse square range values align to the bottom. Horizontal activity row keeps its centered layout.",
+      "validation": "Rendered geometry confirms 14px bottom inset for pulse, oxygen, sleep and steps on main screen, and rest, sleep, stress and rest-duration cards in pulse details. Both screens visually verified.",
+      "previews": [
+        "prototype/history/widgets-values-bottom-aligned.png",
+        "prototype/history/pulse-values-bottom-aligned.png"
+      ]
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Shorten pulse summary card titles",
+      "result": "В покое → Покой; Во сне → Сон; При активности → Активность. The cards and their accessible range descriptions use the shorter labels.",
+      "validation": "Build passed; verified rendered titles Покой, Сон, Активность, Стресс, Отдых.",
+      "preview": "prototype/history/pulse-short-state-labels.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Rename main pulse widget and color by latest observation state",
+      "result": "Widget title is Пульс. Numeric reading and range/marker accent use the shared PULSE_STATES palette for the latest recorded observation on the selected day. Latest day uses its individual readings; historical days use their matching weekly observations. Current 64 bpm at 09:35 is Отдых, purple #9460ed. Units and title remain neutral.",
+      "validation": "5 widget-day and 15 pulse tests passed; build passed. Browser verified title Пульс, numeric and range color rgb(148,96,237), and accessible state/time description.",
+      "preview": "prototype/history/widget-pulse-latest-state.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Restore standard colors on the pulse widget",
+      "result": "Removed status-based visual coloring. Pulse uses the same green #2fbc90 range and dark #28313b numbers as the other widgets; title stays Пульс.",
+      "validation": "Build passed; browser verified equal value/range colors for pulse and oxygen; visually checked.",
+      "preview": "prototype/history/widget-pulse-standard-colors.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Group appointment time with its title",
+      "result": "Appointment card header now reads В 08:30 / Анализы or В 16:00 / Терапевт. Prominent date sits in its own bottom row with the chevron. Existing appointment times and actions retained.",
+      "validation": "Build passed; visually verified both cards.",
+      "preview": "prototype/history/widgets-appointment-time-title.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Увеличена высота карточек записей и добавлен портрет врача",
+      "result": "Карточки 212px: сверху демонстрационный портрет терапевта или значок анализов, ниже короткая дата и название в одну строку, время закреплено снизу. Исходные даты и действия сохранены. Портрет создан встроенным image_gen; промпт в prototype/assets/appointments/generation.json.",
+      "validation": "Build passed. В превью обе карточки 179×212px, заголовки 114px и 121px при доступных 151px; изображение загрузилось. Визуально проверено.",
+      "preview": "prototype/history/widgets-appointments-doctor-photo.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Пересобраны компактные карточки записей без фото",
+      "result": "Дата вынесена над белой карточкой шрифтом 14px. Внутри название 16/22 как у Ферритина и крупное время 30/36 внизу. Высота карточки 116px, фотографии убраны.",
+      "validation": "Build passed; в превью названия занимают одну строку и имеют тот же font, что medical-document-name; фотографий внутри карточек нет.",
+      "preview": "prototype/history/widgets-appointments-date-above.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Записи сгруппированы по дням с вертикальными разделителями",
+      "result": "Подпись дня выровнена по левому краю карточки. Между группами дней линия на 6px выше и ниже группы (156px против 144px карточки с датой). Сегодня и Завтра показываются относительными подписями, далее календарные даты. Несколько записей одного дня находятся под одной подписью без разделителя. Дополнительные дни доступны горизонтальной прокруткой, исключённой из свайпа навигации. Демо-календарь записей закреплён на 17 октября 2026.",
+      "validation": "Build passed. Проверены группировка нескольких записей за день, сортировка времени, Сегодня/Завтра/даты, переход месяца и неизменность данных. 7 navigation tests passed. В превью labelLeft совпадает с cardLeft, разделитель 156px.",
+      "preview": "prototype/history/widgets-appointments-day-dividers.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Укорочен разделитель записей снизу и усилены подписи дней",
+      "result": "Верх разделителя сохранён на -6px; низ поднят на 16px от края карточки, в зону скругления 22px. Подписи дат переключены на medium 500 при прежних 14/20.",
+      "validation": "Проверено в браузере: divider top -6px, bottom 16px, height 134px; даты 500 14/20.",
+      "preview": "prototype/history/widgets-appointments-divider-refined.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Верх разделителя выровнен по тексту даты",
+      "result": "Верхний отступ изменён с -6px на 4px, чтобы линия начиналась на уровне букв подписи даты. Нижний отступ 16px сохранён.",
+      "validation": "Визуально проверено в браузере.",
+      "preview": "prototype/history/widgets-appointments-divider-date-aligned.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Added horizontal appointment scrolling and white booking button",
+      "result": "Pointer dragging, trackpad scrolling and arrow-key navigation. Dragging suppresses accidental card opening. Added a fictional cardiology appointment on October 18 at 10:00 to demonstrate multiple days. Booking button has a white fill and primary dark text.",
+      "validation": "Build passed. Browser mouse drag: scrollLeft 0 to 136, widgets remained active, no detail opened. Subsequent click opened the correct therapist appointment. Booking button opened the existing booking form. ArrowLeft returned scrollLeft to 0. Physical touchscreen not separately tested."
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Removed inset clipping from appointment rail",
+      "result": "Rail extends to both phone-content edges using negative 16px margins and matching inner padding. Start/end cards retain 16px inset; passing cards remain visible through the side gutters.",
+      "validation": "Browser: rail clientWidth 400, scrollWidth 536; bounds match the inner phone edges. Mouse drag still scrolls to 136 without opening a detail. Start and end screenshots visually checked.",
+      "preview": "prototype/history/widgets-appointments-full-width-start.png",
+      "scrollEndPreview": "prototype/history/widgets-appointments-full-width-end.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Refined the My Clinic entry widget",
+      "result": "Replaced the glossy 3D heart with the existing filled hospital vector icon (30px) in a pale-blue 52px tile with 16px corners. Subtitle is lighter at #929ca5. Clinic-only chevron uses a 2.5px stroke at 18px size; other chevrons unchanged. Layout and destination scope preserved.",
+      "validation": "Build passed; rendered clinic entry visually checked. Browser verified the subtitle color and hospital-fill/chevron-right-medium assets. An intermediate GlassScene runtime error disappeared after rebuilding the updated workspace; no unrelated source repair was needed.",
+      "preview": "prototype/history/widgets-clinic-entry-refined.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Анимировано поведение маскота в виджетах, чате и голосовом режиме",
+      "why": "Показывать эмоции глазами, передавать поворот мордочки совместным движением глаз и внутреннего света и мягко обращать внимание на отстающую активность.",
+      "result": "Общий AnimatedMascot использует исходные SVG: сохранены формы, цвета и внешние дуги. Добавлены моргание, любопытство, задумчивость, улыбка глазами, подбадривание, внимательный взгляд и спокойный прищур. Градиент смещается вслед за глазами с небольшой задержкой. В виджетах два взгляда на отстающий показатель сопровождаются мягкой подсветкой его значения; в текущем демо это дистанция. Выполненные цели вызывают улыбку. Старые дни и отсутствие записей не вызывают призывов наверстать.",
+      "behavior": "Подсказка спустя 2,2 с после входа; два взгляда за 2,4 с, затем улыбка и спокойное поведение. Повторный вход не повторяет подсказку в течение 45 с. Анимации и таймеры останавливаются на скрытом экране, при открытии панели, прокрутке маскота за пределы видимости и в фоновой вкладке. Reduced motion оставляет статичное выражение.",
+      "logging": "Изменения описаны в этом журнале. Действия самого маскота дописываются сервером в prototype/history/mascot-events.jsonl: время, ID сессии вкладки, экран, действие, эмоция, причина и целевой показатель. Тексты чатов и значения здоровья не записываются. Runtime-файл исключён из Git.",
+      "validation": "npm run check: 44 теста и сборка прошли; после добавления ID сессии повторно прошли 6 mascot-тестов и сборка. В браузере проверены подсказка дистанции, улыбка на 14 октября, переход из документа к маскоту чата, listening/resting в голосовом режиме, paused у скрытого маскота и reduced-motion с нулевыми transition. Подтверждены реальные записи JSONL; ошибок браузера не обнаружено.",
+      "preview": "prototype/history/mascot-motion-preview.png",
+      "nudgePreview": "prototype/history/mascot-motion-nudge.png",
+      "ai": "AI исследовал текущие компоненты и журнал, переиспользовал авторские векторные формы, реализовал общий контроллер поведения и локальную запись событий, проверил сценарии и сохранил снимки. Внешние модели для генерации изображений не применялись."
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Generated a frosted pink heart for the clinic tile",
+      "result": "Built-in image_gen produced a transparent 3D pink heart, displayed in the existing 52px square wrapper with #fff2f6 fill. This version was superseded by the user-requested medical plus. Prompt and generated source preserved under prototype/assets/clinic/.",
+      "preview": "prototype/history/widgets-clinic-pink-frosted-heart.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Replaced the heart with a saturated pink frosted 3D plus",
+      "result": "Generated a richer rose-pink medical plus using built-in image_gen. Displayed at 64px inside the original 52px rounded wrapper, shifted 8px right and down from center and clipped by the wrapper. The barely pink background, light subtitle and heavier chevron remain.",
+      "validation": "Build passed. Browser verified image loading, 64px image in a 52px tile, overflow hidden, and visible cropping on right and bottom. Screenshot visually checked.",
+      "asset": "prototype/assets/clinic/clinic-plus-pink-frosted.png",
+      "generation": "prototype/assets/clinic/clinic-plus-pink-frosted.generation.json",
+      "preview": "prototype/history/widgets-clinic-pink-plus.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Исправлено движение света внутри маскота по замечанию автора",
+      "why": "Предыдущая реализация переносила целиком залитые круги и эллипсы. Автору нужен сдвиг синего акцента внутри неподвижного градиента, создающий поворот мордочки.",
+      "result": "Удалены mascot-light и CSS translate для цветовых слоёв. Исходные заливки, геометрия и gradientTransform неподвижны; анимируются только fx/fy радиальных градиентов face-glow и lower-light. Внешние цветовые кольца закреплены. Акцент смещается к глазам; длительность и easing совпадают с движением глаз. При прерывании переход продолжается от текущего фокуса, при reduced motion и паузе возвращается в центр без анимации.",
+      "validation": "Сборка и 6 mascot-тестов прошли. В браузере при взгляде вниз fx=0, fy≈0.1324 у основного градиента, исходные круги и gradientTransform неизменны; переносимых цветовых слоёв нет. Нейтральные кадры обеих форм сравнены с исходными inline SVG на одинаковом масштабе в PNG без сжатия: максимальная разница 1/255 в канале, только 14 пикселей для круглой формы и 15 для полукруга. Обычная анимация после проверки восстановлена.",
+      "preview": "prototype/history/mascot-lighting-neutral-preview.png",
+      "comparison": "prototype/tests/mascot-lighting-neutral.html",
+      "ai": "AI заменил движение геометрии на интерполяцию фокуса радиальных градиентов и проверил сохранение исходного вида в браузере."
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Reduced clinic entry padding",
+      "result": "White wrapper padding is 8px top/bottom/left and 16px right. Minimum height reduced from 88px to 68px, preserving the 52px pink icon tile and current typography.",
+      "validation": "Browser visually checked; computed padding 8px 16px 8px 8px, rendered height 68px.",
+      "preview": "prototype/history/widgets-clinic-compact-padding.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Устранено промаргивание градиента при возврате взгляда к центру",
+      "why": "На очень малом ненулевом расстоянии между центром и фокусом радиального градиента браузер терял светлые переходы. Дефект воспроизведён на статичных SVG при fx=0.0001, fy=0.00004, r=1; затронуты обе формы маскота.",
+      "result": "Добавлен stableGradientFocus: нормализованный фокус ближе 0.005 к центру становится ровно нулевым. Максимальная поправка меньше 0.46 единицы исходного SVG. Остальные позиции, движение акцентов, исходные цвета, геометрия и эмоции сохранены. React не пересоздавал SVG — это отдельно проверено наблюдением за DOM.",
+      "validation": "8 mascot-тестов и сборка прошли. Два новых теста проверяют опасные значения в разных направлениях и 2604 кадра прерванных/обратных переходов. В браузере за 14 секунд проверены neutral, encouraging, curious, happy и thoughtful: unsafeFrames=0, sameSvg=true. Сравнение статичных кадров до/после подтверждает сохранение светлых зон в обеих формах. Ошибок браузера не обнаружено.",
+      "preview": "prototype/history/mascot-flicker-fixed.png",
+      "reproduction": "prototype/tests/mascot-lighting-precision.html",
+      "before": "prototype/history/mascot-focal-precision-before.png",
+      "ai": "AI локализовал численную нестабильность отрисовки радиального градиента на диагностическом стенде, добавил защиту и регрессионные проверки."
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Brightened chat glass surfaces to near-white",
+      "result": "Shared 70% white surface fill for composer, suggested replies, header segment shell and header icon buttons. Regular glass refraction retained. Active segment indicator keeps the canvas color.",
+      "validation": "Build passed. Browser glass state ready; input pixels changed from approximately RGB 249/251/250 to 252/254/253. Header and tab switching visually checked.",
+      "preview": "prototype/history/chat-glass-near-white.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Filled dark icon for pulse discussion button",
+      "result": "Used the existing Iconsax rounded bold message-text icon as chat-fill; color is the shared primary text token #28313b.",
+      "validation": "Build passed; rendered button verified with chat-fill and RGB 40/49/59.",
+      "preview": "prototype/history/pulse-discuss-filled-dark.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Aligned profile icon optical weight with menu and clinic arrow",
+      "result": "Profile stroke increased from 1.5 to 2.25 in its 24px SVG. At 22px rendered size the stroke is approximately 2.06px, matching the 2px menu and 1.875px clinic chevron.",
+      "validation": "Visually checked together in the Widgets view. Existing dark profile color and glass wrapper retained.",
+      "preview": "prototype/history/widgets-profile-consistent-weight.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Removed therapist conclusion widget and unified icon weight and tone",
+      "result": "Removed the standalone therapist conclusion section. Appointments, lab result rows and clinic entry now share the same 18px chevron with a 2.5 source stroke. Remaining thin action icons use medium strokes. Neutral interface icons use the shared pale #aeb8c0 token, including header, card labels and navigation. Semantic colored state icons retain their colors.",
+      "validation": "Build passed. Browser confirmed no therapist conclusion block, shared chevron asset and 18px size, and neutral icon RGB 174/184/192. Visually reviewed the appointments and analyses screen.",
+      "preview": "prototype/history/widgets-medical-pale-icons.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Unified metric units and restored header icon contrast",
+      "result": "Home metric units and step goal share Open Runde Medium 16/22 and pale #9aa5af; the step goal was previously Regular 14/20. Existing 15px compact-screen adjustment applies to both. Menu/profile and pulse back icons restored to #28313b; pulse info restored to #697380. Header disabled controls retain full visual opacity without changing their disabled behavior.",
+      "validation": "Browser confirmed all five unit labels share font, weight, size and color. Verified menu/profile and pulse header colors and opacity 1. Inspected isolated app.html because the root page now hosts the case presentation.",
+      "preview": "prototype/history/widgets-unit-style-header-restored.png",
+      "pulsePreview": "prototype/history/pulse-header-colors-restored.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Increased chat suggestion and composer typography",
+      "result": "Suggestions now reuse the top Chat/Widgets segment style: Open Runde Medium 16/22 instead of 14/20. Composer input and placeholder use Regular 18/26 instead of 16/24.",
+      "validation": "Rendered app.html verified matching header/suggestion computed fonts and 18px composer text; screenshot checked.",
+      "preview": "prototype/history/chat-larger-prompt-input-text.png"
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Adjusted chat text to requested final sizes",
+      "result": "Suggestions: Open Runde Medium 13/18. Composer: Open Runde Regular 16/24.",
+      "validation": "Computed fonts and rendered screenshot verified.",
+      "preview": "prototype/history/chat-prompt-13-input-16.png"
+    },
+    {
+      "action": "Собрана интерактивная презентация решения",
+      "why": "По запросу автора использовать подачу предыдущего тестового, сохранить живой прототип и показать реальный процесс",
+      "result": "16 сцен с тремя гипотезами, сравнение раннего и итогового экрана, 18 этапов истории с режимами «Коротко» и «Подробно». Снимки взяты из локальной истории и фреймов Figma 21:469, 37:266, 88:725. Гипотезы сформулированы по словам автора, не представлены результатами исследования.",
+      "scope": "Доступны активный чат, виджеты и пульс. История чатов, профиль, голос, документы, запись к врачу и другие детали отключены. По прямому запросу автора использованы рамка Dresser и визуальные приёмы предыдущего тестового; раннее ограничение на его использование для этого этапа отменено автором.",
+      "files": [
+        "prototype/presentation/src/story.ts",
+        "prototype/presentation/src/main.ts",
+        "prototype/src/hooks/useCaseBridge.js",
+        "prototype/src/case-scope.js"
+      ]
+    },
+    {
+      "action": "Исправлены подача и переход к истории после замечаний автора",
+      "why": "Убрать лишнюю шапку и капсовые надзаголовки, повторить фокусы из референса и исключить пересечение текста с телефоном",
+      "result": "Гипотезы вынесены в заголовки. Фокус использует чёрный контур с белой обводкой и изогнутый указатель. Перед появлением истории описание уходит за край экрана и телефон перемещается вправо. Обратный переход также дожидается перемещения.",
+      "validation": "Полная проверка проекта: 51 тест и сборка прошли. В браузере проверены все 16 сцен, короткие и подробные логи, увеличение снимков, исследование макета, свайпы чат/виджеты, передача контекста пульса, недоступные входы и переход к истории в обе стороны. Компоновка проверена на 390x844 и 320x568, reduced motion переключает историю сразу. После финальной правки повторно прошли 5 тестов кейса, сборка и git diff --check."
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Animated home metric readings and range markers when selecting a date",
+      "result": "One 420ms cubic ease-out reading drives the rounded value, sleep hours/minutes, range marker and step progress. Retargets start from the current interpolated reading. Initial values and missing data do not animate from zero. Reduced motion or inactive widgets settle immediately. Accessible button labels and SVG data-value retain the actual selected reading.",
+      "validation": "Five widget-day tests and the build passed. Browser recorded intermediate numbers and marker positions in all four cards. A second selection after 17ms continued from the displayed value and finished at 4270 steps; reduced-motion selection displayed 960 immediately. No browser errors.",
+      "preview": "prototype/history/widget-reading-transition.png",
+      "evidence": "prototype/history/widget-reading-motion-check.json"
+    },
+    {
+      "action": "Упрощено оформление кейса и изменено вступление",
+      "why": "По новым замечаниям автора убрать зелёные акценты, лишние подзаголовки и поставить точный текст задания перед гипотезами",
+      "result": "На первом экране показана формулировка тестового от автора; на втором все три гипотезы. После них идёт тур, всего 15 экранов. Оформление презентации переведено в нейтральные серые оттенки. Обе кнопки навигации используют один шеврон, левый повёрнут. Переключатель истории без обводки, подписи имеют вес 600. Убраны декоративный подзаголовок истории, инструкция под туром и повторяющаяся подпись телефона вне сравнения.",
+      "validation": "В браузере подтверждены текст задания, все три гипотезы в одном видимом блоке, одинаковые шевроны и стили переключателя. Цвета самого приложения и изображений сохранены."
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Compact suggestion pills and synchronize composer with page navigation",
+      "result": "Suggestion padding reduced to 6px vertically and inherited 56px button height removed; pills are now 32px high. Composer remains mounted during chat/widget transitions and shares the view track transform and 280ms easing. Inactive composer is inert and aria-hidden; overlays still hide it. Dragging and reduced-motion modes share the navigation rules.",
+      "validation": "Build and seven navigation tests passed. Browser pointer swipes in both directions showed identical track and composer offsets; a short swipe returned to widgets. Segment switching moved both to -400px, and the draft survived a round trip. Glass remained ready.",
+      "preview": "prototype/history/chat-compact-suggestions-swipe.png"
+    },
+    {
+      "action": "Исправлено положение фокуса на поликлинике",
+      "why": "В туре блок прокручивался под закреплённую шапку, а обводка показывала только обрезанную полоску",
+      "result": "Прокрутка использует scroll-padding верхней границы контейнера вместо отдельного отступа 20px. Поликлиника и соседний блок показателей размещаются ниже шапки с зазором 8px.",
+      "validation": "В браузере верх поликлиники и показателей 142px при нижней границе шапки 134px. Поликлиника видна полностью, высота 68px; повторный вход в шаг проверен."
+    },
+    {
+      "action": "Фокус обсуждения перенесён на саму кнопку",
+      "why": "Автор уточнил, что на шаге передачи контекста нужно показывать спроектированную кнопку, а не состояние чата после нажатия",
+      "result": "Шаг 13 остаётся на экране пульса и подсвечивает круглую кнопку «Обсудить с помощником». Описание сокращено до назначения кнопки: передать показатель, дату и время. Обводка следует круглой форме стеклянного контейнера кнопки.",
+      "validation": "Проверен живой экран: pulse-discuss, кнопка целиком видна и выделена круглой чёрной рамкой с белой обводкой и указателем. Сборка прошла."
+    },
+    {
+      "action": "Упорядочены подписи месяцев на годовом графике",
+      "why": "Автор уточнил, что замечание относится к нижней строке месяцев. Выбор пяти округлённых индексов давал январь, март, июнь, август и октябрь с переменным шагом.",
+      "result": "Годовая шкала подписывается с календарным шагом в два месяца: январь, март, май, июль, сентябрь и ноябрь, когда для него есть данные. Пропущенные месяцы не сдвигают последовательность. Выравнивание крайних подписей зависит от границ графика, а не позиции в списке подписей.",
+      "validation": "16 тестов модели пульса и сборка прошли. В браузере на периоде «Год» отображаются янв, март, май, июль, сент. Данные, линия и диапазон не изменены."
+    },
+    {
+      "action": "Исправлен календарный шаг в режиме «Месяц»",
+      "why": "После годовой шкалы автор указал на тот же неравномерный выбор подписей в месячном режиме.",
+      "result": "Подписи привязаны к числам месяца с постоянным шагом семь дней: 1, 8, 15, 22, 29. Неполный месяц и пропуски измерений не сдвигают остальные даты. Для текущих данных показаны 1, 8 и 15.",
+      "validation": "17 тестов пульса, сборка и git diff --check прошли. В браузере выбран период «Месяц», подтверждены подписи 1, 8, 15."
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Added the agent epilogue CTA and perspective crawl",
+      "why": "End the case with the supplied personal text and a starfield invitation",
+      "result": "Full-width black CTA, white Open Runde label, WebGL stars, local Cyrillic Roboto Condensed 700, eight verbatim paragraphs. Wheel/touch scrubbing resumes after 2.8 seconds idle; explicit pause remains paused. Quiet reversed PCM transport and local audio selection implemented. Original Main Title identified but not bundled.",
+      "validation": "Case layout tests 5/5; transport tests 4/4; build passed; desktop and 390px button screenshots; browser wheel forward/back and idle resume verified. Original music playback not verified without the requested audio asset.",
+      "evidence": [
+        "prototype/history/case-agent-star-button.png",
+        "prototype/history/case-agent-star-button-mobile.png",
+        "prototype/history/case-agent-crawl.png"
+      ]
+    },
+    {
+      "action": "Пунктир выбранной точки отделён от цветного диапазона",
+      "why": "В выбранной точке пунктирная направляющая просвечивала сквозь цветной диапазон.",
+      "result": "При наличии диапазона направляющая состоит из двух отрезков: выше максимума и ниже минимума, с небольшим зазором у закруглённых концов. При выборе другой точки разрыв следует её диапазону. На дневном графике без диапазонов направляющая остаётся цельной.",
+      "validation": "Сборка и git diff --check прошли. В браузере проверены Неделя, Месяц, Год, День и смена выбранной точки; координаты пунктирных отрезков не пересекаются с цветным диапазоном."
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Refined the agent epilogue player and connected the supplied soundtrack",
+      "why": "Author requested minimal black controls, an opening profanity notice, gradual audio resume and earlier mockup disappearance.",
+      "result": "User-provided Main Title and Escape MP3, default volume 5%. Resume ramps both playback speed and gain over 1.4s. Black controls with 3% white borders and local Iconsax assets. Removed percentage label and bottom pause/replay/read buttons; the same crawl is controlled by scrolling. Profanity warning is the first line before the title, without a consent dialog. Phone opacity follows footer distance and reaches zero 72px before overlap.",
+      "validation": "Audio/playback tests 5/5 and build passed. Browser checked desktop 1057px and mobile 390px, default volume 5%, absence of removed controls, actual audio ready/playing state, idle resume ramp true then false. At footer top 850.65px and phone bottom 801.81px, phone opacity was already zero; scrolling back restored partial opacity.",
+      "evidence": [
+        "prototype/history/case-agent-player-refined.png",
+        "prototype/history/case-agent-player-mobile.png",
+        "prototype/history/case-agent-phone-before-button.png"
+      ]
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Added a shared-surface transition from the agent button to the player",
+      "why": "Author wanted the starfield button itself to expand into fullscreen.",
+      "result": "One star canvas is reparented to the player surface and back. The surface grows from the measured button rectangle to viewport bounds in 700ms, with corners becoming square and the label fading. Crawl and audio start after the transition. Closing collapses the surface in 480ms. Reduced motion skips the geometry animation.",
+      "validation": "Build and 10 case/audio/playback tests passed. Desktop transition captured between button bounds 977x224 at (40,626) and fullscreen 1057x898; mobile fullscreen 390x844 verified. Close and Escape during opening return the single canvas to the visible button, stop sound and restore page scrolling.",
+      "evidence": [
+        "prototype/history/case-agent-expanding-button.png"
+      ]
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Fixed the case text column when entering comparison scenes",
+      "why": "The transition from stage 6 to 7 moved the heading, description and bottom controls sideways as the comparison layout changed the text anchor and width.",
+      "result": "A single text column is used in both layouts. Two comparison phones fit within the left lane, retaining at least a 32px gap to the text. The heading and bottom controls retain the same position and width.",
+      "validation": "6 case tests and build passed. Browser at 1057x898 verified identical text/heading/control x=558.765625 across stages 6 and 7, text width=474.2265625 and controls y=782. Stage 8 and reverse navigation retain the same anchor. Regression covers desktop and compact viewports.",
+      "evidence": [
+        "prototype/history/case-stage-6-fixed-column.png",
+        "prototype/history/case-stage-7-fixed-column.png"
+      ]
+    },
+    {
+      "date": "2026-10-17",
+      "action": "Stabilized the explore button, reviewed case copy and restored page scroll over descriptions",
+      "why": "Author reported a blinking explore button, desktop keyboard wording in a mobile case, and wheel scrolling trapped by the text column.",
+      "result": "The explore button keeps opacity 1 during temporary loading while preserving its readiness guard. Reviewed all 15 scenes and 18 history entries: chart interaction uses touch, step goals are distinguished from weekly ranges, stress is included in color descriptions, aggregation and seven-day mini-chart explanations are clarified, and future appointment functionality is explicitly conceptual. Text scroll containers now permit native scroll chaining to the page.",
+      "validation": "Build passed. Browser verified opacity 1 with disabled true and false. Wheel scrolling over the text moved the document from 4741.5 to 5325px and back, switching between stages 7 and 8. Stage 9 renders the corrected touch wording and fits the fixed column.",
+      "evidence": [
+        "prototype/history/case-explore-button-stable.png",
+        "prototype/history/case-mobile-copy-and-page-scroll.png"
+      ]
     }
   ],
   "aiWorkflow": {
@@ -661,59 +1639,327 @@
     "entry": "prototype/index.html",
     "start": "cd prototype && npm start",
     "figmaSource": "https://www.figma.com/design/aizNMC6YoCzmeYVBKOD4dS?node-id=37-266",
-    "preview": "prototype/preview.png",
+    "preview": "prototype/history/chat-compact-suggestions-swipe.png",
     "aiBackend": false,
     "pending": "Обсудить композицию и содержание; перенос в Figma после локальной итерации.",
     "activityHistory": {
-      "representation": "Date component from Figma 37:582, adapted to Open Runde; white number; abbreviated weekday",
-      "gradient": "White base with a separate transparent-white -> #3c83e7 gradient overlay.",
-      "entry": "Selected day in activity center; explicit Discuss action adds chat context",
-      "data": "Demo; current history day is Thursday as requested"
+      "representation": "Number above three concentric progress rings; no weekday labels or card surfaces",
+      "colors": {
+        "burned": "#F78742",
+        "distance": "#269AE2",
+        "eaten": "#26E29A"
+      },
+      "ringSize": 40,
+      "itemWidth": 44,
+      "itemHeight": 74,
+      "entry": "In-place day selection updates the widget hero arcs, activity values and health metrics; no activity detail is opened.",
+      "data": "Fixed demo week; illustrative values and targets, no live tracking",
+      "location": "Widgets: shared daily selector above the mascot and activity summary"
     },
     "font": "Locally hosted Open Runde 400/500/600; Inter remains only in embedded medical document previews.",
     "homeInteraction": {
-      "initial": "AI chat; centered health overview pill with a persistent profile button. Activity is hidden with the overview.",
-      "expanded": "Health documents, activity history, vital metrics and medical care in one scrollable overview. Profile remains stationary.",
-      "navigation": "Кнопка чатов в шапке удалена. Свайп вправо из свободной области интерактивно сдвигает всю страницу, включая поле ввода, и вытягивает левую панель на полную ширину. Внутри — разделы и история чатов.",
-      "continuity": "При переключении сохраняются текущая переписка, контекст и черновик. В историю добавлены два демонстрационных диалога; новый чат и переключение между чатами работают внутри текущей сессии.",
-      "pill": "В свёрнутой пилюле три минималистичных файла с цветными точками, название и линейный шеврон IconSax. При раскрытии миниатюры масштабируются в полноценные документы с теми же цветными метками; обратное сворачивание также анимировано.",
-      "title": "По последнему уточнению отдельная пилюля над раскрытым блоком убрана. Тот же элемент перемещается в заголовок блока с документами; название «Анализы готовы» на главной заменено на «Обзор здоровья», шрифт увеличивается, шеврон остаётся рядом.",
-      "icons": "И у «подробнее», и у обзора теперь обычные шевроны из локальной библиотеки IconSax Linear.",
-      "gestures": "Страница следует за пальцем. При отпускании после 75% ширины панель раскрывается полностью; короткий жест возвращает исходное состояние. Свайп влево закрывает панель по тому же порогу. Вся зона активности исключена. Вертикальный скролл, поля ввода и горизонтальные списки сохраняют свои жесты; отмена касания и второй палец возвращают исходное состояние.",
-      "motion": {
-        "surface": "Один постоянный компонент: ширина, высота, отступы, обводка, скругления, тень и градиент меняются плавно. Заголовок остаётся внутри него.",
-        "documents": "Те же три DOM-элемента в обоих состояниях. Мини-версия — уменьшенный до 22% веер с теми же углами, порядком перекрытия и пропорциональной обрезкой снизу. Все файлы масштабируются синхронно, без перестановки и отдельных траекторий.",
-        "animation": "Раскрытие 286 мс, сворачивание 274 мс. Появление содержимого и его задержки ускорены пропорционально. Быстрое обратное переключение начинается с текущего визуального кадра. При reduced motion состояния меняются сразу."
-      },
-      "composerMotion": {
-        "surface": "Постоянная нижняя плашка: поле ввода ↔ круглая кнопка AI по центру",
-        "collapseMs": 286,
-        "expandMs": 274,
-        "reducedMotion": "Без анимации"
-      },
-      "sidebarMotion": {
-        "side": "left",
-        "width": "100%",
-        "openThreshold": 0.75,
-        "settleMs": 280,
-        "keyboard": "Alt+ArrowRight открывает, Escape закрывает",
-        "implementation": "prototype/history-gesture.js"
-      },
-      "profile": "Same position and size in both modes; expansion surrounds it.",
-      "layout": "Expanded gradient side margins: 4px. Bento cards: 16px. Collapsed pill centered on the screen. Profile position is fixed across modes."
+      "initial": "Чат по умолчанию; в профиле можно выбрать Виджеты",
+      "navigation": "Компактный Liquid Glass сегмент Чат / Виджеты по центру. Слева меню из двух полосок, справа профиль. Название приложения и отдельная строка текущего чата с плюсом удалены.",
+      "widgets": "Самостоятельная страница: выбор даты с кольцами, полукруг с маскотом для голосового разговора, значения активности, Моя поликлиника, показатели, записи и документы. Выбранный день обновляет дуги, активность и четыре показателя на месте; сохраняется при смене вкладки. Нижний инпут отсутствует.",
+      "chat": "Шапка Чат / Виджеты, центральный маскот или новый документ, подсказки и поле ввода. Новый результат заменяет лицо наклонённым файлом внутри синего шара; нажатие открывает документ. После просмотра возвращается маскот, который открывает голосовой разговор. Ряд активности и отдельная стопка уведомлений из чата удалены.",
+      "startPreference": "Профиль → Открывать при запуске → Чат / Виджеты. Выбор сохраняется локально; изменение настройки не переключает текущую страницу. При недоступном хранилище запуск с чата.",
+      "history": "Меню из двух полосок или свайп вправо из чата. Один заголовок Чаты, Медкарта, строки с названием слева и датой справа, стеклянный круг Новый чат справа снизу.",
+      "continuity": "Черновики, контекст, чаты и скролл виджетов сохраняются при смене вкладки и открытии голосового режима в текущей сессии. После перезагрузки демо сбрасывается; выбор стартового экрана остаётся.",
+      "gestures": {
+        "order": [
+          "history",
+          "chat",
+          "widgets"
+        ],
+        "left": "Следующий экран; история → чат → виджеты",
+        "right": "Предыдущий экран; виджеты → чат → история",
+        "commit": "22% ширины или движение ≥28px со скоростью ≥0.45px/ms в направлении жеста",
+        "exclusions": "Поля ввода и редактируемый текст, сегмент, подсказки, горизонтальные списки; жесты навигации заблокированы в подробностях, профиле и голосовом режиме",
+        "continuity": "Черновик и скролл виджетов сохраняются; отмена и второй палец возвращают исходную страницу",
+        "header": "Сегмент Чат / Виджеты остаётся неподвижным при переходе между вкладками"
+      }
+    },
+    "widgetAssistant": {
+      "component": "prototype/src/components/WidgetAssistant.jsx",
+      "geometry": "Symmetric upper arcs with radii 124/106/88 and 8-unit round strokes, sharing center 152,140 with the mascot. Both centerline endpoints are at y=136 so round caps finish at baseline 140. Endpoint x offsets are sqrt(radius² - 4²). No endpoint icons.",
+      "data": "Selected ACTIVITY_DAYS entry drives all three arcs and the visible activity summary. Fixed demo dates 9–15 October 2026; missing records are explicit.",
+      "interaction": "Opens the same voice dialog as the mascot on chat home, preserving the widget page and scroll.",
+      "motion": "650ms staggered fill on entering widgets; 280ms transition on day selection. Reduced motion disables both.",
+      "decoration": "Mascot and activity arcs only; no endpoint icons, microphone badge or caption.",
+      "asset": "prototype/assets/mascot/health-mascot-semicircle.svg",
+      "innerFace": "No separate inner orb. The complete semicircle is the face; the original paired eyes use an 85% scale and fit fully inside.",
+      "layout": "Responsive width: 100% minus 32px; 16px side margins. SVG viewBox 24 12 260 128; mascot and arcs share the same coordinate space.",
+      "cornerRadius": "5 SVG units on the two lower corners, tangent to the outer arc and baseline.",
+      "summary": "One compact row: filled Iconsax icon in the matching arc color, followed by the selected-day value. Text labels remain accessible to screen readers only."
+    },
+    "voiceInteraction": {
+      "component": "prototype/src/components/VoiceConversation.jsx",
+      "entry": "Mascot on either home; the pending document in chat retains its document action.",
+      "controls": "Glass microphone toggle; end conversation; Escape. Focus is trapped in the dialog and restored to the entry control on closing.",
+      "implementation": "UI demo only. No microphone access, audio recording, speech recognition or AI connection. Explicit demo label on screen.",
+      "preview": "prototype/history/voice-conversation.png"
     },
     "featurePlan": "prototype/feature-plan.html",
     "typographySystem": "references/typography-system.json",
     "healthCards": {
-      "style": "Flat white tracker cards, label + value + weekly history",
+      "style": "Compact white cards: filled icon, short label, selected-day reading and narrow weekly range",
       "metrics": [
         "Пульс в покое",
         "Кислород в крови",
         "Сон",
-        "Вариабельность пульса"
+        "Шаги"
       ],
       "data": "Demo",
-      "background": "Uniform #f5f6f7"
+      "background": "Uniform #f8f9fa",
+      "height": 124,
+      "range": "Pulse, oxygen and sleep use observed weekly min/max with the selected-day point. Steps use selected-day progress toward an illustrative daily goal of 8000. No medical normality labels.",
+      "details": "Tap opens the weekly chart with the same day selected. Intraday samples exist only for the latest demo date and are not reused for older dates.",
+      "reference": "https://mobbin.com/screens/5addacbb-f7a4-4548-aac5-25863dae8bd9",
+      "rangeColor": "#2fbc90",
+      "rangeOpacity": 0.9,
+      "icons": "Local Iconsax rounded bold: heart, drop, moon, walking; alongside labels",
+      "rangeLayout": "Right-hand column, 96 px high within a 124 px card, 14 px inset at top and bottom"
+    },
+    "architecture": {
+      "framework": "React 19.3.0",
+      "entry": "prototype/src/main.jsx",
+      "build": "cd prototype && npm run build",
+      "checks": "cd prototype && npm run check",
+      "components": "AppHeader, ChatView, Composer, HistoryDrawer, Widgets, DetailPanel",
+      "glass": {
+        "package": "@glass-sdk/liquid-glass",
+        "version": "0.0.2",
+        "source": "https://github.com/Glass-HQ/liquid-glass",
+        "localPatch": "prototype/patches/liquid-glass-scale.mjs",
+        "coordinates": "Viewport rects normalized to scene layout pixels; scale-aware press motion; ancestor style/class observers.",
+        "durability": "Build-time patch, immutable node_modules, pinned source SHA-256 guards",
+        "scope": "Positive axis-aligned ancestor scale and translation. Chromium verified; rotation, perspective and cross-browser rendering not verified.",
+        "lightPalette": {
+          "navigationTint": "#ffffff",
+          "selectionTint": "#fafbfc",
+          "selectionTarget": "#f8f9fa",
+          "selectionFallback": "var(--canvas)"
+        },
+        "headerButtons": "GlassButton, regular/light, white tint, circle 44×44; each bounded scene has one surface."
+      }
+    },
+    "mascot": {
+      "sourceNode": "88:725 / 92:847",
+      "asset": "prototype/assets/mascot/health-mascot.svg",
+      "format": "Editable SVG geometry; no raster embedding",
+      "activity": "Static demo arcs on one circle; orange arc above the head, matching side arcs in radius, stroke width and end gaps.",
+      "provenance": "references/concept-88-725/provenance.json",
+      "icons": {
+        "style": "Iconsax pro / rounded / bold",
+        "source": "/Users/darlingfxx/Projects/Neyrokey/iconsax/Icons collection/pro/rounded",
+        "size": "16 SVG units, reduced from 20",
+        "orange": "Burned calories: flame, left",
+        "blue": "Distance travelled: walking shoe, top",
+        "green": "Calories eaten: fork and knife, bottom",
+        "placement": "Offset 4 degrees toward the matching arc; asymmetric gaps reinforce association."
+      },
+      "arcGeometry": {
+        "radius": 90,
+        "sweepDegrees": 97.0412002,
+        "rotations": [
+          0,
+          120,
+          240
+        ],
+        "gapDegrees": 22.9587998
+      }
+    },
+    "notifications": {
+      "location": "Blue orb with the inner face and eyes hidden; document leans left, shifted down-right and clipped to the orb",
+      "initialDemoDocument": "result-blood",
+      "interaction": "Click opens the result and clears pending notification for this session; resetting the prototype restores it.",
+      "artwork": "prototype/assets/mascot/health-document.svg",
+      "delivery": "Local demo only; no push or medical integration"
+    },
+    "composerGlass": {
+      "library": "@glass-sdk/liquid-glass 0.0.2",
+      "surface": "GlassSurface renders native form; suggestion chips use GlassButton",
+      "material": "regular / light / tint #ffffff / refraction 12",
+      "source": "prototype/src/components/Glass.jsx",
+      "verified": "Browser rendering, input and send, suggestion click, tab round trip; all scene maps ready"
+    },
+    "clinicEntry": {
+      "symbol": "Generated saturated rose-pink frosted-glass 3D plus, 64px, offset 8px right/down from center and clipped",
+      "wrapper": "52px square, radius 16px, #fff2f6",
+      "subtitleColor": "#929ca5",
+      "chevron": "chevron-right-medium, 2.5px stroke, 18px size",
+      "screenScope": "Entry widget only; clinic destination is not implemented.",
+      "padding": "8px top/bottom/left, 16px right; total height 68px"
+    },
+    "pulseDetail": {
+      "reference": "https://mobbin.com/screens/b53b8818-c383-43c0-b9c2-754b292c41ee",
+      "style": "White page with a continuous, softly joined pulse trend and compact local range strokes along that same trend. Blue sleep, amber activity, pink stress, purple restorative time.",
+      "component": "prototype/src/components/PulseDetails.jsx",
+      "chartModel": "prototype/src/pulse-chart.js",
+      "interaction": "Day: 16 point readings, no range strokes. Week: 56 chronological interval samples and corresponding ranges, selectable by pointer/keyboard. Context includes exact date/time and local range. Whole-period ranges and durations are static summary cards.",
+      "bounds": "All records are explicitly fictional. Detailed weekly samples are separate from the seven daily resting-pulse values used by widgets and the 28-day baseline; latest shared timestamps agree with daily samples. No clinical inference.",
+      "validation": "27 automated tests and build passed. Browser verified populated latest/historical date ranges, day/week switching, expanded measurement list and selection, info popover opening and Escape close without dismissing the detail. No console warnings/errors.",
+      "statistics": "Removed the average/minimum/maximum bento at the user request.",
+      "personalComparison": "Removed from the visible resting-range card at user request to match the compact summary cards.",
+      "personalRange": "First square card. Existing descriptive 28-day demo range and latest resting reading; no clinical thresholds.",
+      "information": "Weekly line and range marks describe the same observation windows. State summaries below show whole-period ranges and durations.",
+      "contentSource": "https://support.ouraring.com/hc/articles/4410656562579-Heart-Rate-Graph",
+      "chartLayout": "Fixed 220px full-width chart and 58px reading row; 310px chart card. 16px edge fade/right axis inset, muted dashed grid, 8px intrinsic label gap. No auto-scroll when switching periods.",
+      "readingHeader": "Heart plus reading for day or range for longer periods. Right label: HH:mm for day, date for week/month, month for year. No state row or standalone date heading.",
+      "latestValidation": "15 pulse tests passed including averaging, missing/zero data and exclusion of future dates; build passed. Browser confirmed two mini charts, zero old meters, charts above duration values; visual gradient inspection passed.",
+      "breakdown": "Resting/sleep square cards with vertical ranges, activity full-width horizontal range, Stress/Rest square duration cards with separate orange-to-green guidance meters. All static.",
+      "dailyCurve": "Smooth bounded cubic interpolation through actual samples, with horizontal tangents at peaks and troughs; 8px measurement dots and 12px selected dot.",
+      "periodSelector": "52px selector below the chart: Day, Week, Month, Year. One white indicator slides in 240ms, respecting reduced motion. Chart/card height and control position remain fixed across periods.",
+      "longPeriodStyle": "Month/year: bounded smooth average line, 8%-opacity min-max envelope, sample dots and only the selected vertical range. Up to five axis labels. Authored fictional archive has moderate long-term variation; the original seven days are retained.",
+      "surfaces": "Full-width white header/chart surface with rounded lower corners; #f8f9fa lower canvas with white summary/readings cards.",
+      "summaryHeading": "Removed in every period; cards follow the period selector directly.",
+      "measurements": "Always visible latest seven days, independent of chart zoom; Show more appends older records by seven days. Color state icons and dashed dividers retained. Daily archive aggregates explicitly labelled; no fabricated intraday timestamps. Selection maps to source period/index.",
+      "rangeComponent": "Shared MetricRange.jsx with home Widgets. Each range uses its own low/high bounds and latest matching measurement dot; full-height vertical indicators and full-width horizontal activity indicator.",
+      "counterArt": {
+        "mode": "built-in imagegen",
+        "stress": "prototype/assets/pulse/stress-knot-3d.png",
+        "recovery": "prototype/assets/pulse/recovery-sprout-3d.png",
+        "prompts": "prototype/assets/pulse/generation-prompts.txt",
+        "layout": "No images. Title at top, counter value at bottom-left.",
+        "status": "Removed from interface at user request; assets retained as previous exploration."
+      },
+      "summaryTitles": "Same as home: Open Runde 500 14px/20px, #697380; 18px grey Iconsax rounded bold icons, 6px gap. Rest: armchair; sleep: moon; activity: walking; stress: lightning; recovery: charging battery.",
+      "palette": {
+        "sleep": "#269ae2",
+        "rest": "#2fbc90",
+        "activity": "#f78742",
+        "stress": "#ef5b91",
+        "recovery": "#9460ed",
+        "trend": "#239e78"
+      },
+      "guidanceMeters": {
+        "status": "removed",
+        "replacement": "Seven-day duration mini-trends with three-day trailing means; see durationTrends."
+      },
+      "discussionEntry": "56px circular Liquid Glass icon-only chat button at bottom-right; existing context action retained.",
+      "readingAlignment": "26px heart aligned vertically with back icon; reading row left padding 9px and header button 44px.",
+      "durationTrends": {
+        "period": "Last seven calendar days ending on selected widget date",
+        "value": "Mean duration across recorded days in each trailing three-day window",
+        "placement": "Between title and bottom duration; full card content width",
+        "style": "State-colored smooth line; pale 14%-to-0% downward area gradient, left-edge fade over 14% of width, crisp right edge at the latest sample; no axes or visible labels.",
+        "data": "Existing fictional duration records, not pulse-derived stress estimates"
+      }
+    },
+    "metricDetailBackground": "Pulse: white upper chart and #f8f9fa lower canvas. Other metric details remain white; main chat/widgets/history share #f8f9fa.",
+    "activityGreen": {
+      "color": "#2FBC90",
+      "scope": "Widget ranges, activity rings/arcs/values, mascot and document states in chat, green metric detail accents"
+    },
+    "medicalWidgets": {
+      "scope": "Only Widgets.jsx, widget styles and matching Iconsax assets. Nested detail screens are unchanged, as clarified by the user.",
+      "layout": "Appointments now use two compact white bento cards with neutral filled title icons, prominent dates and clear times. Section heading and booking action sit above the cards. Lab results use a unified white list with dashed separators, document icons and small matching document color markers. Therapist conclusion uses the same row style without an extra section heading. Side margins 16px, corner radius 22px, existing type tokens.",
+      "validation": "Build passed; visually verified against nearby metric cards. Ferritin and therapist appointment buttons open their existing correct detail screens.",
+      "preview": "prototype/history/widgets-medical-pale-icons.png",
+      "appointmentGrouping": "Chronological day groups: Today, Tomorrow, then dates, relative to demo 2026-10-17. Left-aligned day label, one or more cards per day, vertical dividers only between day groups, extending 6px above and below each group. Extra days scroll horizontally.",
+      "appointmentDivider": "1px line between days; top 4px aligned to visible date text, bottom 16px. Day labels medium 500, 14/20.",
+      "appointmentRail": "Full-phone-width horizontal rail with 16px inner padding, pointer drag, click suppression, trackpad scrolling, keyboard arrows and proximity snapping. Day dividers retained. Demo days: Today, Tomorrow, October 22.",
+      "appointmentAction": "White rounded 36px-high button with primary dark text and plus icon.",
+      "therapistConclusion": "Removed from the Widgets and records list UI at user request."
+    },
+    "metricValueAlignment": "Numeric value groups including units and goal captions use a 14px bottom inset in main widgets and pulse square cards. Horizontal activity card retains its existing row alignment.",
+    "pulseWidget": {
+      "title": "Пульс",
+      "stateColor": "Disabled visually: standard green range and dark text shared with other widgets.",
+      "validation": "5 widget-day and 15 pulse tests passed; build passed. Browser verified title Пульс, numeric and range color rgb(148,96,237), and accessible state/time description.",
+      "preview": "prototype/history/widget-pulse-standard-colors.png"
+    },
+    "mascotBehavior": {
+      "component": "prototype/src/components/AnimatedMascot.jsx",
+      "controller": "prototype/src/hooks/useMascotBehavior.js",
+      "rules": "prototype/src/mascot-behavior.js",
+      "runtimeLog": "prototype/history/mascot-events.jsonl",
+      "scope": "widgets / empty chat / voice demo",
+      "sourceArt": "Existing editable SVGs; shape and orbit retained",
+      "status": "Implemented and browser-verified; visual acceptance remains with the author",
+      "lighting": "Fixed source geometry and gradient boundaries; only fx/fy focal points move with the gaze. Neutral appearance retained.",
+      "lightingController": "prototype/src/hooks/useMascotLighting.js",
+      "flickerGuard": "Focal distance < 0.005 snaps to exact centre to avoid reproduced radial-gradient colour-band loss."
+    },
+    "chatGlassSurface": {
+      "fill": "#ffffffb3",
+      "material": "regular",
+      "scope": "Composer, suggestions, header switch shell and header icon buttons",
+      "indicator": "Canvas color retained",
+      "validation": "Build and rendered browser verification passed; glass state ready."
+    },
+    "iconSystem": {
+      "neutralColor": "#aeb8c0",
+      "rowChevronSize": 18,
+      "chevronSourceStroke": 2.5,
+      "outlineControlSourceStroke": 2.25,
+      "reference": "Clinic entry chevron",
+      "semanticColors": "Retained for activity and pulse measurement states",
+      "headerExceptions": {
+        "menuProfilePulseBack": "#28313b",
+        "pulseInfo": "#697380",
+        "opacity": 1
+      }
+    },
+    "metricUnits": {
+      "font": "Open Runde Medium 16/22",
+      "color": "#9aa5af",
+      "scope": "Home units and steps goal",
+      "compactSize": 15
+    },
+    "chatTypography": {
+      "suggestions": "Open Runde Medium 13/18",
+      "composer": "Open Runde Regular 16/24",
+      "suggestionPadding": "6px vertical, 13px horizontal; 32px total pill height"
+    },
+    "metricDateTransition": {
+      "durationMs": 420,
+      "easing": "cubic ease-out",
+      "source": "prototype/src/hooks/useAnimatedReading.js",
+      "scope": "Home metric numbers, latest-reading markers and step progress",
+      "retarget": "Continue from current displayed reading",
+      "accessibility": "Reduced-motion changes are immediate; accessible labels use final factual readings"
+    },
+    "composerNavigation": "Mirrors --view-offset with the same transition as view-track, no transition during drag; mounted offscreen and inert on widgets."
+  },
+  "previousConcepts": [
+    {
+      "date": "2026-10-17",
+      "name": "Collapsible health overview",
+      "commit": "5faca65",
+      "tag": "concept-collapsible-overview-2026-10-17",
+      "historyPage": "prototype/history/index.html",
+      "homeInteraction": {
+        "initial": "AI chat; centered health overview pill with a persistent profile button. Activity is hidden with the overview.",
+        "expanded": "Health documents, activity history, vital metrics and medical care in one scrollable overview. Profile remains stationary.",
+        "navigation": "Кнопка чатов в шапке удалена. Свайп вправо из свободной области интерактивно сдвигает всю страницу, включая поле ввода, и вытягивает левую панель на полную ширину. Внутри — разделы и история чатов.",
+        "continuity": "При переключении сохраняются текущая переписка, контекст и черновик. В историю добавлены два демонстрационных диалога; новый чат и переключение между чатами работают внутри текущей сессии.",
+        "pill": "В свёрнутой пилюле три минималистичных файла с цветными точками, название и линейный шеврон IconSax. При раскрытии миниатюры масштабируются в полноценные документы с теми же цветными метками; обратное сворачивание также анимировано.",
+        "title": "По последнему уточнению отдельная пилюля над раскрытым блоком убрана. Тот же элемент перемещается в заголовок блока с документами; название «Анализы готовы» на главной заменено на «Обзор здоровья», шрифт увеличивается, шеврон остаётся рядом.",
+        "icons": "И у «подробнее», и у обзора теперь обычные шевроны из локальной библиотеки IconSax Linear.",
+        "gestures": "Страница следует за пальцем. При отпускании после 75% ширины панель раскрывается полностью; короткий жест возвращает исходное состояние. Свайп влево закрывает панель по тому же порогу. Вся зона активности исключена. Вертикальный скролл, поля ввода и горизонтальные списки сохраняют свои жесты; отмена касания и второй палец возвращают исходное состояние.",
+        "motion": {
+          "surface": "Один постоянный компонент: ширина, высота, отступы, обводка, скругления, тень и градиент меняются плавно. Заголовок остаётся внутри него.",
+          "documents": "Те же три DOM-элемента в обоих состояниях. Мини-версия — уменьшенный до 22% веер с теми же углами, порядком перекрытия и пропорциональной обрезкой снизу. Все файлы масштабируются синхронно, без перестановки и отдельных траекторий.",
+          "animation": "Раскрытие 286 мс, сворачивание 274 мс. Появление содержимого и его задержки ускорены пропорционально. Быстрое обратное переключение начинается с текущего визуального кадра. При reduced motion состояния меняются сразу."
+        },
+        "composerMotion": {
+          "surface": "Постоянная нижняя плашка: поле ввода ↔ круглая кнопка AI по центру",
+          "collapseMs": 286,
+          "expandMs": 274,
+          "reducedMotion": "Без анимации"
+        },
+        "sidebarMotion": {
+          "side": "left",
+          "width": "100%",
+          "openThreshold": 0.75,
+          "settleMs": 280,
+          "keyboard": "Alt+ArrowRight открывает, Escape закрывает",
+          "implementation": "prototype/history-gesture.js"
+        },
+        "profile": "Same position and size in both modes; expansion surrounds it.",
+        "layout": "Expanded gradient side margins: 4px. Bento cards: 16px. Collapsed pill centered on the screen. Profile position is fixed across modes."
+      }
     }
-  }
+  ]
 }

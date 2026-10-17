@@ -1,0 +1,11 @@
+Generation mode: built-in image_gen, transparent_background=true.
+Asset: clinic-heart-3d.png
+
+Use case: stylized-concept.
+Asset type: a small 3D icon for the "My Clinic" section of a minimal mobile health app.
+Primary request: one beautiful, plump, rounded heart, a genuine rendered 3D object, not a flat vector illustration.
+Composition: a single heart, nearly front-facing with a subtle three-quarter tilt that makes its thickness visible. Strong simple heart silhouette, smooth rounded cleft and softly pointed bottom. Center it and fill about 88% of the square image, with no cropping. It must remain legible at 44–56 pixels.
+Materials: polished soft translucent resin, a little frosted inside, rounded inflated volume, broad soft studio highlights and gentle internal light scattering. Refined tactile material matching a friendly glossy blue health mascot.
+Palette: rich clean sky blue and cyan, soft pale blue edge highlights; restrained tonal shading, no multicolor rainbow or metallic chrome.
+Background: genuine transparent alpha, isolated object with clean edges. No floor, backdrop, tile or enclosing shape, no large cast shadow.
+Constraints: exactly one heart. No face, eyes, hands, medical cross, ECG lines, extra objects, text, logos or watermark.

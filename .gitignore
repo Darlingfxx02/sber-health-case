@@ -1,0 +1,4 @@
+prototype/node_modules/
+prototype/dist/
+.DS_Store
+prototype/history/mascot-events.jsonl

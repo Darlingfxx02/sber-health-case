@@ -1,0 +1,59 @@
+{
+  "date": "2026-10-17",
+  "status": "implemented_after_user_selection",
+  "source": "Mobbin MCP",
+  "task": "Detailed heart rate screen",
+  "recommendation": "Bevel: white chart card, large selected value, subtle grid and fill; adapted to the existing resting-heart-rate data and restrained green accent.",
+  "implementationChanged": true,
+  "searches": [
+    "Heart rate detail screen with a daily heart rate chart, selected measurement, date selector and resting heart rate summary",
+    "Bevel heart rate detail screen with a large chart and heart rate readings",
+    "Google Health Fitbit heart rate details showing a daily heart rate graph, time axis and summary values"
+  ],
+  "screens": [
+    {
+      "id": "f4dc3822-5cf5-4cb7-bc5a-89db05617077",
+      "image_url": "https://mobbin.com/api/mcp/short/7KumByeo",
+      "mobbin_url": "https://mobbin.com/screens/f4dc3822-5cf5-4cb7-bc5a-89db05617077",
+      "app_name": "Eight Sleep",
+      "platform": "ios",
+      "file": "eight-sleep.webp",
+      "role": "Основной референс структуры",
+      "take": "Крупное значение и сравнение над большим графиком; выбор периода; пояснение показателя в раскрываемом блоке."
+    },
+    {
+      "id": "76d28186-5f74-4995-800e-7a0b77546abc",
+      "image_url": "https://mobbin.com/api/mcp/short/4yTtM9K2",
+      "mobbin_url": "https://mobbin.com/screens/76d28186-5f74-4995-800e-7a0b77546abc",
+      "app_name": "Bevel",
+      "platform": "ios",
+      "file": "bevel.webp",
+      "role": "Светлая поверхность и читаемость",
+      "take": "График внутри спокойной белой карточки, крупное среднее значение, тонкая сетка и временная шкала. Референс относится к тренировке; зоны не переносим в пульс в покое автоматически."
+    },
+    {
+      "id": "dd78e89f-733c-4428-978d-1de2740f26fc",
+      "image_url": "https://mobbin.com/api/mcp/short/Z6lmRvml",
+      "mobbin_url": "https://mobbin.com/screens/dd78e89f-733c-4428-978d-1de2740f26fc",
+      "app_name": "Oura",
+      "platform": "ios",
+      "file": "oura.webp",
+      "role": "Контекст выбранного дня",
+      "take": "Выделенная точка на графике, периоды сверху и теги активности ниже. Предложение для нашего AI: обсуждать выбранную дату или измерение."
+    }
+  ],
+  "selected": "Bevel",
+  "selectedScreen": "76d28186-5f74-4995-800e-7a0b77546abc",
+  "userDecision": "2 референс больше подходит нашему стилю",
+  "implementation": {
+    "component": "prototype/src/components/PulseDetails.jsx",
+    "preview": "prototype/history/pulse-detail-bevel.png",
+    "interactions": [
+      "day and week periods",
+      "pointer scrubbing and keyboard selection",
+      "collapsible measurement list",
+      "selected measurement to chat"
+    ],
+    "data": "Existing fixed demonstration data. No clinical zone classification or live medical integration."
+  }
+}

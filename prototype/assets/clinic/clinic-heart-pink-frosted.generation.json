@@ -1,0 +1,6 @@
+{
+  "asset": "clinic-heart-pink-frosted.png",
+  "tool": "image_gen (built-in)",
+  "transparentBackground": true,
+  "prompt": "Use case: stylized-concept. Asset type: a single 3D heart icon for the My Clinic entry in a minimal mobile health application, displayed inside a 52px rounded square with a barely pink background. Primary request: a soft pink heart made of matte frosted glass, like gently frozen, milky translucent glass. A full, plump, softly rounded heart with two clear lobes, subtle physical depth, mostly front-facing with a slight three-quarter turn. Blush rose pink with a softly illuminated pale pink interior and slightly richer rose edges. Satin matte micro-roughness, broad diffused highlights, gentle subsurface scattering, soft ambient occlusion. Premium clean 3D product rendering, visually clear at small icon size. Not shiny transparent glass, not chrome, not plastic, not a flat vector. Center the heart and let it fill about 86 percent of the square canvas, preserving the whole silhouette with equal comfortable margins. Isolated on a truly transparent background. Only the heart, no square tile, no floor, no backdrop, no cast shadow outside its silhouette, no text, no symbols, no anatomy, no sparkles, no decorative elements. Soft studio illumination from upper left. Square composition."
+}

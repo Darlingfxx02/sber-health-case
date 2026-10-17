@@ -1,0 +1,7 @@
+{
+  "asset": "therapist-demo.png",
+  "purpose": "Fictional doctor portrait for the demo appointment widget",
+  "tool": "image_gen (built-in)",
+  "prompt": "Use case: photorealistic-natural. Asset type: small doctor portrait at the top of an appointment card in a minimalist mobile health app. Create a natural, photorealistic head-and-shoulders studio portrait of a fictional female general practitioner in her early forties, chestnut brown shoulder-length hair, white medical coat over a muted pale blue shirt. Calm friendly expression with a subtle closed-mouth smile, looking toward the camera. Centered frontal composition, full head with generous space above hair and visible shoulders; suitable for a compact square crop. Soft diffused daylight, realistic skin texture, clean very light neutral grey studio background. No props, no stethoscope, no hands in frame, no logos, no name badge, no text, no border, no watermark. One person only. Square image.",
+  "generatedSource": "/Users/darlingfxx/.codex/generated_images/01a1469a-644e-7e81-a61b-c9b274f1fd97/exec-888155d5-36b0-4343-9050-220451a4b90f.png"
+}

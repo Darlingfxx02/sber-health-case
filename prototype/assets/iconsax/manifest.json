@@ -24,6 +24,150 @@
     "home": "essential/linear/home-2.svg",
     "plan": "content-edit/linear/task-square.svg",
     "chevron-down": "arrow/linear/arrow-down4.svg",
-    "chevron-right": "arrow/linear/arrow-right4.svg"
+    "chevron-right": "arrow/linear/arrow-right4.svg",
+    "chevron-right-medium": "arrow/linear/arrow-right4.svg",
+    "microphone": "video-audio-image/linear/microphone.svg",
+    "microphone-slash": "video-audio-image/linear/microphone-slash.svg",
+    "call-slash": "call/linear/call-slash.svg",
+    "info": "essential/linear/info-circle.svg"
+  },
+  "additionalSets": [
+    {
+      "style": "pro / rounded / bold",
+      "source": "/Users/darlingfxx/Projects/Neyrokey/iconsax/Icons collection/pro/rounded",
+      "files": {
+        "calories-burned-fill": "food/bold/flame.svg",
+        "distance-fill": "sports/bold/walking.svg",
+        "calories-eaten-fill": "kitchen/bold/fork-knife.svg",
+        "heart-fill": "love/bold/heart.svg",
+        "heart-beat-fill": "medical/bold/heart-beat.svg",
+        "brain-fill": "medical/bold/brain.svg",
+        "leaf-fill": "nature/bold/leaf.svg",
+        "rest-fill": "furniture/bold/one-sofa.svg"
+      }
+    },
+    {
+      "style": "free / rounded / bold",
+      "source": "/Users/darlingfxx/Projects/Neyrokey/iconsax/Icons collection/free/rounded",
+      "files": {
+        "drop-fill": "weather/bold/drop.svg",
+        "moon-fill": "weather/bold/moon.svg",
+        "hospital-fill": "building/bold/hospital.svg",
+        "stress-fill": "essential/bold/flash.svg",
+        "recovery-fill": "essential/bold/battery-charging.svg",
+        "calendar-fill": "time/bold/calendar-2.svg",
+        "labs-fill": "school-learning/bold/clipboard.svg",
+        "document-fill": "content-edit/bold/document-text.svg",
+        "chat-fill": "emails-messages/bold/message-text.svg",
+        "volume-cross-fill": "video-audio-image/bold/volume-cross.svg",
+        "volume-high-fill": "video-audio-image/bold/volume-high.svg"
+      }
+    }
+  ],
+  "localOverrides": {
+    "chevron-right-medium": {
+      "strokeWidth": 2.5,
+      "originalStrokeWidth": 1.5,
+      "reason": "Heavier chevron for the clinic entry requested by user"
+    },
+    "attach": {
+      "strokeWidth": 2,
+      "originalStrokeWidth": 1.5,
+      "reason": "Slightly heavier paperclip in the chat composer, requested by user"
+    },
+    "up": {
+      "strokeWidth": 2.25,
+      "originalStrokeWidth": 1.5,
+      "reason": "Heavier send arrow requested by user"
+    },
+    "user": {
+      "strokeWidth": 2.25,
+      "originalStrokeWidth": 1.5,
+      "reason": "Match the optical weight of the 2px menu and the clinic chevron at the 22px profile icon size"
+    },
+    "chevron-right": {
+      "strokeWidth": 2.5,
+      "originalStrokeWidth": 1.5,
+      "reason": "Consistent medium outline weight; navigation chevrons follow the clinic entry reference"
+    },
+    "chevron-down": {
+      "strokeWidth": 2.5,
+      "originalStrokeWidth": 1.5,
+      "reason": "Consistent medium outline weight; navigation chevrons follow the clinic entry reference"
+    },
+    "back": {
+      "strokeWidth": 2.5,
+      "originalStrokeWidth": 1.5,
+      "reason": "Consistent medium outline weight; navigation chevrons follow the clinic entry reference"
+    },
+    "down": {
+      "strokeWidth": 2.5,
+      "originalStrokeWidth": 1.5,
+      "reason": "Consistent medium outline weight; navigation chevrons follow the clinic entry reference"
+    },
+    "add": {
+      "strokeWidth": 2.5,
+      "originalStrokeWidth": 1.5,
+      "reason": "Consistent medium outline weight; navigation chevrons follow the clinic entry reference"
+    },
+    "info": {
+      "strokeWidth": 2.25,
+      "originalStrokeWidth": 1.5,
+      "reason": "Consistent medium outline weight; navigation chevrons follow the clinic entry reference"
+    },
+    "activity": {
+      "strokeWidth": 2.25,
+      "originalStrokeWidth": 1.5,
+      "reason": "Consistent medium outline weight; navigation chevrons follow the clinic entry reference"
+    },
+    "chat": {
+      "strokeWidth": 2.25,
+      "originalStrokeWidth": 1.5,
+      "reason": "Consistent medium outline weight; navigation chevrons follow the clinic entry reference"
+    },
+    "check": {
+      "strokeWidth": 2.25,
+      "originalStrokeWidth": 1.5,
+      "reason": "Consistent medium outline weight; navigation chevrons follow the clinic entry reference"
+    },
+    "home": {
+      "strokeWidth": 2.25,
+      "originalStrokeWidth": 1.5,
+      "reason": "Consistent medium outline weight; navigation chevrons follow the clinic entry reference"
+    },
+    "record": {
+      "strokeWidth": 2.25,
+      "originalStrokeWidth": 1.5,
+      "reason": "Consistent medium outline weight; navigation chevrons follow the clinic entry reference"
+    },
+    "close": {
+      "strokeWidth": 2.25,
+      "originalStrokeWidth": 1.5,
+      "reason": "Consistent medium outline weight; navigation chevrons follow the clinic entry reference"
+    },
+    "trash": {
+      "strokeWidth": 2.25,
+      "originalStrokeWidth": 1.5,
+      "reason": "Consistent medium outline weight; navigation chevrons follow the clinic entry reference"
+    },
+    "microphone": {
+      "strokeWidth": 2.25,
+      "originalStrokeWidth": 1.5,
+      "reason": "Consistent medium outline weight; navigation chevrons follow the clinic entry reference"
+    },
+    "microphone-slash": {
+      "strokeWidth": 2.25,
+      "originalStrokeWidth": 1.5,
+      "reason": "Consistent medium outline weight; navigation chevrons follow the clinic entry reference"
+    },
+    "call-slash": {
+      "strokeWidth": 2.25,
+      "originalStrokeWidth": 1.5,
+      "reason": "Consistent medium outline weight; navigation chevrons follow the clinic entry reference"
+    }
+  },
+  "weightGuideline": {
+    "chevrons": "2.5 source stroke at 24px; 18px size for row navigation, matching the clinic entry",
+    "outlineControls": "2.25 source stroke for remaining thin action icons; preserve existing filled glyphs and heavier composer/header overrides"
   }
 }

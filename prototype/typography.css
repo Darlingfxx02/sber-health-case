@@ -11,6 +11,7 @@
   --type-body:400 16px/24px var(--font-app);
   --type-card:500 16px/22px var(--font-app);
   --type-unit:500 18px/24px var(--font-app);
+  --type-widget-unit:500 16px/22px var(--font-app);
   --type-section:600 20px/26px var(--font-app);
   --type-title:600 28px/34px var(--font-app);
   --type-value:500 36px/40px var(--font-app);
@@ -19,6 +20,8 @@
   --tracking-value:-.015em;
   --text-primary:#28313b;
   --text-secondary:#697380;
+  --text-unit:#9aa5af;
+  --icon-muted:#aeb8c0;
   font-family:var(--font-app);
 }
 .device{font:var(--type-body);letter-spacing:var(--tracking-text);color:var(--text-primary)}
@@ -40,16 +43,18 @@
 
 /* Metric cards. All units remain grey, but have enough size and weight to read. */
 .health-section-heading{padding-bottom:4px}
-.health-tile .health-tile-title{font:var(--type-card);letter-spacing:0}
+.health-tile .health-tile-title{font:var(--type-label);letter-spacing:0}
 .health-tile .health-number,.metric-detail-number{font:var(--type-value);letter-spacing:var(--tracking-value);display:flex;align-items:baseline;gap:6px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.health-tile .health-number{font-size:30px;line-height:36px;gap:4px}
 .health-number .metric-pair,.metric-detail-number .metric-pair{display:inline-flex;align-items:baseline;gap:4px}
 .health-tile .health-number small,.metric-detail-number small{font:var(--type-unit);letter-spacing:0;margin:0;color:var(--text-secondary)}
+.health-tile .health-number small{font:var(--type-widget-unit);color:var(--text-unit)}
+.health-tile .metric-pair{gap:3px}
 .health-tile .health-caption,.chart-axis{font:var(--type-caption);letter-spacing:0;color:var(--text-secondary)}
-.metric-week-axis{font:var(--type-caption);letter-spacing:0;color:var(--text-secondary)}
 .care-intro h2{font:var(--type-section);letter-spacing:var(--tracking-heading)}
 .care-book{font:var(--type-label);letter-spacing:0;min-height:40px;padding:10px 12px}
 .care-book .icon{width:16px;height:16px}
-.care-events button{padding:15px 4px;gap:12px}
+.care-events button{padding:12px 2px;gap:12px}
 .care-events strong{font:var(--type-card);letter-spacing:0}
 .care-events small{font:var(--type-meta);letter-spacing:0;color:var(--text-secondary);margin-top:3px}
 
@@ -57,7 +62,7 @@
 .empty-chat p{font:500 24px/32px var(--font-app);letter-spacing:var(--tracking-heading);color:#7a8491}
 .composer input{font:var(--type-body);letter-spacing:0}
 .composer input::placeholder{color:#7a8491}
-.suggestions button{font:var(--type-label);letter-spacing:0;color:var(--text-secondary);padding:10px 13px}
+.suggestions button{font:500 13px/18px var(--font-app);letter-spacing:0;color:var(--text-secondary);padding:6px 13px}
 .message{font:var(--type-body);letter-spacing:0}
 .context-heading,.message-context,.message-context span,.context-chip strong{font:var(--type-caption);letter-spacing:0;color:var(--text-secondary)}
 .context-chip strong{font-weight:500;color:var(--text-primary)}
@@ -91,8 +96,8 @@
 .toast{font:var(--type-label);letter-spacing:0}
 
 @media(max-width:360px){
-  .health-tile .health-number{font-size:30px;line-height:38px;gap:4px}
-  .health-tile .health-number small{font-size:18px}
+  .health-tile .health-number{font-size:27px;line-height:34px;gap:3px}
+  .health-tile .health-number small,.health-tile .health-goal{font-size:15px}
   .health-number .metric-pair{gap:3px}
   .overview-row .results-block:not(.is-collapsed) .overview-label{font-size:20px;letter-spacing:var(--tracking-heading)}
   .results-block.is-collapsed .overview-heading-content{left:calc(50% + 19px);gap:5px}

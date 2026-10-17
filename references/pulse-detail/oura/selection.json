@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-17",
+  "selectedBy": "User",
+  "screen": "https://mobbin.com/screens/b53b8818-c383-43c0-b9c2-754b292c41ee",
+  "screenshot": "references/pulse-detail/oura/mobbin-reference.png",
+  "documentation": "https://support.ouraring.com/hc/articles/4410656562579-Heart-Rate-Graph",
+  "principles": [
+    "Range for each observation window plus mean trace",
+    "Colour gives activity context",
+    "Right-aligned axis; each grid line sized to its own label"
+  ],
+  "adaptation": "Continuous chronological pulse trend with compact local ranges in weekly mode. Daily mode remains sparse individual readings. Whole-period state extremes and durations remain in expandable summary rows.",
+  "preview": "prototype/history/pulse-week-continuous.png"
+}

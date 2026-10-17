@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-17",
+  "status": "implemented_after_user_selection",
+  "figmaReferenceSection": "https://www.figma.com/design/aizNMC6YoCzmeYVBKOD4dS?node-id=10-30",
+  "figmaRead": "Reference section visually inspected through the personal connection.",
+  "recommendation": "MacroFactor grid adapted to existing Open Runde type and gray canvas; keep full-width medical actions separate.",
+  "references": [
+    {
+      "app": "MacroFactor",
+      "file": "references/widget-directions/macrofactor-tiles.jpg",
+      "url": "https://mobbin.com/screens/ebffde36-4c1a-407f-9551-1ba794fe3c8e",
+      "direction": "Спокойная сетка 2 × 2",
+      "adaptation": "Название, крупное значение и один миниграфик без повторяющихся осей и дней недели. Убрать подпись Last 7 Entries и внутренние разделители. Основной кандидат."
+    },
+    {
+      "app": "Withings Health Mate",
+      "file": "references/mobbin/3e0d9ab3-1658-4490-8738-6c7f90940729.jpg",
+      "url": "https://mobbin.com/screens/3e0d9ab3-1658-4490-8738-6c7f90940729",
+      "direction": "Горизонтальные карточки",
+      "adaptation": "Название и значение слева, небольшой график справа. Сократить вспомогательные подписи, статусы и цветные значки."
+    },
+    {
+      "app": "Bevel",
+      "file": "references/widget-directions/bevel-monitor.jpg",
+      "url": "https://mobbin.com/screens/5addacbb-f7a4-4548-aac5-25863dae8bd9",
+      "direction": "Компактные карточки с диапазоном",
+      "adaptation": "Крупное число и узкая шкала справа; убрать свечение, заметные тени и повторяющиеся статусные значки. Шкала положения в диапазоне не заменяет историю и применима только при наличии данных о диапазоне."
+    }
+  ],
+  "implementationChanged": true,
+  "selectedDirection": "Bevel compact cards",
+  "userDecision": "3 очень нравится по плотности и когнитивной нагрузке",
+  "implementation": {
+    "cardHeight": 124,
+    "previousHeight": 224,
+    "preview": "prototype/history/widgets-bevel.png",
+    "rangeMeaning": "Observed weekly min/max with the latest reading as a dot; not a clinical range.",
+    "scope": "Four health metrics and the booking summary. Full charts remain in detail pages."
+  }
+}

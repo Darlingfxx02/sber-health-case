@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-17",
+  "source": "Mobbin MCP",
+  "status": "implemented_populated_pulse_detail",
+  "implementationChanged": true,
+  "screens": [
+    {
+      "id": "1b79e2f2-e913-44f9-aa33-45d595659f21",
+      "image_url": "https://mobbin.com/api/mcp/short/k7absAZX",
+      "mobbin_url": "https://mobbin.com/screens/1b79e2f2-e913-44f9-aa33-45d595659f21",
+      "app_name": "Ultrahuman",
+      "platform": "ios",
+      "file": "resting-heart-rate.webp",
+      "observed": "Resting heart rate detail; main chart, daily/weekly/monthly/yearly controls, Score Contribution 98 and Contributor Details with Average last 7 days and Community Average. Those bottom numbers belong to the score section, not raw bpm."
+    },
+    {
+      "id": "e2b0a4ea-2c6d-4319-8f6d-96feab329e02",
+      "image_url": "https://mobbin.com/api/mcp/short/6zhb96hF",
+      "mobbin_url": "https://mobbin.com/screens/e2b0a4ea-2c6d-4319-8f6d-96feab329e02",
+      "app_name": "Ultrahuman",
+      "platform": "ios",
+      "file": "sleep-heart-rate.webp",
+      "observed": "Sleep detail; Heart Rate card with Lowest Heart Rate 44 BPM, Average 53 BPM and a marked Lowest HR Zone on the overnight line chart."
+    },
+    {
+      "id": "f7f46f35-bed5-4de8-8729-a2f2685c9366",
+      "image_url": "https://mobbin.com/api/mcp/short/GW93dO8D",
+      "mobbin_url": "https://mobbin.com/screens/f7f46f35-bed5-4de8-8729-a2f2685c9366",
+      "app_name": "Ultrahuman",
+      "platform": "ios",
+      "file": "recovery-context.webp",
+      "observed": "Dynamic Recovery Score screen; Add a tag action and contributor rows including resting heart rate with a range status."
+    }
+  ],
+  "proposals": [
+    "Compact comparison of selected-day resting pulse with personal history, expressed in bpm. A longer personal baseline requires additional measurements beyond the current demo week.",
+    "Small event-tag row connected to the selected day and assistant context. Manual events or connected device data would be separate implementation work.",
+    "Short on-demand explanation through the info control rather than a permanent long article."
+  ],
+  "decision": "User requested populated demo data and less text. Personal range and comparison now form one compact unframed section. Three measurements are visible by default; education moved to a header info popover. No event tags or statistics bento.",
+  "preview": "prototype/history/pulse-detail-populated.png",
+  "contentSource": "https://www.heart.org/en/health-topics/high-blood-pressure/the-facts-about-high-blood-pressure/all-about-heart-rate-pulse"
+}

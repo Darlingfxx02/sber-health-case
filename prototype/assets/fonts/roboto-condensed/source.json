@@ -1,0 +1,9 @@
+{
+  "family": "Roboto Condensed",
+  "selectedWeight": 700,
+  "license": "OFL-1.1",
+  "source": "https://github.com/google/fonts/tree/main/ofl/robotocondensed",
+  "download": "https://raw.githubusercontent.com/google/fonts/main/ofl/robotocondensed/RobotoCondensed%5Bwght%5D.ttf",
+  "cyrillicGlyphCheck": "All 66 Russian uppercase and lowercase letters present, including Yo",
+  "note": "Cyrillic alternative for the perspective crawl, not claimed to be the exact film typeface"
+}

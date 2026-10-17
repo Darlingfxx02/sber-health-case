@@ -1,0 +1,75 @@
+{
+  "status": "Implemented starfield CTA, supplied text and soundtrack, scrubbing, smooth resume and minimal controls.",
+  "date": "2026-10-17",
+  "recommended": {
+    "name": "Go Boldly Forward starwarsintro.css",
+    "demo": "https://goboldlyforward.github.io/starwarsintro/",
+    "repository": "https://github.com/GoBoldlyForward/starwarsintro",
+    "license": "MIT",
+    "licenseSource": "https://github.com/GoBoldlyForward/starwarsintro/blob/main/LICENSE",
+    "saved": [
+      "starwarsintro.css",
+      "img/stars-bg.jpg"
+    ],
+    "actualFontStack": "Droid Sans, Arial, Verdana, sans-serif",
+    "fidelity": "Ready perspective animation and starfield; not a verified pixel-exact reproduction or original movie typography."
+  },
+  "alternative": {
+    "name": "PurpaFur SWcrawl",
+    "repository": "https://github.com/PurpaFur/SWcrawl",
+    "license": "MIT",
+    "features": "Canvas starfield, text editor, perspective and duration controls, local audio with fade control",
+    "font": "News Cycle fallback for crawl; Star Jedi Outline for logo",
+    "music": "Original score not included"
+  },
+  "visualReference": {
+    "url": "https://starwarsintrocreator.kassellabs.io/",
+    "name": "Kassel Labs Star Wars Intro Creator",
+    "note": "Custom-text generator; not selected as embedded runtime dependency"
+  },
+  "integration": {
+    "location": "After case-history; case-epilogue.ts appends the full-width footer",
+    "entry": "Full-width black button, white text, local procedural WebGL stars",
+    "player": "Full-viewport dialog outside the phone mockup; keep existing app iframe and tour state",
+    "text": "Author supplied eight paragraphs; stored verbatim in agent-text.ts",
+    "audio": "User-provided Main Title and Escape file bundled; forward and reversed PCM, default volume 5%, 1.4 s speed and gain ramp on resume.",
+    "controls": [
+      "Volume slider without visible percentage",
+      "Mute",
+      "Close / Escape",
+      "Wheel / touch / arrow keys",
+      "Space pause when text region is focused"
+    ],
+    "motion": "Reduced motion opens the same crawl paused for manual scrolling.",
+    "scrubbing": "Wheel/touch adjusts timeline; resume after 2800 ms idle unless explicitly paused. Speed and volume ramp over 1400 ms.",
+    "warning": "Profanity warning is the first line before the crawl title. No confirmation dialog.",
+    "mockup": "Opacity follows the gap to the footer: fades between 252 and 72px before the phone lower edge; no overlap.",
+    "transition": "The same WebGL canvas moves from the CTA into a surface that expands from its actual bounds to fullscreen over 700ms, then returns over 480ms on close. Label fades, corners straighten, player starts after expansion. Escape interruption is token-guarded; reduced motion skips geometry animation."
+  },
+  "unresolved": [],
+  "selectedFont": {
+    "family": "Roboto Condensed",
+    "weight": 700,
+    "source": "https://github.com/google/fonts/tree/main/ofl/robotocondensed",
+    "cyrillic": "Verified all Russian letters in the downloaded font cmap",
+    "license": "OFL-1.1"
+  },
+  "originalMusic": {
+    "title": "Main Title",
+    "artists": [
+      "John Williams",
+      "London Symphony Orchestra"
+    ],
+    "album": "Star Wars: A New Hope (Original Motion Picture Score)",
+    "officialTrack": "https://music.apple.com/us/song/1375814284",
+    "officialDownload": "https://www.qobuz.com/us-en/album/star-wars-a-new-hope-john-williams/zl8hnbq88fkob",
+    "status": "Initial A New Hope recording identified. User instead supplied the downloaded Main Title and Escape file, which is the integrated version."
+  },
+  "suppliedMusic": {
+    "localFile": "prototype/assets/audio/main-title.mp3",
+    "title": "Main Title and Escape",
+    "albumFromFilename": "Star Wars: The Last Jedi",
+    "durationSeconds": 445.492208,
+    "source": "User-provided download"
+  }
+}

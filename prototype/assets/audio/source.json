@@ -1,0 +1,10 @@
+{
+  "source": "user-provided Downloads file",
+  "originalFile": "star_wars_the_last_jedi_01 Main Title and Escape.mp3",
+  "localFile": "main-title.mp3",
+  "bytes": 10692736,
+  "durationSeconds": 445.492208,
+  "sampleRate": 44100,
+  "channels": 2,
+  "referenceDifference": "The supplied file is labelled The Last Jedi, not the A New Hope recording shown in the initial reference."
+}

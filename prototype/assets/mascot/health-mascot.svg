@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="224.68" height="217.94" viewBox="-10 -16 200 194" fill="none">
+  <title>Помощник по здоровью</title>
+  <desc>Голубой круглый маскот с двумя светлыми глазами и тремя дугами активности. Оранжевая дуга — сожжённые калории, синяя — пройденная дистанция, зелёная — съеденные калории. Все элементы — редактируемые векторные формы.</desc>
+  <defs>
+    <clipPath id="head-clip"><circle cx="79.307" cy="79.307" r="79.307"/></clipPath>
+    <linearGradient id="head-blue" x1="79" y1="0" x2="79" y2="118" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#00BCF7"/><stop offset=".28" stop-color="#00A4FF"/><stop offset=".65" stop-color="#008CFF"/><stop offset="1" stop-color="#00B8F7"/>
+    </linearGradient>
+    <radialGradient id="face-glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(79.6 118.6) scale(92 77.5)">
+      <stop stop-color="#00AFF5"/><stop offset=".43" stop-color="#00B3F8"/><stop offset=".62" stop-color="#00BEFA"/><stop offset=".72" stop-color="#4BCEFD"/><stop offset=".82" stop-color="#A5E4FD"/><stop offset=".93" stop-color="#DFF5FE"/><stop offset=".985" stop-color="#F4FCFD"/><stop offset="1" stop-color="#DCF6FC"/>
+    </radialGradient>
+    <radialGradient id="lower-light" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(79 158) scale(60 50)">
+      <stop stop-color="#00DBFF" stop-opacity=".48"/><stop offset="1" stop-color="#00DBFF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="sphere-edge" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(79.307 79.307) scale(79.307)">
+      <stop offset=".77" stop-color="#DBF7FF" stop-opacity="0"/><stop offset=".94" stop-color="#DBF7FF" stop-opacity=".06"/><stop offset="1" stop-color="#DBF7FF" stop-opacity=".3"/>
+    </radialGradient>
+    <linearGradient id="eyes" x1="0" y1="70" x2="0" y2="118" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FCFEFB"/><stop offset=".45" stop-color="#D8F5FC"/><stop offset="1" stop-color="#9CE5FA"/>
+    </linearGradient>
+    <radialGradient id="eye-shadow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(0 0) scale(21 26)">
+      <stop offset=".3" stop-color="#006B9F" stop-opacity=".23"/><stop offset="1" stop-color="#006B9F" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <g id="mascot" transform="translate(10.62 0)">
+    <g id="mascot-body" clip-path="url(#head-clip)">
+      <circle cx="79.307" cy="79.307" r="79.307" fill="url(#head-blue)"/>
+      <ellipse cx="79.6" cy="118.6" rx="92" ry="77.5" fill="url(#face-glow)"/>
+      <ellipse cx="79" cy="148" rx="78" ry="51" fill="url(#lower-light)"/>
+      <circle cx="79.307" cy="79.307" r="79.307" fill="url(#sphere-edge)"/>
+    </g>
+    <g id="mascot-eyes">
+      <ellipse transform="translate(69 101) rotate(-10)" rx="21" ry="26" fill="url(#eye-shadow)"/>
+      <ellipse transform="translate(111 93) rotate(-9)" rx="21" ry="26" fill="url(#eye-shadow)"/>
+      <ellipse cx="66.8" cy="97.2" rx="14.1" ry="18.2" transform="rotate(-10 66.8 97.2)" fill="url(#eyes)"/>
+      <ellipse cx="108.5" cy="88.6" rx="14" ry="18.2" transform="rotate(-9 108.5 88.6)" fill="url(#eyes)"/>
+    </g>
+  </g>
+  <g id="daily-activity" stroke-width="8.91089" stroke-linecap="round">
+    <path id="activity-green" d="M22.57063 19.28843A90 90 0 0 1 157.42553 19.28843" transform="rotate(240 89.99808 78.9)" stroke="#2FBC90"/>
+    <path id="activity-blue" d="M22.57063 19.28843A90 90 0 0 1 157.42553 19.28843" transform="rotate(120 89.99808 78.9)" stroke="#269AE2"/>
+    <path id="activity-orange" d="M22.57063 19.28843A90 90 0 0 1 157.42553 19.28843" transform="rotate(0 89.99808 78.9)" stroke="#F78742"/>
+  </g>
+  <g id="activity-icons">
+    <g id="calories-burned-fill" aria-label="Сожжённые калории" transform="translate(6.07547 22.57033) scale(.6666667)" fill="#F78742"><path d="M16.5399 7.57039L16.52 7.54039C15.7 6.54039 14.8999 5.56039 14.4099 4.39039L14.4 4.38039L14.39 4.36039C14.12 3.71039 13.94 3.01039 13.9 2.21039C13.89 2.05039 13.71 1.94039 13.58 2.03039C13.36 2.18039 13.15 2.3404 12.96 2.5104C12.53 2.8804 12.16 3.32039 11.84 3.77039C10.06 6.43039 10.0599 10.1404 10.0999 11.0804C10.0999 11.2004 9.99993 11.3004 9.86993 11.2904C8.53993 11.2104 7.39997 10.4004 6.83997 9.27039C6.77997 9.13039 6.59994 9.10039 6.49994 9.21039C5.21994 10.5804 4.42993 12.4404 4.42993 14.4504C4.42993 15.2804 4.55995 16.0804 4.81995 16.8204C5.80995 19.8304 8.64994 22.0004 11.9999 22.0004C16.1799 22.0004 19.5599 18.6104 19.5599 14.4504C19.5699 11.2404 18.0199 9.37039 16.5399 7.57039Z"/></g>
+    <g id="distance-fill" aria-label="Пройденная дистанция" transform="translate(161.81411 29.31393) scale(.6666667)" fill="#269AE2"><path d="M5.6601 3.64973L3.56012 6.79973C2.39012 8.55973 2.86007 10.9397 4.63007 12.1097L14.33 18.5597C16.24 19.8297 18.6601 20.0297 20.7601 19.0997C22.1401 18.4897 22.3001 16.5897 21.0401 15.7497C19.0001 14.3897 17.4901 12.3897 16.7401 10.0497L15.83 7.20973C15.65 6.64973 15.1201 6.28973 14.5401 6.31973L12.83 6.41973C10.78 6.53973 8.85002 5.47973 7.83002 3.69973C7.27002 2.73973 6.2901 2.70973 5.6601 3.64973Z"/><path d="M8.97986 21.04H2.85986C2.44986 21.04 2.10986 20.7 2.10986 20.29C2.10986 19.88 2.44986 19.54 2.85986 19.54H8.97986C9.38986 19.54 9.72986 19.88 9.72986 20.29C9.72986 20.7 9.38986 21.04 8.97986 21.04Z"/><path d="M4.94006 17.9004H2.8501C2.4401 17.9004 2.1001 17.5604 2.1001 17.1504C2.1001 16.7404 2.4401 16.4004 2.8501 16.4004H4.94006C5.35006 16.4004 5.69006 16.7404 5.69006 17.1504C5.69006 17.5604 5.36006 17.9004 4.94006 17.9004Z"/></g>
+    <g id="calories-eaten-fill" aria-label="Съеденные калории" transform="translate(78.10466 160.81575) scale(.6666667)" fill="#2FBC90"><path d="M20.0197 15.33V2C16.9497 2 14.4697 6.14 14.4697 11.24V14.78C14.4697 15.08 14.7197 15.33 15.0297 15.33H16.6897V20.33C16.6897 21.25 17.4397 22 18.3597 22C19.2797 22 20.0297 21.25 20.0297 20.33V15.33H20.0197Z"/><path d="M10.54 7.35V2.7C10.54 2.31 10.23 2 9.83996 2C9.44996 2 9.13996 2.31 9.13996 2.7V6.65H7.94996V2.96C7.94996 2.57 7.63996 2.26 7.24996 2.26C6.85996 2.26 6.54996 2.57 6.54996 2.96V6.66H5.35996V2.7C5.35996 2.31 5.04996 2 4.65996 2C4.26996 2 3.95996 2.31 3.95996 2.7V8.28C3.95996 9.74 5.10996 10.93 6.54996 11.02V12.45C5.64996 12.75 4.99996 13.58 4.99996 14.58V19.74C4.99996 20.98 6.00996 21.99 7.24996 21.99C8.48996 21.99 9.49996 20.98 9.49996 19.74V14.58C9.49996 13.58 8.84996 12.75 7.94996 12.45V11.02C9.38996 10.93 10.54 9.74 10.54 8.28V7.35Z"/></g>
+  </g>
+</svg>

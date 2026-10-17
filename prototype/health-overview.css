@@ -1,4 +1,4 @@
-/* Quiet tracker cards: label, measurement, weekly history. */
+/* Compact tracker cards: label, latest reading, observed weekly range. */
 .overview-row{position:relative;flex:none;min-width:0;margin-top:8px}
 .overview-row #insights{padding:0;margin:0 4px}
 .assistant-mode .overview-row #insights{margin:0 16px}
@@ -9,29 +9,39 @@
 .overview-row .results-block:not(.is-collapsed) .overview-heading-content{left:calc(50% + 14px);top:10px}
 .overview-row .results-block.is-collapsed{transform:translateX(0);max-width:calc(100% - 96px)}
 @media(max-width:360px){.overview-row .results-block:not(.is-collapsed) .overview-label{font-size:18px;letter-spacing:-.8px}}
-.health-bento{--health-card-shadow:0 5px 22px #3149640c,inset 0 1px 0 #fff;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:0 16px}
+.health-bento{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:0 16px}
+.clinic-entry{display:flex;align-items:center;gap:12px;min-height:68px;margin:0 16px;padding:8px 16px 8px 8px;border-radius:22px;background:#fff}
+.clinic-entry-symbol{position:relative;display:grid;place-items:center;flex:none;width:52px;height:52px;border-radius:16px;background:#fff2f6;overflow:hidden}
+.clinic-entry-symbol>img{position:absolute;left:50%;top:50%;display:block;width:64px;height:64px;object-fit:contain;transform:translate(calc(-50% + 8px),calc(-50% + 8px))}
+.clinic-entry-copy{flex:1;min-width:0}
+.clinic-entry-copy h2{margin:0;font:var(--type-card);color:var(--text-primary)}
+.clinic-entry-copy p{margin:4px 0 0;font:var(--type-meta);color:#929ca5}
+.clinic-entry>.icon{flex:none;width:18px;height:18px;color:var(--icon-muted)}
+.is-wireframe .clinic-entry>*{visibility:hidden}
 .health-section-heading{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;padding:0 2px 2px}
 .health-section-heading h2,.care-intro h2{margin:0;font-size:17px;font-weight:500;letter-spacing:-.6px;line-height:1.22}
 .health-section-heading>span{font-size:11px;color:#969da6}
-.health-tile{position:relative;display:flex;flex-direction:column;align-items:flex-start;overflow:hidden;min-width:0;height:224px;border-radius:24px;padding:18px 16px;text-align:left;background:#fff;border:0;box-shadow:none;transition:transform .18s;touch-action:pan-y}
-.health-tile:active{transform:scale(.988);filter:none}
-.health-tile-title{display:block;min-height:44px;width:100%;text-wrap:balance}
-.health-number{position:relative;margin-top:8px}
-.metric-week-chart{display:block;width:100%;margin-top:auto}
-.metric-week-chart svg{display:block;width:100%;height:64px;overflow:visible}
-.metric-week-axis{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));align-items:center;margin-top:6px}
-.metric-week-axis>span{display:grid;place-items:center;width:22px;height:22px;justify-self:center;border-radius:50%}
-.metric-week-axis .is-current{background:#ecf0f2;color:#35464f;font-weight:500}
-.care-tile{grid-column:1/-1;background:#fff;border:0;border-radius:24px;overflow:hidden;margin-top:4px;box-shadow:none}
-.care-intro{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:20px 18px 12px}
+.health-tile{position:relative;display:flex;flex-direction:column;align-items:flex-start;overflow:hidden;min-width:0;height:124px;border-radius:22px;padding:14px 48px 14px 14px;text-align:left;background:#fff;border:0;box-shadow:0 2px 5px #28313b03;transition:transform .18s;touch-action:pan-y}
+.health-tile:not(:disabled):active{transform:scale(.988);filter:none}
+.health-tile:focus-visible{outline:2px solid #8aaecb;outline-offset:3px}
+.health-tile-title{display:flex;align-items:flex-start;gap:6px;width:100%;min-height:20px;color:var(--text-secondary)}
+.health-tile-title>.icon{flex:none;width:18px;height:18px;margin-top:1px;color:var(--icon-muted)}
+.health-tile-title>span:last-child{min-width:0;overflow-wrap:break-word}
+.health-tile-reading{display:flex;align-items:flex-end;justify-content:space-between;gap:6px;flex:1;width:100%;min-width:0}
+.health-reading-content{display:flex;flex-direction:column;gap:2px;min-width:0}
+.health-goal{font:var(--type-widget-unit);letter-spacing:0;color:var(--text-unit)}
+.health-number{position:relative;margin:0}
+.metric-range{position:absolute;right:12px;top:14px;display:block;width:24px;height:calc(100% - 28px);color:#2fbc90}
+.care-tile{grid-column:1/-1;background:#fff;border:0;border-radius:22px;overflow:hidden;margin-top:12px;box-shadow:none}
+.care-intro{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px 4px}
 .care-intro h2{max-width:190px;text-wrap:balance}
-.care-book{display:flex;gap:5px;align-items:center;background:#edf5f1;color:#397660;border-radius:14px;white-space:nowrap;flex:none}
-.care-book:hover{background:#e4f0e9}
-.care-events{margin:0 18px 6px;padding:0;background:transparent}
+.care-book{display:flex;gap:5px;align-items:center;background:#f4f6f5;color:#56786d;border-radius:14px;white-space:nowrap;flex:none}
+.care-book:hover{background:#edf2ef}
+.care-events{margin:0 16px 4px;padding:0;background:transparent}
 .care-events button{width:100%;display:flex;align-items:center;text-align:left;background:transparent}
 .care-events button+button{border-top:1px solid #edf0f2}
-.care-events button>.icon:first-child{width:22px;height:22px;color:#798a91}
-.care-events button>.icon:last-child{margin-left:auto;width:16px;height:16px;color:#8f9ba2}
+.care-events button>.icon:first-child{width:22px;height:22px;color:var(--icon-muted)}
+.care-events button>.icon:last-child{margin-left:auto;width:16px;height:16px;color:var(--icon-muted)}
 .care-events strong,.care-events small{display:block}
 .health-metric-detail{display:flex;flex-direction:column;gap:22px}
 .metric-detail-summary{position:relative;min-height:125px;padding-top:20px;isolation:isolate}
@@ -51,10 +61,10 @@
 .care-formats{display:flex;gap:8px}.care-formats button{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:15px 8px;border:1px solid #e5ebe8;border-radius:16px;background:#fff;font-size:12px;color:#7e8f86}.care-formats .icon{width:18px;height:18px}
 .care-formats button[aria-pressed=true]{background:#e5f5ed;border-color:#bcdacb;color:#3b7f60}
 .care-field-label{font-size:13px;font-weight:500;margin:10px 0 -7px;letter-spacing:-.3px}
-.care-specialties{background:#fff;border-radius:18px;padding:0 14px}.care-specialties button{background:transparent;display:flex;justify-content:space-between;align-items:center;width:100%;padding:16px 0;font-size:13px;text-align:left}.care-specialties button+button{border-top:1px solid #f0f3f1}.care-specialties .icon{width:18px;height:18px;color:#b0bab5}.care-specialties [aria-pressed=true] .icon{color:#61a780}
+.care-specialties{background:#fff;border-radius:18px;padding:0 14px}.care-specialties button{background:transparent;display:flex;justify-content:space-between;align-items:center;width:100%;padding:16px 0;font-size:13px;text-align:left}.care-specialties button+button{border-top:1px solid #f0f3f1}.care-specialties .icon{width:18px;height:18px;color:var(--icon-muted)}.care-specialties [aria-pressed=true] .icon{color:#61a780}
 .care-slots{display:flex;flex-wrap:wrap;gap:7px}.care-slots button{border-radius:12px;padding:12px 10px;background:#fff;border:1px solid #e6ece9;font-size:11px}.care-slots [aria-pressed=true]{border-color:#b0d1be;background:#e8f5ee;color:#3c7958}
 .care-confirm{display:flex;gap:10px;align-items:center;justify-content:center;background:#5f987d;color:#fff;padding:15px;border-radius:18px;font-size:13px;margin-top:8px}.care-confirm .icon{width:18px;height:18px}
 .care-demo-note{text-align:center;color:#a2aaa6;font-size:10px;margin:-5px 0 0}
 .care-success{text-align:center;background:linear-gradient(#fff,#eef8f2);border:1px solid #fff;border-radius:26px;padding:20px 12px 28px}.care-success .material-art{width:150px;height:150px}.care-success h2{font-weight:500;font-size:23px;letter-spacing:-.7px;margin:0}.care-success p{font-size:14px;line-height:1.8;color:#6b8274}.care-success>span{font-size:10px;color:#9baa9f}.care-secondary{background:#fff;border:1px solid #e0e9e3;border-radius:16px;padding:14px;color:#6b8274;font-size:12px}
 .is-wireframe .health-tile>*,.is-wireframe .care-tile>*,.is-wireframe .health-section-heading,.is-wireframe .health-sync{visibility:hidden}
-@media(max-width:360px){.health-tile{height:246px;padding-left:12px;padding-right:12px}.health-tile-title{min-height:66px}.metric-week-axis>span{width:19px;height:22px}.care-intro{flex-wrap:wrap}}
+@media(max-width:360px){.health-tile{padding-left:12px;padding-right:42px}.metric-range{right:8px}.health-tile-title{gap:4px}.health-tile-title>.icon{width:16px;height:16px;margin-top:2px}.care-intro{flex-wrap:wrap}}

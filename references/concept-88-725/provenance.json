@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-17",
+  "figmaFile": "aizNMC6YoCzmeYVBKOD4dS",
+  "frame": "88:725",
+  "mascotGroup": "92:847",
+  "sourceRaster": "mascot-source.png",
+  "sourceScreenshot": "mascot-reference.png",
+  "vectorAsset": "../../prototype/assets/mascot/health-mascot.svg",
+  "method": "Mascot rebuilt from editable SVG geometry. Three activity arcs share a 90-unit-radius circle and retain source colors and stroke width. Their starts are shortened to fit the user-requested Iconsax Bold icons, with round ends.",
+  "checks": [
+    "No image elements or base64 content in SVG",
+    "Visual comparison in browser at reference size",
+    "Activity entry and day selection work",
+    "Chat sends and new chat returns mascot",
+    "Menu, profile and tab switching work",
+    "npm run check: eight scale tests and build passed"
+  ],
+  "limitations": [
+    "Static demonstration activity curves; no live tracking backend",
+    "No edits written to Figma"
+  ],
+  "comparisonBeforeOrangeMove": "vector-comparison.png",
+  "preview": "../../prototype/history/mascot-equal-arcs.png",
+  "icons": {
+    "source": "/Users/darlingfxx/Projects/Neyrokey/iconsax/Icons collection/pro/rounded",
+    "burned": "food/bold/flame.svg",
+    "distance": "sports/bold/walking.svg",
+    "eaten": "kitchen/bold/fork-knife.svg",
+    "size": 16,
+    "placement": "Moved 4 degrees clockwise toward their matching arcs, with larger clearance to the neighboring arc."
+  },
+  "arcSpacing": "Trailing ends extended 4 degrees to reduce gaps; icons stay closer to matching arcs.",
+  "arcGeometry": {
+    "method": "Identical SVG d path, rotated by 0, 120 and 240 degrees",
+    "radius": 90,
+    "sweepDegrees": 97.0412002,
+    "iconLeadDegrees": 9
+  }
+}

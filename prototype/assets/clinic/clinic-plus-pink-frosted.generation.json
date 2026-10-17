@@ -1,0 +1,6 @@
+{
+  "asset": "clinic-plus-pink-frosted.png",
+  "tool": "image_gen (built-in)",
+  "transparentBackground": true,
+  "prompt": "Use case: stylized-concept. Asset type: a 3D medical plus icon for a small mobile healthcare app tile. Create one bold, plump, rounded plus sign with four equally long, equally thick arms. Material: saturated rose pink matte frosted glass, like softly frozen milky glass, rich medium rose pink around #ed5b9d, clearly pink even at 40px, not pale pastel and not red. Soft diffuse surface highlights, micro-rough satin finish, gentle internal translucency and subtle depth. Mostly front-facing, tiny three-quarter perspective to reveal rounded thickness, upright plus orientation, compact clean silhouette. This is a premium 3D object render, not a vector drawing, not glossy chrome or polished crystal. Soft studio illumination, enough contrast and richer pink shaded edges to preserve the rounded shape. The plus alone, centered and fully visible, occupying about 88 percent of a square canvas with modest equal transparent margins. Truly transparent background. Do not draw any square container or backdrop: that is supplied in CSS. No floor, no external cast shadow, no text, no heart, no extra symbols, no sparkles."
+}

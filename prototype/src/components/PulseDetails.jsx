@@ -5,7 +5,7 @@ import {PulseBreakdown} from './PulseBreakdown.jsx';
 import {GLASS_PRESETS,GlassControlScene} from './Glass.jsx';
 import {PULSE_STATES,PULSE_PERIODS,pulseSeries,pulseInitialIndex,pulseSelectionLabel,pulseHeaderLabel,pulsePeriodLabel,nearestPulsePoint,pulseChart,pulsePointLabel,pulseObservation,pulseContext,pulseReferenceRange,pulseReadingHistory} from '../pulse-chart.js';
 
-export function PulseDetails({metric,onClose,onDiscuss,onContext}){
+export function PulseDetails({metric,onClose,onContext}){
   const [period,setPeriod]=useState(metric.series.day?'day':'week');
   const [selected,setSelected]=useState(()=>pulseInitialIndex(metric,metric.series.day?'day':'week'));
   const [historyDays,setHistoryDays]=useState(7);
@@ -113,6 +113,6 @@ export function PulseDetails({metric,onClose,onDiscuss,onContext}){
         {hasMore&&<button className="pulse-all-readings" aria-controls={readingsId} onClick={()=>setHistoryDays(days=>days+7)}>Показать ещё</button>}
       </section>
     </div>
-    <footer className="pulse-footer"><GlassControlScene className="pulse-discuss-scene"><GlassButton {...GLASS_PRESETS.navigation} size="icon" className="pulse-discuss" aria-label="Обсудить с помощником" onClick={onDiscuss}><Icon name="chat-fill"/></GlassButton></GlassControlScene></footer>
+    <footer className="pulse-footer"><GlassControlScene className="pulse-discuss-scene"><GlassButton {...GLASS_PRESETS.navigation} size="icon" className="pulse-discuss" aria-label="Обсудить с помощником" disabled title="Вне сценария тестового"><Icon name="chat-fill"/></GlassButton></GlassControlScene></footer>
   </section>;
 }

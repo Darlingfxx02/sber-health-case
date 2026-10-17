@@ -45,7 +45,7 @@ function RecordDetails({item}){
 export function DetailPanel({item,onClose,onDiscuss,onContext,onOpen,planned,onPlan}){
   const backRef=useRef(null);
   useEffect(()=>{backRef.current?.focus({preventScroll:true});},[item,onContext]);
-  if(item.id==='pulse')return <PulseDetails metric={item} onClose={onClose} onDiscuss={onDiscuss} onContext={onContext}/>;
+  if(item.id==='pulse')return <PulseDetails metric={item} onClose={onClose} onContext={onContext}/>;
   return <section className="detail-panel open" id="detail-panel" aria-label="Подробности"><div className="detail-head"><button ref={backRef} aria-label="Назад" onClick={onClose}><Icon name="back"/></button><button aria-label="Добавить в чат" onClick={onDiscuss}><Icon name="chat"/></button></div><h1 className="detail-title">{item.title}</h1>
     {item.kind==='metric'?<MetricDetails metric={item} onContext={onContext}/>:item.kind==='care'?<CareDetails planned={planned} onPlan={onPlan} onContext={onContext}/>:item.kind==='activity'?<ActivityDetails item={item} onOpen={onOpen}/>:<RecordDetails item={item}/>}
     <button className="detail-cta" onClick={onDiscuss}><Icon name="chat"/><span>Обсудить</span></button>

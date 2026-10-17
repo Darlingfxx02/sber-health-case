@@ -122,6 +122,7 @@
 .pulse-footer>*{pointer-events:auto}
 .pulse-discuss-scene{width:56px;height:56px;border-radius:50%}
 .pulse-discuss{display:grid;place-items:center;width:56px;height:56px;padding:0;border-radius:50%;color:var(--icon-muted)}
+.pulse-discuss:disabled{opacity:1}
 .pulse-discuss>.icon{width:24px;height:24px}
 .pulse-panel .glass-control-scene:not([data-glass-state=ready]) button{background:#fff;border-radius:999px}
 .results-list{background:#fff;border-radius:24px;padding:18px}

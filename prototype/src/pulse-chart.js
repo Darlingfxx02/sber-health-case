@@ -42,12 +42,26 @@ export function pulseObservation(series,index){
   return context?{context,...PULSE_STATES[context],time:series.labels[index]}:null;
 }
 
+export function pulseDaySeries(metric,date){
+  const dailyDate=metric.selectedDayId||metric.series.week.dates.at(-1);
+  if(date===dailyDate&&metric.series.day)return metric.series.day;
+  const week=metric.detailSeries?.week;
+  const indexes=week?.dates.flatMap((sampleDate,index)=>sampleDate===date?[index]:[])||[];
+  if(!indexes.length)return undefined;
+  // Reuse this date's recorded points, not the latest day's intraday curve.
+  return {
+    dates:indexes.map(()=>date),
+    labels:indexes.map(index=>week.labels[index]),
+    values:indexes.map(index=>week.values[index]),
+    contexts:indexes.map(index=>week.contexts?.[index]||week.ranges?.[index]?.context)
+  };
+}
+
 export function pulseLatestObservation(metric,date){
-  const daily=date===metric.series.week.dates.at(-1)&&metric.series.day;
-  const series=daily||metric.detailSeries?.week;
+  const series=pulseDaySeries(metric,date);
   if(!series)return null;
   for(let index=series.values.length-1;index>=0;index--){
-    if((daily||series.dates[index]===date)&&Number.isFinite(series.values[index])){
+    if(Number.isFinite(series.values[index])){
       return {...pulseObservation(series,index),date,time:series.labels[index],value:series.values[index]};
     }
   }

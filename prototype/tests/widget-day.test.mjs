@@ -17,7 +17,10 @@ test('date keys join the reverse day picker to matching metric readings',()=>{
 test('historical dates do not reuse the latest intraday measurements or mutate source data',()=>{
   const original=JSON.stringify(HEALTH_METRICS);
   const historical=metricsForDay(ACTIVITY_DAYS[1]);
-  assert.equal(historical[0].series.day,undefined);
+  assert.deepEqual(historical[0].series.day.dates,Array(8).fill('2026-10-14'));
+  assert.equal(historical[0].series.day.values.at(-1),62);
+  assert.equal(historical[0].series.day.labels.at(-1),'21:00');
+  assert.equal(historical[1].series.day,undefined);
   assert.equal(historical[0].source,'Часы · 14 октября');
   assert.equal(historical[2].value,'7 ч 18 мин');
   assert.ok(metricsForDay(ACTIVITY_DAYS[0])[0].series.day);

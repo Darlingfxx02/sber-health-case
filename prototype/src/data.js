@@ -1,5 +1,5 @@
 import {PULSE_DEMO_DAY,PULSE_DEMO_ARCHIVE,PULSE_DEMO_WEEK,PULSE_DEMO_MONTH,PULSE_DEMO_YEAR} from './pulse-demo.js';
-import {pulseLatestObservation} from './pulse-chart.js';
+import {pulseDaySeries,pulseLatestObservation} from './pulse-chart.js';
 export const makeChats=()=>[
   {id:'chat-current',title:'Новый чат',date:'Сегодня',messages:[],contexts:[],draft:'',pending:0},
   {id:'chat-visit',title:'Вопросы к терапевту',date:'12 октября',messages:[{role:'user',text:'Помоги собрать вопросы к следующему приёму.'},{role:'assistant',text:'Можно обсудить результаты последних анализов, назначения и план наблюдения. Что хотелось бы уточнить в первую очередь?'}],contexts:[],draft:'',pending:0},
@@ -61,10 +61,10 @@ export function metricsForDay(day){
     const lastObservation=metric.id==='pulse'&&selectedIndex>=0?pulseLatestObservation(metric,day.id):null;
     const reading=selectedIndex<0?null:lastObservation?.value??metric.series.week.values[selectedIndex];
     const latest=selectedIndex===metric.series.week.values.length-1;
+    const daily=metric.id==='pulse'&&selectedIndex>=0?pulseDaySeries(metric,day.id):latest?metric.series.day:undefined;
     return {...metric,reading,lastObservation,selectedIndex,selectedDate:day.date,selectedDayId:day.id,
       value:reading===null?'Нет данных':formatHealthValue(metric,reading),
       source:latest?metric.source.replace('сегодня',day.date):`Часы · ${day.date}`,
-      // Only the latest demo date has intraday measurements; don't relabel those as history.
-      series:latest?metric.series:{week:metric.series.week}};
+      series:daily?{...metric.series,day:daily}:{week:metric.series.week}};
   });
 }

@@ -4,6 +4,27 @@ import {ACTIVITY_DAYS,metricsForDay} from '../src/data.js';
 import {pulseSeries,pulseInitialIndex,pulseSelectionLabel,pulsePeriodLabel,pulseChart,pulsePointLabel,pulseObservation,pulseBreakdown,pulseDuration,nearestPulsePoint,pulseContext,pulseComparison,pulseReferenceRange,pulseReadingHistory,pulseDurationTrend} from '../src/pulse-chart.js';
 
 const latest=metricsForDay(ACTIVITY_DAYS[0])[0];
+test('every calendar day opens its own intraday chart with matching history and chat context',()=>{
+  for(const day of ACTIVITY_DAYS){
+    const metric=metricsForDay(day)[0],series=pulseSeries(metric,'day');
+    assert.ok(series?.values.length,`${day.id} must retain the Day tab`);
+    const index=pulseInitialIndex(metric,'day'),plot=pulseChart(series);
+    assert.equal(series.values[index],metric.reading);
+    assert.ok(plot.points.every(point=>Number.isFinite(point.x)&&Number.isFinite(point.y)));
+    assert.ok(plot.axis.every(index=>/^\d{2}:\d{2}$/.test(plot.axisLabels[index])));
+    const context=pulseContext(metric,'day',index);
+    assert.equal(context.title,`Пульс · ${day.date}, ${series.labels[index]}`);
+    assert.equal(context.value,metric.value);
+    const history=pulseReadingHistory(metric).readings;
+    assert.equal(new Set(history.map(row=>`${row.date} ${row.time}`)).size,history.length);
+    assert.equal(history[0].date,day.id);
+    assert.equal(history[0].period,'day');
+    assert.equal(pulseBreakdown(metric,'day')[0].minutes,metric.pulseDays.find(row=>row.date===day.id).sleep.minutes);
+  }
+  const october10=metricsForDay(ACTIVITY_DAYS.find(day=>day.id==='2026-10-10'))[0];
+  assert.deepEqual(october10.series.day.values,[55,58,60,128,123,86,97,65]);
+  assert.deepEqual(october10.series.day.labels,['00:00','03:00','06:00','09:00','12:00','15:00','18:00','21:00']);
+});
 test('history starts with seven full days and only appends older records',()=>{
   const initial=pulseReadingHistory(latest),more=pulseReadingHistory(latest,14),all=pulseReadingHistory(latest,21);
   assert.equal(initial.readings.length,64);
@@ -20,7 +41,8 @@ test('history starts with seven full days and only appends older records',()=>{
 test('historical-day history excludes future dates and does not copy latest-day samples',()=>{
   const historical=metricsForDay(ACTIVITY_DAYS[1])[0];
   const {readings}=pulseReadingHistory(historical);
-  assert.ok(readings.every(row=>row.date<='2026-10-14'&&row.date>='2026-10-08'&&row.period!=='day'));
+  assert.ok(readings.every(row=>row.date<='2026-10-14'&&row.date>='2026-10-08'));
+  assert.ok(readings.filter(row=>row.period==='day').every(row=>row.date==='2026-10-14'));
   assert.equal(readings[0].label,'14 окт, 21:00');
   assert.equal(readings.at(-1).label,'8 окт · среднее');
 });

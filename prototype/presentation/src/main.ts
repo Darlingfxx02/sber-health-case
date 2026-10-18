@@ -3,7 +3,7 @@ import {createCaseEpilogue} from './case-epilogue';
 import {sameOriginAdapter} from './core/adapter';
 import {scenes,entries} from './story';
 import {caseLayout,shell} from './case-layout.mjs';
-import {caseScrollGeometry,caseScrollPosition} from './case-scroll.mjs';
+import {caseScrollPosition,resizeCaseScroll} from './case-scroll.mjs';
 import {createCaseTouchScroll} from './case-touch-scroll.mjs';
 import {playInteractionDemo} from './case-interaction-demo';
 import './style.css';
@@ -36,12 +36,13 @@ root.innerHTML=`
 <dialog class="evidence-viewer"><button data-close-image aria-label="Закрыть изображение">${icon('add')}</button><img alt=""/><p></p></dialog>`;
 const $=<T extends HTMLElement>(q:string)=>root.querySelector<T>(q)!;
 const epilogue=createCaseEpilogue(root);
-const frame=$<HTMLIFrameElement>('iframe'),adapter=sameOriginAdapter(frame),stage=$('.case-stage'),copy=$('.case-copy'),device=$('.live-device'),before=$('.before-device'),controls=$('.tour-controls'),history=$('.case-history'),track=$('.case-track');
+const frame=$<HTMLIFrameElement>('iframe'),adapter=sameOriginAdapter(frame),stage=$('.case-stage'),copy=$('.case-copy'),device=$('.live-device'),before=$('.before-device'),controls=$('.tour-controls'),history=$('.case-history');
 const effects=createCaseEffects(stage);let focusFrame=0;
 let historyTimer=0,moving=false;
 let index=0,historyMode=false,free=false,operation=new AbortController(),resizeFrame=0,historyTop=0,focusTargets:HTMLElement[]=[],ready=false;
 let demoOperation:AbortController|null=null;
-let scrollGeometry:ReturnType<typeof caseScrollGeometry>|null=null;
+let scrollViewport:ReturnType<typeof resizeCaseScroll>|null=null;
+let scrollGeometry:ReturnType<typeof resizeCaseScroll>['geometry']|null=null;
 const compact=()=>window.innerWidth<1000;
 const place=(el:HTMLElement,box:any)=>Object.assign(el.style,{width:shell.width+'px',height:shell.height+'px',transform:`translate3d(${box.x}px,${box.y}px,0) scale(${box.scale})`});
 function layout(){
@@ -61,17 +62,16 @@ function layout(){
   if(free||historyMode)hideFocus();
 }
 function sizing(){
- const previous=scrollGeometry,scrollY=window.scrollY;
- scrollGeometry=caseScrollGeometry(window.innerHeight,scenes.length,compact());
- root.style.setProperty('--case-track-height',`${scrollGeometry.trackHeight}px`);
+ const previous=scrollGeometry;
+ scrollViewport=resizeCaseScroll(scrollViewport,window.innerWidth,window.innerHeight,scenes.length,window.scrollY);
+ scrollGeometry=scrollViewport.geometry;
+ if(scrollGeometry!==previous)root.style.setProperty('--case-track-height',`${scrollGeometry.trackHeight}px`);
  root.style.setProperty('--case-viewport-height',`${window.innerHeight}px`);
- historyTop=track.offsetHeight;
- // Mobile browser chrome and orientation changes must keep the current reading position.
- if(previous&&(Math.abs(previous.step-scrollGeometry.step)>1||Math.abs(previous.trackHeight-scrollGeometry.trackHeight)>1)){
-  const top=historyMode?scrollY+scrollGeometry.trackHeight-previous.trackHeight:scrollY/previous.step*scrollGeometry.step;
-  window.scrollTo({top,behavior:'instant'});
- }
- layout();
+ historyTop=scrollGeometry.trackHeight;
+ // Only genuine layout changes need a correction; never interrupt mobile inertia
+ // just because Safari shows or hides its address bar.
+ if(scrollViewport.scrollTop!==null)window.scrollTo({top:scrollViewport.scrollTop,behavior:'instant'});
+ if(!compact()||!historyMode||free||scrollGeometry!==previous)layout();
 }
 function copyScene(){
  const scene=scenes[index];root.dataset.scene=scene.id;

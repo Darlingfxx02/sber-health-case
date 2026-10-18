@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {existsSync} from 'node:fs';
 import {fileURLToPath} from 'node:url';
 import {caseLayout,shell} from '../presentation/src/case-layout.mjs';
-import {caseScrollGeometry,caseScrollPosition} from '../presentation/src/case-scroll.mjs';
+import {caseScrollGeometry,caseScrollPosition,resizeCaseScroll} from '../presentation/src/case-scroll.mjs';
 import {createCaseTouchScroll,splitCopyScroll} from '../presentation/src/case-touch-scroll.mjs';
 import {scenes,entries} from '../presentation/src/story.ts';
 import {canOpenDetail} from '../src/case-scope.js';
@@ -73,11 +73,36 @@ test('mobile scrolling advances through every scene before reaching history',()=
   assert.deepEqual(caseScrollPosition((scenes.length-1)*geometry.step,geometry),{history:false,index:scenes.length-1},'reverse scrolling restores the last scene');
  }
 });
-test('viewport height changes retain fractional progress within a scene',()=>{
- const before=caseScrollGeometry(844,scenes.length,true),after=caseScrollGeometry(740,scenes.length,true);
- const position=6.2*before.step,resizedPosition=position/before.step*after.step;
- assert.deepEqual(caseScrollPosition(resizedPosition,after),{history:false,index:6});
- assert.ok(Math.abs(resizedPosition/after.step-6.2)<1e-9);
+test('mobile browser bars do not resize the tour or issue scroll corrections in either direction',()=>{
+ let viewport=resizeCaseScroll(null,390,844,scenes.length);
+ const original=viewport.geometry;
+ for(const offset of [100,900,1800,1200,300])for(const height of [844,800,740,780,844]){
+  const scrollY=original.trackHeight+offset;
+  viewport=resizeCaseScroll(viewport,390,height,scenes.length,scrollY);
+  assert.equal(viewport.geometry,original,'history must stay at the same document offset');
+  assert.equal(viewport.scrollTop,null,'a resize must not cancel native scroll momentum');
+  assert.equal(caseScrollPosition(scrollY,viewport.geometry).history,true);
+ }
+ const tourY=6.2*original.step;
+ viewport=resizeCaseScroll(viewport,390,740,scenes.length,tourY);
+ assert.equal(viewport.scrollTop,null);
+ assert.deepEqual(caseScrollPosition(tourY,viewport.geometry),{history:false,index:6});
+});
+test('rotation and desktop window resizing retain fractional progress within a scene',()=>{
+ for(const [from,to] of [[[390,844],[844,390]],[[1440,900],[1440,768]],[[1024,768],[900,768]]]){
+  const before=resizeCaseScroll(null,...from,scenes.length);
+  const after=resizeCaseScroll(before,...to,scenes.length,6.2*before.geometry.step);
+  assert.notEqual(after.scrollTop,null);
+  assert.deepEqual(caseScrollPosition(after.scrollTop,after.geometry),{history:false,index:6});
+  assert.ok(Math.abs(after.scrollTop/after.geometry.step-6.2)<1e-9);
+ }
+});
+test('rotation preserves the reading offset in history and subsequent browser bar changes stay passive',()=>{
+ const before=resizeCaseScroll(null,390,844,scenes.length);
+ const after=resizeCaseScroll(before,844,390,scenes.length,before.geometry.trackHeight+800);
+ assert.ok(Math.abs(after.scrollTop-after.geometry.trackHeight-800)<1e-9);
+ const bars=resizeCaseScroll(after,844,340,scenes.length,after.scrollTop);
+ assert.equal(bars.geometry,after.geometry);assert.equal(bars.scrollTop,null);
 });
 test('mobile history follows the final scene in normal vertical flow',()=>{
  for(const height of [568,740,844]){

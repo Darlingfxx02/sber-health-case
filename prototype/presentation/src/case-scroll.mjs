@@ -11,3 +11,17 @@ export function caseScrollPosition(scrollY,geometry){
   index:Math.max(0,Math.min(geometry.sceneCount-1,Math.round(scrollY/geometry.step)))
  };
 }
+
+// Mobile browser bars resize the viewport while a native scroll is in flight.
+// Keep the tour's document height stable until its width (or scene count) changes.
+export function resizeCaseScroll(previous,width,height,sceneCount,scrollY=0){
+ const keep=width<1000&&previous?.width===width&&previous.geometry.sceneCount===sceneCount;
+ const geometry=keep?previous.geometry:caseScrollGeometry(height,sceneCount,width<1000);
+ let scrollTop=null;
+ if(previous&&(Math.abs(previous.geometry.step-geometry.step)>1||Math.abs(previous.geometry.trackHeight-geometry.trackHeight)>1)){
+  scrollTop=caseScrollPosition(scrollY,previous.geometry).history
+   ?scrollY+geometry.trackHeight-previous.geometry.trackHeight
+   :scrollY/previous.geometry.step*geometry.step;
+ }
+ return{width,geometry,scrollTop};
+}

@@ -1,5 +1,6 @@
 import {useEffect,useRef} from 'react';
 import {flushSync} from 'react-dom';
+import {performCaseDemoAction} from '../case-demo.js';
 
 const frames=(signal,count=2)=>new Promise((resolve,reject)=>{
   let id;const abort=()=>{cancelAnimationFrame(id);reject(signal.reason);};
@@ -10,6 +11,7 @@ export function useCaseBridge(actions){
   const latest=useRef(actions);latest.current=actions;
   useEffect(()=>{
     const bridge={
+      demo(action,options){return performCaseDemoAction(action,{...options,actions:latest.current});},
       async enter(state,signal){
         signal.throwIfAborted();flushSync(()=>latest.current.enter(state));
         await frames(signal,3);signal.throwIfAborted();

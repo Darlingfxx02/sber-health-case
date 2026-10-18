@@ -22,6 +22,7 @@ export function useHistoryDrawer({deviceRef,surfaceRef,trackRef,layerRef,drawerR
   },[]);
   const setOpen=useCallback(value=>instance.current?.setOpen(value),[]);
   const setView=useCallback(value=>instance.current?.setView(value),[]);
+  const demoSwipe=useCallback(value=>instance.current?.demoSwipe(value),[]);
   useEffect(()=>{
     if(!open)return;
     const keys=event=>{
@@ -34,5 +35,5 @@ export function useHistoryDrawer({deviceRef,surfaceRef,trackRef,layerRef,drawerR
     };
     window.addEventListener('keydown',keys);return ()=>window.removeEventListener('keydown',keys);
   },[open,setOpen]);
-  return {open,setOpen,setView};
+  return {open,setOpen,setView,demoSwipe};
 }

@@ -12,9 +12,9 @@
     "test:pulse": "node --test tests/pulse-chart.test.mjs",
     "test:widget-day": "node --test tests/widget-day.test.mjs",
     "test:preferences": "node --test tests/preferences.test.mjs",
-    "test:navigation": "node --test tests/navigation.test.mjs",
+    "test:navigation": "node --test tests/navigation.test.mjs tests/pulse-back-gesture.test.mjs",
     "test:mascot": "node --test tests/mascot.test.mjs",
-    "test:case": "node --experimental-strip-types --test tests/case.test.mjs"
+    "test:case": "node --experimental-strip-types --test tests/case.test.mjs tests/demo-clock.test.mjs"
   },
   "dependencies": {
     "@glass-sdk/liquid-glass": "0.0.2",

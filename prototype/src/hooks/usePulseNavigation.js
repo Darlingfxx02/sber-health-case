@@ -1,4 +1,4 @@
-import {useCallback,useEffect,useRef,useState} from 'react';
+import {useCallback,useEffect,useMemo,useRef,useState} from 'react';
 
 // One clock moves the incoming screen and its slower background. Keep the
 // mounted detail through the return trip, including an interrupted entrance.
@@ -44,11 +44,16 @@ export function usePulseNavigation(deviceRef){
     updateDetail(null);deviceRef.current?.classList.remove('pulse-navigation-active');
     onComplete?.();
   }),[animate,deviceRef]);
+  const backSwipe=useMemo(()=>({
+    start(){cancel();deviceRef.current.dataset.pulseTransitioning='true';return progress.current;},
+    move:paint,
+    cancel:()=>animate(1)
+  }),[cancel,paint,animate,deviceRef]);
   useEffect(()=>{
     const media=window.matchMedia('(prefers-reduced-motion: reduce)');
     const changed=()=>{if(media.matches)complete.current?.();};
     media.addEventListener('change',changed);
     return()=>{cancel();media.removeEventListener('change',changed);};
   },[cancel]);
-  return {detail,setDetail,open,close};
+  return {detail,setDetail,open,close,backSwipe};
 }

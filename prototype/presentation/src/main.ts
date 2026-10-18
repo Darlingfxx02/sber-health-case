@@ -5,6 +5,7 @@ import {scenes,entries} from './story';
 import {caseLayout,shell} from './case-layout.mjs';
 import {caseScrollGeometry,caseScrollPosition} from './case-scroll.mjs';
 import {createCaseTouchScroll} from './case-touch-scroll.mjs';
+import {playInteractionDemo} from './case-interaction-demo';
 import './style.css';
 const root=document.querySelector<HTMLElement>('#case')!;
 const icon=(name:string)=>`<span class="case-icon" style="--icon:url('assets/iconsax/${name}.svg')" aria-hidden="true"></span>`;
@@ -19,7 +20,7 @@ root.innerHTML=`
   <div class="case-device before-device" aria-hidden="true"><div class="case-screen"><img class="comparison-image" alt=""/></div><img class="frame-art" src="${frameUrl}" alt=""/><span class="device-caption">Ранний вариант</span></div>
   <div class="case-device live-device"><div class="case-screen"><iframe src="app.html?embed=case" title="Живой прототип СберЗдоровья"></iframe><div class="case-shield"></div></div><img class="frame-art" src="${frameUrl}" alt="iPhone 17 Pro Max Deep Blue"/><span class="device-caption">Решение</span></div>
   <svg class="tour-overlay" aria-hidden="true"></svg>
-  <article class="case-copy" tabindex="0"><h1></h1><div class="scene-body"></div></article>
+  <article class="case-copy" tabindex="0"><h1></h1><div class="scene-body"></div><div class="interaction-demo-controls" hidden><p data-demo-status></p><div><button data-demo-toggle aria-pressed="false">Пауза</button><button data-demo-replay>Повторить</button></div></div></article>
   <div class="tour-controls"><button data-prev class="arrow-button" aria-label="Предыдущий этап">${icon('chevron-right')}</button><button data-explore>Исследовать макет</button><button data-next class="arrow-button" aria-label="Следующий этап">${icon('chevron-right')}</button><span class="tour-count"></span></div>
   <p class="case-error" role="alert" hidden></p>
   <div class="free-controls" hidden><button data-close-free>К кейсу</button></div>
@@ -75,6 +76,7 @@ function copyScene(){
  const scene=scenes[index];root.dataset.scene=scene.id;
  $('h1').textContent=scene.title;$('h1').hidden=!!scene.blocks;
  $('.scene-body').innerHTML=scene.blocks?scene.blocks.map(block=>`<section class="hypothesis-section"><h2>${block.title}</h2><p>${block.body}</p></section>`).join(''):scene.body.split('\n\n').map(p=>`<p>${p}</p>`).join('');
+ $('.interaction-demo-controls').hidden=!scene.demo;
  copy.scrollTop=0;$('.tour-count').textContent=`${index+1} / ${scenes.length}`;
  $<HTMLButtonElement>('[data-prev]').disabled=index===0;
  $<HTMLButtonElement>('[data-next]').setAttribute('aria-label',index===scenes.length-1?'Перейти к истории':'Следующий этап');
@@ -98,6 +100,7 @@ async function enter(next:number){
   await adapter.ready(signal);await adapter.enter(scene.state,signal);await Promise.all(anchors.map(anchor=>adapter.settled(anchor,signal)));signal.throwIfAborted();
   const targets=await Promise.all(anchors.map(anchor=>adapter.find(anchor,signal)));signal.throwIfAborted();
   ready=true;$<HTMLButtonElement>('[data-explore]').disabled=false;focusTargets=targets;if(targets.length)followFocus();
+  if(scene.demo)await playInteractionDemo({frame,screen:device.querySelector<HTMLElement>('.case-screen')!,controls:$('.interaction-demo-controls'),signal});
  }catch(error){if(signal.aborted)return;$('.case-error').textContent='Не удалось открыть этап. Попробуйте перейти к нему ещё раз.';$('.case-error').hidden=false;console.error(error);}
 }
 function navigate(next:number){
@@ -108,6 +111,7 @@ function navigate(next:number){
 }
 function setHistoryMode(value:boolean){
  if(value===historyMode)return;
+ if(value)operation.abort();
  clearTimeout(historyTimer);historyMode=value;moving=true;root.dataset.moving='true';root.dataset.historyReady='false';hideFocus();layout();
  const finish=()=>{moving=false;root.dataset.moving='false';root.dataset.historyReady=String(historyMode);history.inert=free||(!compact()&&!historyMode);if(!historyMode)followFocus();};
  if(matchMedia('(prefers-reduced-motion: reduce)').matches||compact())finish();else historyTimer=window.setTimeout(finish,820);
@@ -131,6 +135,7 @@ let savedOverflow='';
 function explore(){if(!ready)return;textScroll.cancel();operation.abort();free=true;hideFocus();savedOverflow=document.documentElement.style.overflow;document.documentElement.style.overflow='hidden';$('.free-backdrop').hidden=false;layout();$('[data-close-free]').focus();}
 function closeFree(){free=false;document.documentElement.style.overflow=savedOverflow;$('.free-backdrop').hidden=true;void enter(index);$('[data-explore]').focus({preventScroll:true});}
 $('[data-prev]').onclick=()=>navigate(index-1);$('[data-next]').onclick=()=>navigate(index+1);$('[data-explore]').onclick=explore;$('[data-close-free]').onclick=closeFree;
+$('[data-demo-replay]').onclick=()=>void enter(index);
 $('[data-restart]').onclick=()=>navigate(0);
 function setEntry(entry:HTMLElement,open:boolean){entry.querySelector('button')!.setAttribute('aria-expanded',String(open));entry.querySelector<HTMLElement>('.entry-detail')!.hidden=!open;}
 root.querySelectorAll<HTMLElement>('.history-entry').forEach(entry=>entry.querySelector('button')!.onclick=()=>setEntry(entry,entry.querySelector('button')!.getAttribute('aria-expanded')!=='true'));

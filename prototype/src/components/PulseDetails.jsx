@@ -3,9 +3,10 @@ import {GlassButton} from '@glass-sdk/liquid-glass';
 import {Icon} from './Icon.jsx';
 import {PulseBreakdown} from './PulseBreakdown.jsx';
 import {GLASS_PRESETS,GlassControlScene} from './Glass.jsx';
+import {createPulseBackGesture} from '../pulse-back-gesture.js';
 import {PULSE_STATES,PULSE_PERIODS,pulseSeries,pulseInitialIndex,pulseSelectionLabel,pulseHeaderLabel,pulsePeriodLabel,nearestPulsePoint,pulseChart,pulsePointLabel,pulseObservation,pulseContext,pulseReferenceRange,pulseReadingHistory} from '../pulse-chart.js';
 
-export function PulseDetails({metric,onClose,onContext}){
+export function PulseDetails({metric,onClose,backSwipe,onContext}){
   const [period,setPeriod]=useState(metric.series.day?'day':'week');
   const [selected,setSelected]=useState(()=>pulseInitialIndex(metric,metric.series.day?'day':'week'));
   const [chartWidth,setChartWidth]=useState(402);
@@ -28,6 +29,10 @@ export function PulseDetails({metric,onClose,onContext}){
   const {readings,hasMore}=useMemo(()=>pulseReadingHistory(metric,7),[metric]);
   const periods=Object.entries(PULSE_PERIODS).filter(([key])=>metric.series[key]||metric.detailSeries?.[key]);
   useEffect(()=>{const frame=requestAnimationFrame(()=>panelRef.current?.querySelector('button')?.focus({preventScroll:true}));return()=>cancelAnimationFrame(frame);},[]);
+  useEffect(()=>{
+    const gesture=createPulseBackGesture({panel:panelRef.current,onStart:backSwipe.start,onProgress:backSwipe.move,onFinish:commit=>commit?onClose():backSwipe.cancel()});
+    return()=>gesture.dispose();
+  },[backSwipe,onClose]);
   useEffect(()=>{
     const observer=new ResizeObserver(([entry])=>{if(entry.contentRect.width>0)setChartWidth(entry.contentRect.width);});
     observer.observe(chartRef.current);return()=>observer.disconnect();

@@ -358,6 +358,7 @@
 .pulse-navigation-active .view-viewport,.pulse-navigation-active .app-header{transform:translate3d(calc(var(--pulse-navigation-progress,0) * -18%),0,0)}
 .pulse-navigation-active .detail-panel.pulse-panel{transform:translate3d(calc((1 - var(--pulse-navigation-progress,0)) * 100%),0,0);transition:none;box-shadow:-12px 0 32px #27313b14}
 .device[data-pulse-transitioning] .view-viewport,.device[data-pulse-transitioning] .app-header,.device[data-pulse-transitioning] .pulse-panel{will-change:transform}
+.pulse-back-dragging{user-select:none;-webkit-user-select:none}
 
 /* Figma-like hints reveal the available controls without intercepting input. */
 .interaction-hints{position:absolute;inset:0;z-index:60;pointer-events:none;animation:interaction-hint-flash 1s ease-out both}

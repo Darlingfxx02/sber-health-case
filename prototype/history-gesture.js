@@ -131,5 +131,12 @@ export function createHistoryGesture({device,surface,track,layer,drawer,onPrepar
   });
   device.dataset.navigationPage=page===2?'widgets':'chat';
   write(page);
-  return {setOpen:open=>goTo(open?0:1),setView:view=>goTo(view==='widgets'?2:1),dispose(){lifetime.abort();clearTimeout(settleTimer);releasePointer(gesture);gesture=null;}};
+  return {setOpen:open=>goTo(open?0:1),setView:view=>goTo(view==='widgets'?2:1),
+    demoSwipe(view){
+      const rect=surface.getBoundingClientRect(),direction=view==='widgets'?-1:1;
+      const x=rect.left+rect.width*(direction<0?.8:.2),y=rect.top+rect.height*.5;
+      const event={target:surface,cancelable:false};start(event,x,y);
+      return {update(progress){move(event,x+direction*rect.width*.6*progress,y);},finish(){end();},cancel(){end(true);},from:{x,y},distance:direction*rect.width*.6};
+    },
+    dispose(){lifetime.abort();clearTimeout(settleTimer);releasePointer(gesture);gesture=null;}};
 }

@@ -23,7 +23,7 @@ export function App(){
   const [pendingDocument,setPendingDocument]=useState(null);
   const [wireframe,setWireframe]=useState(new URLSearchParams(location.search).get('mode')==='wireframe'),[resetKey,setResetKey]=useState(0);
   const deviceRef=useRef(null),surfaceRef=useRef(null),trackRef=useRef(null),layerRef=useRef(null),drawerRef=useRef(null),homeRef=useRef(null),inputRef=useRef(null),fileRef=useRef(null);
-  const {detail,setDetail,open:showDetail,close:hideDetail}=usePulseNavigation(deviceRef);
+  const {detail,setDetail,open:showDetail,close:hideDetail,backSwipe}=usePulseNavigation(deviceRef);
   const scrollPosition=useRef(0),detailContext=useRef(null),detailReturn=useRef(null),profileReturn=useRef(null),voiceReturn=useRef(null),timers=useRef(new Set()),fileUrls=useRef(new Set()),sequence=useRef(0);
   const {diagnostic}=useGlassDiagnostics(surfaceRef);
   const [dockHeight,setDockHeight]=useState(118);
@@ -89,7 +89,7 @@ profileReturn.current=document.activeElement;setProfileOpen(true);}
     timers.current.forEach(clearTimeout);timers.current.clear();fileUrls.current.forEach(URL.revokeObjectURL);fileUrls.current.clear();history.setOpen(false);
     setChats(makeChats());setChatId('chat-current');history.setView(startView);setSection('home');setDetail(null);setProfileOpen(false);setVoiceOpen(false);setPlanned(null);setPendingDocument(null);scrollPosition.current=0;setResetKey(key=>key+1);notify('Прототип сброшен');
   }
-  useCaseBridge({enter(state){
+  useCaseBridge({swipeView:history.demoSwipe,backSwipe,closeDetail,enter(state){
     timers.current.forEach(clearTimeout);timers.current.clear();
     const metric=metricsForDay(ACTIVITY_DAYS[0]).find(item=>item.id==='pulse');
     const chats=makeChats();const current=chats.find(item=>item.id==='chat-current');
@@ -123,7 +123,7 @@ profileReturn.current=document.activeElement;setProfileOpen(true);}
         <div className="scroll-edge-wash scroll-edge-wash-top" aria-hidden="true" hidden={overlayOpen}/>
         <div className="scroll-edge-wash scroll-edge-wash-bottom" aria-hidden="true" hidden={overlayOpen}/>
         <Composer visible={!overlayOpen} active={view==='chat'&&!overlayOpen} chat={chat} onDraft={draft=>patchChat(chat.id,c=>({...c,draft}))} onSend={sendMessage} onAttach={pickFile} onRemoveContext={id=>patchChat(chat.id,c=>({...c,contexts:c.contexts.filter(item=>item.id!==id)}))} onClearContext={()=>patchChat(chat.id,c=>({...c,contexts:[]}))} onSize={setDockHeight} inputRef={inputRef}/>
-        {detail&&<DetailPanel key={detail.id} item={detail} onClose={closeDetail} onDiscuss={discuss} onContext={selectContext} onOpen={openDetail} planned={planned} onPlan={setPlanned}/>}
+        {detail&&<DetailPanel key={detail.id} item={detail} onClose={closeDetail} backSwipe={backSwipe} onDiscuss={discuss} onContext={selectContext} onOpen={openDetail} planned={planned} onPlan={setPlanned}/>}
         {profileOpen&&<ProfileSettings startView={startView} onChange={changeStartView} onClose={closeProfile}/>}
         {voiceOpen&&<VoiceConversation onClose={closeVoice}/>}
         <div className={`toast${toast?' visible':''}`} role="status">{toast}</div>

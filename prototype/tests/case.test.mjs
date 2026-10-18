@@ -4,9 +4,63 @@ import {existsSync} from 'node:fs';
 import {fileURLToPath} from 'node:url';
 import {caseLayout,shell} from '../presentation/src/case-layout.mjs';
 import {caseScrollGeometry,caseScrollPosition} from '../presentation/src/case-scroll.mjs';
+import {createCaseTouchScroll,splitCopyScroll} from '../presentation/src/case-touch-scroll.mjs';
 import {scenes,entries} from '../presentation/src/story.ts';
 import {canOpenDetail} from '../src/case-scope.js';
 const overlaps=(a,b)=>a.x<b.x+b.width&&a.x+a.width>b.x&&a.y<b.y+b.height&&a.y+a.height>b.y;
+function touchHarness({max=0,top=0}={}){
+ const listeners=new Map(),hostListeners=new Map(),frames=new Map();let time=0,id=0,active=true,currentScene=0,page=0;
+ const copy={scrollTop:top,scrollHeight:200+max,clientHeight:200,addEventListener:(name,fn)=>listeners.set(name,fn),removeEventListener:name=>listeners.delete(name)};
+ const host={addEventListener:(name,fn)=>hostListeners.set(name,fn),removeEventListener:name=>hostListeners.delete(name)};
+ const controller=createCaseTouchScroll(copy,{enabled:()=>active,scene:()=>currentScene,scrollPage:delta=>{page+=delta;},host,now:()=>time,requestFrame:fn=>{frames.set(++id,fn);return id;},cancelFrame:id=>frames.delete(id)});
+ const touch=(name,y,{x=0,count=1,elapsed=16,cancelable=true}={})=>{
+  time+=elapsed;let prevented=false;
+  const touches=Array.from({length:count},(_,identifier)=>({identifier,clientX:x,clientY:y}));
+  listeners.get(name)?.({touches,cancelable,preventDefault:()=>{prevented=true;}});return prevented;
+ };
+ return {copy,hostListeners,controller,touch,get page(){return page;},get pending(){return frames.size;},setActive:value=>{active=value;},nextScene:()=>{currentScene++;copy.scrollTop=0;},tick(ms=16){time+=ms;const pending=[...frames.values()];frames.clear();pending.forEach(fn=>fn(time));}};
+}
+test('copy scrolling hands unused distance to the page in either direction',()=>{
+ assert.deepEqual(splitCopyScroll(80,170,200),{top:200,page:50});
+ assert.deepEqual(splitCopyScroll(-80,30,200),{top:0,page:-50});
+ assert.deepEqual(splitCopyScroll(80,0,0),{top:0,page:80});
+});
+test('a swipe over short mobile copy immediately scrolls the tour',()=>{
+ const h=touchHarness();h.touch('touchstart',500);
+ h.hostListeners.get('pointerdown')({pointerType:'touch'});
+ assert.equal(h.touch('touchmove',420),true);assert.equal(h.page,80);
+ assert.equal(h.copy.scrollTop,0);h.controller.dispose();
+});
+test('long copy finishes before the same gesture advances the tour, without relatching on the next scene',()=>{
+ const h=touchHarness({max:200,top:100});h.touch('touchstart',500);
+ h.touch('touchmove',450);assert.equal(h.copy.scrollTop,150);assert.equal(h.page,0);
+ h.touch('touchmove',350);assert.equal(h.copy.scrollTop,200);assert.equal(h.page,50);
+ h.nextScene();h.touch('touchmove',300);assert.equal(h.page,100);assert.equal(h.copy.scrollTop,0);
+ h.controller.dispose();
+});
+test('reverse swipe reads back to the top before returning to an earlier scene',()=>{
+ const h=touchHarness({max:200,top:30});h.touch('touchstart',300);h.touch('touchmove',380);
+ assert.equal(h.copy.scrollTop,0);assert.equal(h.page,-50);h.controller.dispose();
+});
+test('taps, horizontal gestures, pinch, cancellation and inactive modes keep their native behavior',()=>{
+ for(const scenario of ['tap','horizontal','pinch','cancel','disabled']){
+  const h=touchHarness();if(scenario==='disabled')h.setActive(false);h.touch('touchstart',500);
+  if(scenario==='cancel')h.touch('touchcancel',500);
+  assert.equal(h.touch('touchmove',scenario==='tap'?498:scenario==='horizontal'?490:420,{x:scenario==='horizontal'?100:0,count:scenario==='pinch'?2:1}),false,scenario);
+  assert.equal(h.page,0,scenario);h.touch('touchend',420);assert.equal(h.pending,0,scenario);h.controller.dispose();
+ }
+});
+test('a held finger stops the tour, a flick glides, and a new gesture cancels its momentum',()=>{
+ const held=touchHarness();held.touch('touchstart',500);held.touch('touchmove',420);held.touch('touchend',420,{elapsed:120});
+ assert.equal(held.pending,0);held.controller.dispose();
+ const flick=touchHarness();flick.touch('touchstart',500);flick.touch('touchmove',420);flick.touch('touchend',420);
+ flick.tick();assert.ok(flick.page>80);const stopped=flick.page;flick.hostListeners.get('touchstart')();
+ flick.tick();assert.equal(flick.page,stopped);assert.equal(flick.pending,0);flick.controller.dispose();
+});
+test('copy momentum stops when leaving the tour and cleans up every listener',()=>{
+ const h=touchHarness();h.touch('touchstart',500);h.touch('touchmove',420);h.touch('touchend',420);h.setActive(false);h.tick();
+ assert.equal(h.page,80);assert.equal(h.pending,0);h.controller.dispose();assert.equal(h.hostListeners.size,0);
+});
 test('mobile scrolling advances through every scene before reaching history',()=>{
  for(const [height,compact] of [[568,true],[844,true],[900,true],[900,false]]){
   const geometry=caseScrollGeometry(height,scenes.length,compact);

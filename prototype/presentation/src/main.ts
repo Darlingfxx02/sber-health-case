@@ -4,6 +4,7 @@ import {sameOriginAdapter} from './core/adapter';
 import {scenes,entries} from './story';
 import {caseLayout,shell} from './case-layout.mjs';
 import {caseScrollGeometry,caseScrollPosition} from './case-scroll.mjs';
+import {createCaseTouchScroll} from './case-touch-scroll.mjs';
 import './style.css';
 const root=document.querySelector<HTMLElement>('#case')!;
 const icon=(name:string)=>`<span class="case-icon" style="--icon:url('assets/iconsax/${name}.svg')" aria-hidden="true"></span>`;
@@ -100,6 +101,7 @@ async function enter(next:number){
  }catch(error){if(signal.aborted)return;$('.case-error').textContent='Не удалось открыть этап. Попробуйте перейти к нему ещё раз.';$('.case-error').hidden=false;console.error(error);}
 }
 function navigate(next:number){
+ textScroll.cancel();
  if(next>=scenes.length){showHistory();return;}
  if(next<0)return;
  window.scrollTo({top:next*scrollGeometry!.step,behavior:'instant'});void enter(next);
@@ -126,7 +128,7 @@ function onScroll(){
  $('.case-progress i').style.width=`${isHistory?100:(index+1)/scenes.length*100}%`;
 }
 let savedOverflow='';
-function explore(){if(!ready)return;operation.abort();free=true;hideFocus();savedOverflow=document.documentElement.style.overflow;document.documentElement.style.overflow='hidden';$('.free-backdrop').hidden=false;layout();$('[data-close-free]').focus();}
+function explore(){if(!ready)return;textScroll.cancel();operation.abort();free=true;hideFocus();savedOverflow=document.documentElement.style.overflow;document.documentElement.style.overflow='hidden';$('.free-backdrop').hidden=false;layout();$('[data-close-free]').focus();}
 function closeFree(){free=false;document.documentElement.style.overflow=savedOverflow;$('.free-backdrop').hidden=true;void enter(index);$('[data-explore]').focus({preventScroll:true});}
 $('[data-prev]').onclick=()=>navigate(index-1);$('[data-next]').onclick=()=>navigate(index+1);$('[data-explore]').onclick=explore;$('[data-close-free]').onclick=closeFree;
 $('[data-restart]').onclick=()=>navigate(0);
@@ -134,6 +136,11 @@ function setEntry(entry:HTMLElement,open:boolean){entry.querySelector('button')!
 root.querySelectorAll<HTMLElement>('.history-entry').forEach(entry=>entry.querySelector('button')!.onclick=()=>setEntry(entry,entry.querySelector('button')!.getAttribute('aria-expanded')!=='true'));
 root.querySelectorAll<HTMLButtonElement>('[data-density]').forEach(button=>button.onclick=()=>{root.querySelectorAll<HTMLElement>('.history-entry').forEach(entry=>setEntry(entry,button.dataset.density==='full'));root.querySelectorAll('[data-density]').forEach(other=>other.setAttribute('aria-pressed',String(other===button)));});
 const viewer=$<HTMLDialogElement>('.evidence-viewer');let imageOpener:HTMLElement|null=null;
+const textScroll=createCaseTouchScroll(copy,{
+ enabled:()=>compact()&&!free&&!historyMode&&!viewer.open&&!epilogue.isOpen(),
+ scene:()=>index,
+ scrollPage:(delta:number)=>window.scrollBy({top:delta,behavior:'instant'})
+});
 root.querySelectorAll<HTMLElement>('.evidence-image').forEach(button=>button.onclick=()=>{imageOpener=button;viewer.querySelector('img')!.src=button.dataset.src!;viewer.querySelector('img')!.alt=button.dataset.caption!;viewer.querySelector('p')!.textContent=button.dataset.caption!;viewer.showModal();});
 $('[data-close-image]').onclick=()=>viewer.close();viewer.onclick=event=>{if(event.target===viewer)viewer.close();};viewer.addEventListener('close',()=>imageOpener?.focus({preventScroll:true}));
 window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',()=>{cancelAnimationFrame(resizeFrame);resizeFrame=requestAnimationFrame(()=>{sizing();followFocus();});});

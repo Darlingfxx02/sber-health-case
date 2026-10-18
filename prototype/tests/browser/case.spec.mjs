@@ -15,11 +15,17 @@ test("late iframe load recovers automatically and preserves the current intro sc
     .getByRole("button", { name: "Следующий этап", exact: true })
     .click();
   await page.waitForTimeout(6500); // Reproduces the former hard six-second failure.
-  await expect(page.locator(".case-error")).toBeHidden();
+  // Slow CI rendering may pass the ten-second notice; that is still a pending
+  // load, not the old terminal failure. It must recover without pressing Retry.
+  await expect(page.locator("#case")).toHaveAttribute("data-loading", "true");
+  await expect(page.locator(".case-error")).not.toContainText(
+    "Не удалось открыть этап",
+  );
   release();
   await expect(
     page.getByRole("button", { name: "Исследовать макет", exact: true }),
   ).toBeEnabled();
+  await expect(page.locator(".case-error")).toBeHidden();
   await expect(page.locator("#case")).toHaveAttribute(
     "data-scene",
     "hypotheses",
@@ -29,7 +35,9 @@ test("late iframe load recovers automatically and preserves the current intro sc
 
 test("tour, free prototype and pulse periods work with one persistent iframe", async ({
   page,
+  isMobile,
 }) => {
+  const activate = (locator) => (isMobile ? locator.tap() : locator.click());
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("");
@@ -39,25 +47,39 @@ test("tour, free prototype and pulse periods work with one persistent iframe", a
   const frame = page.locator("iframe");
   await frame.evaluate((node) => (node.dataset.testIdentity = "original"));
   for (let i = 0; i < 3; i++)
-    await page
-      .getByRole("button", { name: "Следующий этап", exact: true })
-      .click();
+    await activate(
+      page.getByRole("button", { name: "Следующий этап", exact: true }),
+    );
+  await expect(page.locator("#case")).toHaveAttribute("data-scene", "chat");
   await expect(page.locator(".demo-gesture-layer")).toHaveCount(0);
-  await page
-    .getByRole("button", { name: "Исследовать макет", exact: true })
-    .click();
+  await activate(
+    page.getByRole("button", { name: "Исследовать макет", exact: true }),
+  );
+  await expect(page.locator("#case")).toHaveAttribute("data-free", "true");
+  // A locator inside an iframe does not wait for its outer device's transition.
+  // Wait for the real animation, then use touch input in the mobile project.
+  await page.locator(".live-device").evaluate(async (node) => {
+    await Promise.all(
+      node.getAnimations().map((animation) => animation.finished),
+    );
+  });
   const app = page.frameLocator("iframe");
-  await app.getByRole("tab", { name: "Виджеты", exact: true }).click();
-  await app.locator(".pulse-tile").click();
+  await activate(app.getByRole("tab", { name: "Виджеты", exact: true }));
+  await expect(
+    app.getByRole("tab", { name: "Виджеты", exact: true }),
+  ).toHaveAttribute("aria-selected", "true");
+  await expect(app.locator(".device")).not.toHaveClass(/navigation-settling/);
+  await activate(app.getByRole("button", { name: /^Пульс,/ }));
+  await expect(app.locator(".pulse-panel")).toBeVisible();
   for (const name of ["Неделя", "Месяц", "Год", "День"]) {
-    await app.getByRole("button", { name, exact: true }).click();
+    await activate(app.getByRole("button", { name, exact: true }));
     await expect(
       app.getByRole("button", { name, exact: true }),
     ).toHaveAttribute("aria-pressed", "true");
   }
-  await app.getByRole("button", { name: "Назад", exact: true }).click();
+  await activate(app.getByRole("button", { name: "Назад", exact: true }));
   await expect(app.locator(".pulse-panel")).toHaveCount(0);
-  await page.getByRole("button", { name: "К кейсу", exact: true }).click();
+  await activate(page.getByRole("button", { name: "К кейсу", exact: true }));
   await expect(frame).toHaveAttribute("data-test-identity", "original");
   expect(errors).toEqual([]);
 });

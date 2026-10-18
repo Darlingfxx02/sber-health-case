@@ -659,11 +659,14 @@ button:not(:disabled):active {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  transform: translateY(calc(100% + 34px));
   visibility: hidden;
+  transition: 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
   overflow: auto;
   scrollbar-width: none;
 }
 .detail-panel.open {
+  transform: translateY(0);
   visibility: visible;
 }
 .detail-head {

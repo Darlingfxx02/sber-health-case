@@ -141,11 +141,9 @@
   background: #fff;
   border: 0;
   box-shadow: 0 2px 5px #28313b03;
-  transition: transform 0.18s;
   touch-action: pan-y;
 }
 .health-tile:not(:disabled):active {
-  transform: scale(0.988);
   filter: none;
 }
 .health-tile:focus-visible {

@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Документ — три варианта</title>
+<style>
+@font-face{font-family:Runde;src:url('../../assets/fonts/open-runde/OpenRunde-Regular.woff2')}@font-face{font-family:Runde;src:url('../../assets/fonts/open-runde/OpenRunde-Semibold.woff2');font-weight:600}
+*{box-sizing:border-box}body{margin:0;background:#fff;color:#28313b;font:16px/1.5 Runde,system-ui,sans-serif}main{max-width:1240px;margin:auto;padding:40px 32px 32px}header{display:flex;justify-content:space-between;gap:24px;align-items:center;margin-bottom:32px}h1{font-size:32px;letter-spacing:-1px;line-height:1.2;margin:0 0 10px;font-weight:600}header p{margin:0;color:#7f8993;font-size:15px}.baseline{display:flex;align-items:center;gap:14px;flex:none;color:#929ba3;font-size:13px}.baseline img{width:76px;height:76px;object-fit:contain}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.variant{min-width:0}.canvas{height:360px;border-radius:28px;background:#f7f8fa;display:flex;flex-direction:column;align-items:center;justify-content:center}.canvas img{width:224.68px;height:217.94px;object-fit:contain}.caption{font-size:18px;font-weight:600;color:#8c98a3;margin:14px 0 0}h2{font-size:19px;font-weight:600;margin:22px 0 8px;line-height:1.3}h2 span{font-size:13px;color:#9aa4ac;display:block;margin-bottom:8px;letter-spacing:.5px}.description{font-size:14px;color:#828c95;line-height:1.55;margin:0;max-width:310px}.note{margin:32px 0 0;padding-top:20px;border-top:1px solid #f0f2f4;font-size:13px;color:#9ba3aa}@media(max-width:720px){main{padding:28px 20px}.grid{grid-template-columns:1fr;gap:32px}header{align-items:flex-start}.baseline{flex-direction:column;gap:4px}.baseline img{width:60px;height:60px}h1{font-size:26px}.canvas{height:330px}h2{margin-top:16px}.description{max-width:none}}
+</style>
+<main>
+  <header><div><h1>Когда анализы готовы</h1><p>Три небольшие правки одного визуала</p></div><div class="baseline"><img src="00-original.svg" alt="Исходный вариант"><span>Было</span></div></header>
+  <div class="grid">
+    <article class="variant"><div class="canvas"><img src="01-balanced.svg" alt="Документ ближе к центру круга"><p class="caption">Анализы готовы</p></div><h2><span>ВАРИАНТ 01</span>Больше воздуха</h2><p class="description">Документ чуть меньше и ближе к центру. Силуэт целиком читается внутри круга.</p></article>
+    <article class="variant"><div class="canvas"><img src="02-frosted.svg" alt="Светлый матовый документ на синем круге"><p class="caption">Анализы готовы</p></div><h2><span>ВАРИАНТ 02</span>Матовое стекло</h2><p class="description">Светлая поверхность отделяет документ от шара. Положение и обрезка сохранены.</p></article>
+    <article class="variant"><div class="canvas"><img src="03-depth.svg" alt="Синий документ с наклоном вправо и мягкой тенью"><p class="caption">Анализы готовы</p></div><h2><span>ВАРИАНТ 03</span>Больше глубины</h2><p class="description">Небольшой наклон вправо, светлее верхняя грань и мягкая тень за документом.</p></article>
+  </div>
+  <p class="note">Выбран вариант 02 — матовое стекло. Дуги активности, размер визуала и подпись сохранены.</p>
+</main>
+</html>

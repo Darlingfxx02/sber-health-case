@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="224.68" height="217.94" viewBox="-10 -16 200 194" fill="none">
   <title>Новые результаты анализов</title>
-  <desc>Голубой объёмный документ на исходном синем шаре. Файл наклонён влево, смещён вправо-вниз и обрезан границей шара. Внутренняя светлая форма лица и глаза скрыты. Три дуги активности остаются на месте.</desc>
+  <desc>Объёмный документ из светлого матового стекла на синем шаре. Наклонён влево и обрезан границей шара. Три дуги активности окружают уведомление.</desc>
   <style>
     #document-entrance{animation:document-in 360ms cubic-bezier(.22,.8,.2,1) both}
     @keyframes document-in{from{opacity:0;transform:translate(18px,28px) rotate(7deg);transform-origin:90px 120px}to{opacity:1;transform:translate(0,0) rotate(0deg);transform-origin:90px 120px}}
@@ -16,24 +16,14 @@
     </radialGradient>
     <path id="document-shape" d="M59 17H105Q109 17 112 20L136 44Q139 47 139 52V129Q139 146 122 146H59Q42 146 42 129V34Q42 17 59 17Z"/>
     <clipPath id="document-clip"><use href="#document-shape"/></clipPath>
-    <linearGradient id="document-blue" x1="59" y1="17" x2="123" y2="145" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#03C6FA"/><stop offset=".3" stop-color="#009FFF"/><stop offset=".66" stop-color="#008CFF"/><stop offset="1" stop-color="#00C5F8"/>
-    </linearGradient>
-    <linearGradient id="document-depth" x1="55" y1="25" x2="135" y2="145" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#24BDFA"/><stop offset=".55" stop-color="#087FD9"/><stop offset="1" stop-color="#8BDFF7"/>
-    </linearGradient>
-    <radialGradient id="document-glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(79 91) rotate(10) scale(80 68)">
-      <stop offset=".43" stop-color="#00BCFB" stop-opacity="0"/><stop offset=".69" stop-color="#65D8FD" stop-opacity=".22"/><stop offset=".86" stop-color="#D3F6FF" stop-opacity=".85"/><stop offset="1" stop-color="#F3FDFF"/>
-    </radialGradient>
+    <linearGradient id="document-blue" x1="59" y1="17" x2="123" y2="145" gradientUnits="userSpaceOnUse"><stop stop-color="#F5FDFF"/><stop offset=".3" stop-color="#DEEFF9"/><stop offset=".66" stop-color="#B6DCF1"/><stop offset="1" stop-color="#E4F7FC"/></linearGradient>
+    <linearGradient id="document-depth" x1="55" y1="25" x2="135" y2="145" gradientUnits="userSpaceOnUse"><stop stop-color="#A8DAEF"/><stop offset=".55" stop-color="#519DCE"/><stop offset="1" stop-color="#E4F5FC"/></linearGradient>
+    <radialGradient id="document-glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(79 91) rotate(10) scale(80 68)"><stop offset=".43" stop-color="#E9FBFF" stop-opacity="0"/><stop offset=".86" stop-color="#FFFFFF" stop-opacity=".18"/><stop offset="1" stop-color="#FFFFFF" stop-opacity=".7"/></radialGradient>
     <linearGradient id="document-rim" x1="49" y1="17" x2="139" y2="146" gradientUnits="userSpaceOnUse">
       <stop stop-color="#D9FAFF" stop-opacity=".85"/><stop offset=".4" stop-color="#9CE7FF" stop-opacity=".15"/><stop offset="1" stop-color="#E8FCFF" stop-opacity=".9"/>
     </linearGradient>
-    <linearGradient id="document-fold" x1="106" y1="20" x2="128" y2="54" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#F1FCFF"/><stop offset=".5" stop-color="#B7EEFF"/><stop offset="1" stop-color="#48BEFA"/>
-    </linearGradient>
-    <linearGradient id="document-ink" x1="64" y1="65" x2="109" y2="115" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#F1FCFF"/><stop offset="1" stop-color="#A4E8FD"/>
-    </linearGradient>
+    <linearGradient id="document-fold" x1="106" y1="20" x2="128" y2="54" gradientUnits="userSpaceOnUse"><stop stop-color="#FFFFFF"/><stop offset=".5" stop-color="#E9F8FF"/><stop offset="1" stop-color="#A7D3ED"/></linearGradient>
+    <linearGradient id="document-ink" x1="64" y1="65" x2="109" y2="115" gradientUnits="userSpaceOnUse"><stop stop-color="#3E95CD"/><stop offset="1" stop-color="#68B8E0"/></linearGradient>
     <radialGradient id="document-shadow"><stop stop-color="#18749E" stop-opacity=".15"/><stop offset="1" stop-color="#18749E" stop-opacity="0"/></radialGradient>
   </defs>
   <g id="notification-orb" transform="translate(10.62 0)">
@@ -52,7 +42,7 @@
         <path d="M106 18L139 51H119Q106 51 106 38Z" fill="url(#document-fold)"/>
         <path d="M106 20V37Q106 50 119 50H136" stroke="#E6FAFF" stroke-opacity=".65" stroke-width="1.2"/>
         <path d="M52 59V36Q52 27 61 27H91" stroke="#CFF8FF" stroke-opacity=".3" stroke-width="2" stroke-linecap="round"/>
-        <path d="M62 69H109M62 81H98M62 103H114M62 115H99" stroke="url(#document-ink)" stroke-width="6" stroke-linecap="round"/>
+        <path d="M62 69H109M62 81H98M62 103H114M62 115H99" stroke="url(#document-ink)" stroke-width="5" stroke-linecap="round"/>
       </g>
       <use href="#document-shape" stroke="url(#document-rim)" stroke-width="1"/>
     </g>

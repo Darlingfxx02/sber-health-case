@@ -37,7 +37,7 @@ const epilogue=createCaseEpilogue(root);
 const frame=$<HTMLIFrameElement>('iframe'),adapter=sameOriginAdapter(frame),stage=$('.case-stage'),copy=$('.case-copy'),device=$('.live-device'),before=$('.before-device'),controls=$('.tour-controls'),history=$('.case-history'),track=$('.case-track');
 const effects=createCaseEffects(stage);let focusFrame=0;
 let historyTimer=0,moving=false;
-let index=0,historyMode=false,free=false,operation=new AbortController(),resizeFrame=0,historyTop=0,focusTarget:HTMLElement|null=null,ready=false;
+let index=0,historyMode=false,free=false,operation=new AbortController(),resizeFrame=0,historyTop=0,focusTargets:HTMLElement[]=[],ready=false;
 let scrollGeometry:ReturnType<typeof caseScrollGeometry>|null=null;
 const compact=()=>window.innerWidth<1000;
 const place=(el:HTMLElement,box:any)=>Object.assign(el.style,{width:shell.width+'px',height:shell.height+'px',transform:`translate3d(${box.x}px,${box.y}px,0) scale(${box.scale})`});
@@ -79,10 +79,10 @@ function copyScene(){
  $<HTMLButtonElement>('[data-next]').setAttribute('aria-label',index===scenes.length-1?'Перейти к истории':'Следующий этап');
  if(scene.compare){$<HTMLImageElement>('.comparison-image').src=scene.compare.src;before.querySelector('.device-caption')!.textContent=scene.compare.label;}
 }
-function hideFocus(){cancelAnimationFrame(focusFrame);effects.clear();focusTarget=null;}
+function hideFocus(){cancelAnimationFrame(focusFrame);effects.clear();focusTargets=[];}
 function drawFocus(animate=false){
- if(!focusTarget||free||historyMode||moving)return;
- effects.draw(focusTarget,device.querySelector<HTMLElement>('.case-screen')!,animate);
+ if(!focusTargets.length||free||historyMode||moving)return;
+ effects.draw(focusTargets,device.querySelector<HTMLElement>('.case-screen')!,animate);
 }
 function followFocus(){
  cancelAnimationFrame(focusFrame);const end=performance.now()+700;drawFocus(true);
@@ -93,8 +93,10 @@ async function enter(next:number){
  operation.abort();operation=new AbortController();const{signal}=operation;ready=false;$<HTMLButtonElement>('[data-explore]').disabled=true;index=Math.min(scenes.length-1,Math.max(0,next));setHistoryMode(false);hideFocus();copyScene();layout();
  $('.case-error').hidden=true;
  try{
-  await adapter.ready(signal);await adapter.enter(scenes[index].state,signal);await adapter.settled(scenes[index].focus,signal);signal.throwIfAborted();
-  ready=true;$<HTMLButtonElement>('[data-explore]').disabled=false;if(scenes[index].focus){focusTarget=await adapter.find(scenes[index].focus!,signal);followFocus();}
+  const scene=scenes[index],anchors=typeof scene.focus==='string'?[scene.focus]:scene.focus??[];
+  await adapter.ready(signal);await adapter.enter(scene.state,signal);await Promise.all(anchors.map(anchor=>adapter.settled(anchor,signal)));signal.throwIfAborted();
+  const targets=await Promise.all(anchors.map(anchor=>adapter.find(anchor,signal)));signal.throwIfAborted();
+  ready=true;$<HTMLButtonElement>('[data-explore]').disabled=false;focusTargets=targets;if(targets.length)followFocus();
  }catch(error){if(signal.aborted)return;$('.case-error').textContent='Не удалось открыть этап. Попробуйте перейти к нему ещё раз.';$('.case-error').hidden=false;console.error(error);}
 }
 function navigate(next:number){

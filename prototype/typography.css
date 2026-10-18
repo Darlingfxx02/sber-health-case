@@ -1,106 +1,380 @@
-@font-face{font-family:"Open Runde";font-style:normal;font-weight:400;font-display:swap;src:url("assets/fonts/open-runde/OpenRunde-Regular.woff2") format("woff2")}
-@font-face{font-family:"Open Runde";font-style:normal;font-weight:500;font-display:swap;src:url("assets/fonts/open-runde/OpenRunde-Medium.woff2") format("woff2")}
-@font-face{font-family:"Open Runde";font-style:normal;font-weight:600;font-display:swap;src:url("assets/fonts/open-runde/OpenRunde-Semibold.woff2") format("woff2")}
+@font-face {
+  font-family: "Open Runde";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/fonts/open-runde/OpenRunde-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Open Runde";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/fonts/open-runde/OpenRunde-Medium.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Open Runde";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("assets/fonts/open-runde/OpenRunde-Semibold.woff2") format("woff2");
+}
 
 /* One type scale for the app. Values use optical spacing; reading text uses natural spacing. */
-:root{
-  --font-app:"Open Runde",Inter,system-ui,sans-serif;
-  --type-caption:400 12px/16px var(--font-app);
-  --type-meta:400 14px/20px var(--font-app);
-  --type-label:500 14px/20px var(--font-app);
-  --type-body:400 16px/24px var(--font-app);
-  --type-card:500 16px/22px var(--font-app);
-  --type-unit:500 18px/24px var(--font-app);
-  --type-widget-unit:500 16px/22px var(--font-app);
-  --type-section:600 20px/26px var(--font-app);
-  --type-title:600 28px/34px var(--font-app);
-  --type-value:500 36px/40px var(--font-app);
-  --tracking-text:0;
-  --tracking-heading:-.01em;
-  --tracking-value:-.015em;
-  --text-primary:#28313b;
-  --text-secondary:#697380;
-  --text-unit:#9aa5af;
-  --icon-muted:#aeb8c0;
-  font-family:var(--font-app);
+:root {
+  --font-app: "Open Runde", Inter, system-ui, sans-serif;
+  --type-caption: 400 12px/16px var(--font-app);
+  --type-meta: 400 14px/20px var(--font-app);
+  --type-label: 500 14px/20px var(--font-app);
+  --type-body: 400 16px/24px var(--font-app);
+  --type-card: 500 16px/22px var(--font-app);
+  --type-unit: 500 18px/24px var(--font-app);
+  --type-widget-unit: 500 16px/22px var(--font-app);
+  --type-section: 600 20px/26px var(--font-app);
+  --type-title: 600 28px/34px var(--font-app);
+  --type-value: 500 36px/40px var(--font-app);
+  --tracking-text: 0;
+  --tracking-heading: -0.01em;
+  --tracking-value: -0.015em;
+  --text-primary: #28313b;
+  --text-secondary: #697380;
+  --text-unit: #9aa5af;
+  --icon-muted: #aeb8c0;
+  font-family: var(--font-app);
 }
-.device{font:var(--type-body);letter-spacing:var(--tracking-text);color:var(--text-primary)}
-.device button,.device input{font-family:var(--font-app)}
-.device strong{font-weight:600}
+.device {
+  font: var(--type-body);
+  letter-spacing: var(--tracking-text);
+  color: var(--text-primary);
+}
+.device button,
+.device input {
+  font-family: var(--font-app);
+}
+.device strong {
+  font-weight: 600;
+}
 
 /* Overview and activity: no squeezed lettering or tiny date labels. */
-.results-block .overview-label,.results-heading h2,.activity-entry h2,.health-section-heading h2,.activity-center-date{font:var(--type-section);letter-spacing:var(--tracking-heading)}
-.results-block.is-collapsed .overview-label{font:var(--type-label);letter-spacing:0}
-.results-block.is-collapsed .overview-heading-content{left:calc(50% + 26px);top:11px;gap:7px}
-.overview-row .results-block:not(.is-collapsed) .overview-heading-content{top:9px}
-.activity-entry{margin-bottom:12px}
-.activity-more,.health-section-heading>span{font:var(--type-label);letter-spacing:0;color:var(--text-secondary)}
-.activity-day-name,.activity-center-track .activity-day-name{font:var(--type-label);letter-spacing:0;color:#637184}
-.activity-day-date{font:600 16px/22px var(--font-app);letter-spacing:0}
-.activity-day-surface{padding:10px 0}
-.activity-day-values dt{font:var(--type-body);color:var(--text-secondary)}
-.activity-day-values dd{font:var(--type-card);letter-spacing:0}
+.results-block .overview-label,
+.results-heading h2,
+.activity-entry h2,
+.health-section-heading h2,
+.activity-center-date {
+  font: var(--type-section);
+  letter-spacing: var(--tracking-heading);
+}
+.results-block.is-collapsed .overview-label {
+  font: var(--type-label);
+  letter-spacing: 0;
+}
+.results-block.is-collapsed .overview-heading-content {
+  left: calc(50% + 26px);
+  top: 11px;
+  gap: 7px;
+}
+.overview-row .results-block:not(.is-collapsed) .overview-heading-content {
+  top: 9px;
+}
+.activity-entry {
+  margin-bottom: 12px;
+}
+.activity-more,
+.health-section-heading > span {
+  font: var(--type-label);
+  letter-spacing: 0;
+  color: var(--text-secondary);
+}
+.activity-day-name,
+.activity-center-track .activity-day-name {
+  font: var(--type-label);
+  letter-spacing: 0;
+  color: #637184;
+}
+.activity-day-date {
+  font: 600 16px/22px var(--font-app);
+  letter-spacing: 0;
+}
+.activity-day-surface {
+  padding: 10px 0;
+}
+.activity-day-values dt {
+  font: var(--type-body);
+  color: var(--text-secondary);
+}
+.activity-day-values dd {
+  font: var(--type-card);
+  letter-spacing: 0;
+}
 
 /* Metric cards. All units remain grey, but have enough size and weight to read. */
-.health-section-heading{padding-bottom:4px}
-.health-tile .health-tile-title{font:var(--type-label);letter-spacing:0}
-.health-tile .health-number,.metric-detail-number{font:var(--type-value);letter-spacing:var(--tracking-value);display:flex;align-items:baseline;gap:6px;font-variant-numeric:tabular-nums;white-space:nowrap}
-.health-tile .health-number{font-size:30px;line-height:36px;gap:4px}
-.health-number .metric-pair,.metric-detail-number .metric-pair{display:inline-flex;align-items:baseline;gap:4px}
-.health-tile .health-number small,.metric-detail-number small{font:var(--type-unit);letter-spacing:0;margin:0;color:var(--text-secondary)}
-.health-tile .health-number small{font:var(--type-widget-unit);color:var(--text-unit)}
-.health-tile .metric-pair{gap:3px}
-.health-tile .health-caption,.chart-axis{font:var(--type-caption);letter-spacing:0;color:var(--text-secondary)}
-.care-intro h2{font:var(--type-section);letter-spacing:var(--tracking-heading)}
-.care-book{font:var(--type-label);letter-spacing:0;min-height:40px;padding:10px 12px}
-.care-book .icon{width:16px;height:16px}
-.care-events button{padding:12px 2px;gap:12px}
-.care-events strong{font:var(--type-card);letter-spacing:0}
-.care-events small{font:var(--type-meta);letter-spacing:0;color:var(--text-secondary);margin-top:3px}
+.health-section-heading {
+  padding-bottom: 4px;
+}
+.health-tile .health-tile-title {
+  font: var(--type-label);
+  letter-spacing: 0;
+}
+.health-tile .health-number,
+.metric-detail-number {
+  font: var(--type-value);
+  letter-spacing: var(--tracking-value);
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.health-tile .health-number {
+  font-size: 30px;
+  line-height: 36px;
+  gap: 4px;
+}
+.health-number .metric-pair,
+.metric-detail-number .metric-pair {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+}
+.health-tile .health-number small,
+.metric-detail-number small {
+  font: var(--type-unit);
+  letter-spacing: 0;
+  margin: 0;
+  color: var(--text-secondary);
+}
+.health-tile .health-number small {
+  font: var(--type-widget-unit);
+  color: var(--text-unit);
+}
+.health-tile .metric-pair {
+  gap: 3px;
+}
+.health-tile .health-caption,
+.chart-axis {
+  font: var(--type-caption);
+  letter-spacing: 0;
+  color: var(--text-secondary);
+}
+.care-intro h2 {
+  font: var(--type-section);
+  letter-spacing: var(--tracking-heading);
+}
+.care-book {
+  font: var(--type-label);
+  letter-spacing: 0;
+  min-height: 40px;
+  padding: 10px 12px;
+}
+.care-book .icon {
+  width: 16px;
+  height: 16px;
+}
+.care-events button {
+  padding: 12px 2px;
+  gap: 12px;
+}
+.care-events strong {
+  font: var(--type-card);
+  letter-spacing: 0;
+}
+.care-events small {
+  font: var(--type-meta);
+  letter-spacing: 0;
+  color: var(--text-secondary);
+  margin-top: 3px;
+}
 
 /* Chat, history and documents use the same reading and action styles. */
-.empty-chat p{font:500 24px/32px var(--font-app);letter-spacing:var(--tracking-heading);color:#7a8491}
-.composer input{font:var(--type-body);letter-spacing:0}
-.composer input::placeholder{color:#7a8491}
-.suggestions button{font:500 13px/18px var(--font-app);letter-spacing:0;color:var(--text-secondary);padding:6px 13px}
-.message{font:var(--type-body);letter-spacing:0}
-.context-heading,.message-context,.message-context span,.context-chip strong{font:var(--type-caption);letter-spacing:0;color:var(--text-secondary)}
-.context-chip strong{font-weight:500;color:var(--text-primary)}
-.context-chip{padding:10px 12px}.context-heading{min-height:24px}
-.history-heading h2{font:var(--type-section);letter-spacing:var(--tracking-heading)}
-.history-sections button,.history-chat strong{font:var(--type-body);letter-spacing:0}
-.new-chat{font:var(--type-card);letter-spacing:0}
-.history-list-heading{font:var(--type-label);letter-spacing:0;color:var(--text-secondary)}
-.history-chat small{font:var(--type-caption);color:var(--text-secondary)}
-.card .card-title,.card.wide .card-title{font:var(--type-section);letter-spacing:var(--tracking-heading)}
-.card .card-meta{font:var(--type-meta);color:var(--text-secondary)}
-.section-heading h1,.detail-title{font:var(--type-title);letter-spacing:var(--tracking-heading)}
+.empty-chat p {
+  font: 500 24px/32px var(--font-app);
+  letter-spacing: var(--tracking-heading);
+  color: #7a8491;
+}
+.composer input {
+  font: var(--type-body);
+  letter-spacing: 0;
+}
+.composer input::placeholder {
+  color: #7a8491;
+}
+.suggestions button {
+  font: 500 13px/18px var(--font-app);
+  letter-spacing: 0;
+  color: var(--text-secondary);
+  padding: 6px 13px;
+}
+.message {
+  font: var(--type-body);
+  letter-spacing: 0;
+}
+.context-heading,
+.message-context,
+.message-context span,
+.context-chip strong {
+  font: var(--type-caption);
+  letter-spacing: 0;
+  color: var(--text-secondary);
+}
+.context-chip strong {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+.context-chip {
+  padding: 10px 12px;
+}
+.context-heading {
+  min-height: 24px;
+}
+.history-heading h2 {
+  font: var(--type-section);
+  letter-spacing: var(--tracking-heading);
+}
+.history-sections button,
+.history-chat strong {
+  font: var(--type-body);
+  letter-spacing: 0;
+}
+.new-chat {
+  font: var(--type-card);
+  letter-spacing: 0;
+}
+.history-list-heading {
+  font: var(--type-label);
+  letter-spacing: 0;
+  color: var(--text-secondary);
+}
+.history-chat small {
+  font: var(--type-caption);
+  color: var(--text-secondary);
+}
+.card .card-title,
+.card.wide .card-title {
+  font: var(--type-section);
+  letter-spacing: var(--tracking-heading);
+}
+.card .card-meta {
+  font: var(--type-meta);
+  color: var(--text-secondary);
+}
+.section-heading h1,
+.detail-title {
+  font: var(--type-title);
+  letter-spacing: var(--tracking-heading);
+}
 
 /* Detailed measurements and booking: readable labels, with fewer labels on dense axes. */
-.detail-sub,.detail-label,.detail-note,.detail-list li,.metric-source,.metric-detail-summary p{font:var(--type-meta);letter-spacing:0;color:var(--text-secondary)}
-.detail-note,.detail-list li{font:var(--type-body);color:var(--text-primary)}
-.detail-cta,.metric-period button,.range-control button{font:var(--type-label);letter-spacing:0}
-.metric-detail-summary{min-height:138px}
-.metric-detail-number{margin-top:28px}
-.metric-chart-targets button,.metric-chart-targets button span{font:var(--type-caption);letter-spacing:0;color:var(--text-secondary)}
-.metric-chart-targets button:first-child span{margin-left:16px}.metric-chart-targets button:last-child span{margin-right:16px}
-.metric-summary-row dt{font:var(--type-meta);letter-spacing:0;color:var(--text-secondary)}
-.metric-summary-row dd{font:var(--type-card);letter-spacing:0}
-.metric-source>span{font:var(--type-caption);color:var(--text-secondary)}
-.care-formats button,.care-slots button,.care-confirm,.care-secondary{font:var(--type-label);letter-spacing:0}
-.care-specialties button{font:var(--type-body);letter-spacing:0}
-.care-field-label{font:var(--type-card);letter-spacing:0;margin-bottom:-3px}
-.care-success h2{font:var(--type-title);letter-spacing:var(--tracking-heading)}
-.care-success p{font:var(--type-body)}
-.care-success>span,.care-demo-note{font:var(--type-caption);color:var(--text-secondary)}
-.toast{font:var(--type-label);letter-spacing:0}
+.detail-sub,
+.detail-label,
+.detail-note,
+.detail-list li,
+.metric-source,
+.metric-detail-summary p {
+  font: var(--type-meta);
+  letter-spacing: 0;
+  color: var(--text-secondary);
+}
+.detail-note,
+.detail-list li {
+  font: var(--type-body);
+  color: var(--text-primary);
+}
+.detail-cta,
+.metric-period button,
+.range-control button {
+  font: var(--type-label);
+  letter-spacing: 0;
+}
+.metric-detail-summary {
+  min-height: 138px;
+}
+.metric-detail-number {
+  margin-top: 28px;
+}
+.metric-chart-targets button,
+.metric-chart-targets button span {
+  font: var(--type-caption);
+  letter-spacing: 0;
+  color: var(--text-secondary);
+}
+.metric-chart-targets button:first-child span {
+  margin-left: 16px;
+}
+.metric-chart-targets button:last-child span {
+  margin-right: 16px;
+}
+.metric-summary-row dt {
+  font: var(--type-meta);
+  letter-spacing: 0;
+  color: var(--text-secondary);
+}
+.metric-summary-row dd {
+  font: var(--type-card);
+  letter-spacing: 0;
+}
+.metric-source > span {
+  font: var(--type-caption);
+  color: var(--text-secondary);
+}
+.care-formats button,
+.care-slots button,
+.care-confirm,
+.care-secondary {
+  font: var(--type-label);
+  letter-spacing: 0;
+}
+.care-specialties button {
+  font: var(--type-body);
+  letter-spacing: 0;
+}
+.care-field-label {
+  font: var(--type-card);
+  letter-spacing: 0;
+  margin-bottom: -3px;
+}
+.care-success h2 {
+  font: var(--type-title);
+  letter-spacing: var(--tracking-heading);
+}
+.care-success p {
+  font: var(--type-body);
+}
+.care-success > span,
+.care-demo-note {
+  font: var(--type-caption);
+  color: var(--text-secondary);
+}
+.toast {
+  font: var(--type-label);
+  letter-spacing: 0;
+}
 
-@media(max-width:360px){
-  .health-tile .health-number{font-size:27px;line-height:34px;gap:3px}
-  .health-tile .health-number small,.health-tile .health-goal{font-size:15px}
-  .health-number .metric-pair{gap:3px}
-  .overview-row .results-block:not(.is-collapsed) .overview-label{font-size:20px;letter-spacing:var(--tracking-heading)}
-  .results-block.is-collapsed .overview-heading-content{left:calc(50% + 19px);gap:5px}
-  .results-block.is-collapsed .result-file{left:calc(22px + var(--fan-x)*.18);transform:translate(-50%,-50%) rotate(var(--fan-angle)) scale(.18)}
-  .results-block.is-collapsed .result-file.is-selected{transform:translate(-50%,-50%) rotate(0) scale(.1872)}
+@media (max-width: 360px) {
+  .health-tile .health-number {
+    font-size: 27px;
+    line-height: 34px;
+    gap: 3px;
+  }
+  .health-tile .health-number small,
+  .health-tile .health-goal {
+    font-size: 15px;
+  }
+  .health-number .metric-pair {
+    gap: 3px;
+  }
+  .overview-row .results-block:not(.is-collapsed) .overview-label {
+    font-size: 20px;
+    letter-spacing: var(--tracking-heading);
+  }
+  .results-block.is-collapsed .overview-heading-content {
+    left: calc(50% + 19px);
+    gap: 5px;
+  }
+  .results-block.is-collapsed .result-file {
+    left: calc(22px + var(--fan-x) * 0.18);
+    transform: translate(-50%, -50%) rotate(var(--fan-angle)) scale(0.18);
+  }
+  .results-block.is-collapsed .result-file.is-selected {
+    transform: translate(-50%, -50%) rotate(0) scale(0.1872);
+  }
 }

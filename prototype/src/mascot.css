@@ -1,28 +1,115 @@
-.animated-mascot{display:block;width:100%;height:100%;pointer-events:auto}
-.animated-mascot>svg{display:block;width:100%;height:100%;overflow:visible}
-.health-mascot>.animated-mascot{position:absolute;left:-11.2325px;top:0;width:224.68px;height:217.94px}
-.mascot-gaze{transform:translate(var(--gaze-x),var(--gaze-y));transition:transform 650ms cubic-bezier(.333333,1,.666667,1)}
-.mascot-eye{transition:transform 380ms cubic-bezier(.2,.7,.25,1)}
-.mascot-eye-open,.mascot-eye-smile{transition:opacity 220ms ease}
-.mascot-eye-smile{opacity:0}
-.mascot-blink{transform-origin:88px 93px;transition:transform 85ms ease-out}
-.is-blinking .mascot-blink{transform:scaleY(.055)}
-.animated-mascot[data-emotion="happy"] .mascot-eye-open{opacity:0}
-.animated-mascot[data-emotion="happy"] .mascot-eye-smile{opacity:1}
-.animated-mascot[data-emotion="happy"] .mascot-eye-left{transform:rotate(-7deg)}
-.animated-mascot[data-emotion="happy"] .mascot-eye-right{transform:rotate(6deg)}
-.animated-mascot[data-emotion="curious"] .mascot-eye-left{transform:scale(.94,.76)}
-.animated-mascot[data-emotion="curious"] .mascot-eye-right{transform:scale(1.04,1.1)}
-.animated-mascot[data-emotion="thoughtful"] .mascot-eye-left{transform:scaleY(.65) rotate(8deg)}
-.animated-mascot[data-emotion="thoughtful"] .mascot-eye-right{transform:scaleY(.76) rotate(-6deg)}
-.animated-mascot[data-emotion="encouraging"] .mascot-eye-left{transform:rotate(8deg) scaleY(.86)}
-.animated-mascot[data-emotion="encouraging"] .mascot-eye-right{transform:rotate(-5deg) scaleY(1.08)}
-.animated-mascot[data-emotion="listening"] .mascot-eye{transform:scale(1.06,1.1)}
-.animated-mascot[data-emotion="resting"] .mascot-eye{transform:scaleY(.38)}
-.animated-mascot[data-motion="paused"] *{transition:none!important}
-[data-mascot-target]{position:relative}
-[data-mascot-target]::after{content:"";position:absolute;inset:-5px -7px;border-radius:16px;background:var(--cue-color,#269ae2);opacity:0;pointer-events:none}
-[data-mascot-cue="true"]::after{animation:mascot-target-pulse 1.2s ease-in-out 2}
-@keyframes mascot-target-pulse{0%,100%{opacity:0}45%{opacity:.12}}
-.is-wireframe .animated-mascot{visibility:hidden}
-@media(prefers-reduced-motion:reduce){.animated-mascot *{transition:none!important;animation:none!important}[data-mascot-cue]::after{animation:none}}
+.animated-mascot {
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
+}
+.animated-mascot > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.health-mascot > .animated-mascot {
+  position: absolute;
+  left: -11.2325px;
+  top: 0;
+  width: 224.68px;
+  height: 217.94px;
+}
+.mascot-gaze {
+  transform: translate(var(--gaze-x), var(--gaze-y));
+  transition: transform 650ms cubic-bezier(0.333333, 1, 0.666667, 1);
+}
+.mascot-eye {
+  transition: transform 380ms cubic-bezier(0.2, 0.7, 0.25, 1);
+}
+.mascot-eye-open,
+.mascot-eye-smile {
+  transition: opacity 220ms ease;
+}
+.mascot-eye-smile {
+  opacity: 0;
+}
+.mascot-blink {
+  transform-origin: 88px 93px;
+  transition: transform 85ms ease-out;
+}
+.is-blinking .mascot-blink {
+  transform: scaleY(0.055);
+}
+.animated-mascot[data-emotion="happy"] .mascot-eye-open {
+  opacity: 0;
+}
+.animated-mascot[data-emotion="happy"] .mascot-eye-smile {
+  opacity: 1;
+}
+.animated-mascot[data-emotion="happy"] .mascot-eye-left {
+  transform: rotate(-7deg);
+}
+.animated-mascot[data-emotion="happy"] .mascot-eye-right {
+  transform: rotate(6deg);
+}
+.animated-mascot[data-emotion="curious"] .mascot-eye-left {
+  transform: scale(0.94, 0.76);
+}
+.animated-mascot[data-emotion="curious"] .mascot-eye-right {
+  transform: scale(1.04, 1.1);
+}
+.animated-mascot[data-emotion="thoughtful"] .mascot-eye-left {
+  transform: scaleY(0.65) rotate(8deg);
+}
+.animated-mascot[data-emotion="thoughtful"] .mascot-eye-right {
+  transform: scaleY(0.76) rotate(-6deg);
+}
+.animated-mascot[data-emotion="encouraging"] .mascot-eye-left {
+  transform: rotate(8deg) scaleY(0.86);
+}
+.animated-mascot[data-emotion="encouraging"] .mascot-eye-right {
+  transform: rotate(-5deg) scaleY(1.08);
+}
+.animated-mascot[data-emotion="listening"] .mascot-eye {
+  transform: scale(1.06, 1.1);
+}
+.animated-mascot[data-emotion="resting"] .mascot-eye {
+  transform: scaleY(0.38);
+}
+.animated-mascot[data-motion="paused"] * {
+  transition: none !important;
+}
+[data-mascot-target] {
+  position: relative;
+}
+[data-mascot-target]::after {
+  content: "";
+  position: absolute;
+  inset: -5px -7px;
+  border-radius: 16px;
+  background: var(--cue-color, #269ae2);
+  opacity: 0;
+  pointer-events: none;
+}
+[data-mascot-cue="true"]::after {
+  animation: mascot-target-pulse 1.2s ease-in-out 2;
+}
+@keyframes mascot-target-pulse {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  45% {
+    opacity: 0.12;
+  }
+}
+.is-wireframe .animated-mascot {
+  visibility: hidden;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animated-mascot * {
+    transition: none !important;
+    animation: none !important;
+  }
+  [data-mascot-cue]::after {
+    animation: none;
+  }
+}

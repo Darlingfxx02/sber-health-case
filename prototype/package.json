@@ -8,13 +8,19 @@
     "build:pages": "node build-pages.mjs",
     "watch": "node build.mjs --watch",
     "test:glass": "node --test tests/glass-scale.test.mjs",
-    "check": "node --check server.mjs && node --check history-gesture.js && node --check src/data.js && npm run test:glass && npm run test:navigation && npm run test:preferences && npm run test:widget-day && npm run test:pulse && npm run test:mascot && npm run test:case && npm run build",
+    "check": "npm run typecheck && npm run lint && npm test && npm run build",
     "test:pulse": "node --test tests/pulse-chart.test.mjs",
     "test:widget-day": "node --test tests/widget-day.test.mjs",
     "test:preferences": "node --test tests/preferences.test.mjs",
     "test:navigation": "node --test tests/navigation.test.mjs tests/pulse-back-gesture.test.mjs",
     "test:mascot": "node --test tests/mascot.test.mjs",
-    "test:case": "node --experimental-strip-types --test tests/case.test.mjs tests/demo-clock.test.mjs"
+    "test:case": "node --experimental-strip-types --test tests/case.test.mjs tests/demo-clock.test.mjs",
+    "test": "node --experimental-strip-types --test tests/*.test.mjs",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src presentation/src tests scripts *.mjs history-gesture.js",
+    "format": "prettier --write src presentation/src scripts *.mjs *.css",
+    "test:browser": "playwright test",
+    "prepare:audio": "node scripts/prepare-audio.mjs"
   },
   "dependencies": {
     "@glass-sdk/liquid-glass": "0.0.2",
@@ -22,6 +28,13 @@
     "react-dom": "19.3.0"
   },
   "devDependencies": {
-    "esbuild": "0.28.2"
+    "@eslint/js": "10.0.1",
+    "@playwright/test": "1.64.1",
+    "esbuild": "0.28.2",
+    "eslint": "10.13.0",
+    "globals": "17.13.0",
+    "prettier": "3.9.10",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.71.2"
   }
 }

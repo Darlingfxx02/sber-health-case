@@ -1,2 +1,2 @@
-// The soundtrack is supplied by the author as a local audio file.
-export const epilogueAudioUrl='assets/audio/main-title.mp3';
+// Author-supplied soundtrack; bounded PCM chunks preserve stereo and sample rate.
+export const epilogueAudioUrl = "assets/audio/chunks/track-f55d25760b36.json";

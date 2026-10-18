@@ -30,7 +30,9 @@ export function sameOriginAdapter(frame: HTMLIFrameElement): AppAdapter {
       signal,
     );
   return {
-    ready: (signal) => until(() => bridge(), signal).then(() => {}),
+    // Network loading has no six-second deadline. The caller owns cancellation;
+    // a late iframe is allowed to become ready without leaving a broken scene.
+    ready: (signal) => until(() => bridge(), signal, Infinity).then(() => {}),
     async enter(state, signal) {
       signal.throwIfAborted();
       await bridge()!.enter(state, signal);

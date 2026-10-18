@@ -1,0 +1,7 @@
+node_modules/
+dist/
+*.bundle.*
+assets/
+history/
+presentation/public/
+presentation/src/vendor/

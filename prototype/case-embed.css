@@ -1,11 +1,57 @@
-.case-embedded,.case-embedded body,.case-embedded #root{width:100%;height:100%;min-height:0;margin:0;overflow:hidden;background:var(--canvas,#f8f9fa)}
-.case-embedded .workbench{display:none}
-.case-embedded .stage{padding:0;gap:0;min-height:0;width:100%;height:100%;display:block}
-.case-embedded .device-size{--scale:1!important;width:100%;height:100%}
-.case-embedded .device{width:100%;height:100%;transform:none;border:0;border-radius:0}
-button:disabled{cursor:default}
-.app-menu:disabled,#profile:disabled{opacity:.38}
-.health-tile:disabled,.appointment-card:disabled,.medical-document-row:disabled{cursor:default}
-.health-mascot:disabled,.widget-assistant-trigger:disabled{opacity:1}
-.health-tile:disabled:hover,.medical-document-row:disabled:hover,.appointment-card:disabled:hover{transform:none}
-.case-embedded .pulse-panel button:focus:not(:focus-visible){outline:none}
+.case-embedded,
+.case-embedded body,
+.case-embedded #root {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  margin: 0;
+  overflow: hidden;
+  background: var(--canvas, #f8f9fa);
+}
+.case-embedded .workbench {
+  display: none;
+}
+.case-embedded .stage {
+  padding: 0;
+  gap: 0;
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.case-embedded .device-size {
+  --scale: 1 !important;
+  width: 100%;
+  height: 100%;
+}
+.case-embedded .device {
+  width: 100%;
+  height: 100%;
+  transform: none;
+  border: 0;
+  border-radius: 0;
+}
+button:disabled {
+  cursor: default;
+}
+.app-menu:disabled,
+#profile:disabled {
+  opacity: 0.38;
+}
+.health-tile:disabled,
+.appointment-card:disabled,
+.medical-document-row:disabled {
+  cursor: default;
+}
+.health-mascot:disabled,
+.widget-assistant-trigger:disabled {
+  opacity: 1;
+}
+.health-tile:disabled:hover,
+.medical-document-row:disabled:hover,
+.appointment-card:disabled:hover {
+  transform: none;
+}
+.case-embedded .pulse-panel button:focus:not(:focus-visible) {
+  outline: none;
+}

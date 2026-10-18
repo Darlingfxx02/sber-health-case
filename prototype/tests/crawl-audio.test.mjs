@@ -1,46 +1,139 @@
-import test from 'node:test';
-import assert from 'node:assert/strict';
-import {createCrawlAudio} from '../presentation/src/crawl-audio.ts';
-import {NORMAL_VOLUME,REVERSE_VOLUME} from '../presentation/src/crawl-playback.mjs';
+import test from "node:test";
+import assert from "node:assert/strict";
+import {
+  createCrawlAudio,
+  playbackTime,
+} from "../presentation/src/crawl-audio.ts";
+import { playbackAdvance } from "../presentation/src/crawl-playback.mjs";
 
-test('audio transport reverses actual samples, fades quietly, mutes and stops',async()=>{
-  const sources=[],gains=[];
-  const param=()=>({value:0,events:[],setValueAtTime(value,time){this.value=value;this.events.push(['set',value,time]);},setTargetAtTime(value){this.value=value;},linearRampToValueAtTime(value,time){this.value=value;this.events.push(['ramp',value,time]);},cancelScheduledValues(){}});
-  class Buffer {
-    constructor(channels,length,rate){this.numberOfChannels=channels;this.length=length;this.sampleRate=rate;this.duration=length/rate;this.channels=Array.from({length:channels},()=>new Float32Array(length));}
-    getChannelData(channel){return this.channels[channel];}
-    copyToChannel(data,channel){this.channels[channel].set(data);}
-  }
-  const decoded=new Buffer(2,8,2);decoded.channels[0].set([.1,.2,.3,.4,.5,.6,.7,.8]);decoded.channels[1].set([-.1,-.2,-.3,-.4,-.5,-.6,-.7,-.8]);
+const flush = async () => {
+  for (let i = 0; i < 30; i++) await Promise.resolve();
+};
+test("chunk boundaries share the acceleration clock in both directions", () => {
+  for (const ramp of [0, 1.4])
+    for (const distance of [0, 0.1, 0.7, 8, 16])
+      assert.ok(
+        Math.abs(
+          playbackAdvance(playbackTime(distance, ramp), ramp) - distance,
+        ) < 1e-8,
+      );
+});
+test("transport schedules ahead, reverses, cancels late seeks and releases PCM on close", async () => {
+  const sources = [],
+    gains = [],
+    timers = new Map();
+  let state,
+    context,
+    hold = null,
+    released = 0;
+  const param = () => ({
+    value: 0,
+    events: [],
+    setValueAtTime(value, time) {
+      this.value = value;
+      this.events.push(["set", value, time]);
+    },
+    setTargetAtTime(value) {
+      this.value = value;
+    },
+    linearRampToValueAtTime(value, time) {
+      this.value = value;
+      this.events.push(["ramp", value, time]);
+    },
+    cancelScheduledValues() {},
+  });
   class Context {
-    currentTime=0;state='suspended';destination={};
-    createGain(){const gain={gain:param(),connect(){},disconnect(){}};gains.push(gain);return gain;}
-    createBuffer(...args){return new Buffer(...args);}
-    createBufferSource(){const source={playbackRate:param(),connect(){},disconnect(){},start(time,offset){this.offset=offset;},stop(){this.stopped=true;}};sources.push(source);return source;}
-    async decodeAudioData(){return decoded;}
-    async resume(){this.state='running';}
-    async suspend(){this.state='suspended';}
+    currentTime = 0;
+    state = "running";
+    destination = {};
+    constructor() {
+      context = this;
+    }
+    createGain() {
+      const gain = { gain: param(), connect() {}, disconnect() {} };
+      gains.push(gain);
+      return gain;
+    }
+    createBufferSource() {
+      const source = {
+        playbackRate: param(),
+        connect() {},
+        disconnect() {},
+        start(time, offset) {
+          this.when = time;
+          this.offset = offset;
+        },
+        stop(time) {
+          this.stopAt = time;
+        },
+      };
+      sources.push(source);
+      return source;
+    }
+    async resume() {
+      this.state = "running";
+    }
+    async suspend() {
+      this.state = "suspended";
+    }
   }
-  const original=globalThis.AudioContext;globalThis.AudioContext=Context;
-  try{
-    let state;const audio=createCrawlAudio(value=>{state=value;});
-    await audio.load(Promise.resolve(new ArrayBuffer(8)));assert.equal(audio.ready,true);
-    assert.equal(gains[0].gain.value,.05);assert.equal(state.volume,.05);
-    audio.play(1);assert.equal(sources.at(-1).buffer,decoded);assert.equal(sources.at(-1).offset,1);assert.equal(gains.at(-1).gain.value,NORMAL_VOLUME);
-    audio.play(1,-1,true);assert.equal(sources.at(-1).offset,3);assert.equal(gains.at(-1).gain.value,REVERSE_VOLUME);
-    assert.deepEqual([...sources.at(-1).buffer.getChannelData(0)],[...decoded.getChannelData(0)].reverse());
-    assert.deepEqual([...sources.at(-1).buffer.getChannelData(1)],[...decoded.getChannelData(1)].reverse());
-    assert.equal(sources[0].stopped,true);assert.equal(state.direction,-1);
-    audio.toggleMuted();assert.equal(state.playing,false);assert.equal(gains[0].gain.value,0);
-    audio.toggleMuted();assert.equal(state.playing,true);
-    audio.setVolume(.2);assert.equal(gains[0].gain.value,.2);assert.equal(state.volume,.2);
-    audio.toggleMuted();audio.toggleMuted();assert.equal(gains[0].gain.value,.2);
-    audio.setVolume(0);assert.equal(state.playing,false);
-    audio.toggleMuted();assert.equal(state.playing,true);assert.equal(gains[0].gain.value,.2);
-    audio.setVolume(2);assert.equal(gains[0].gain.value,1);
-    audio.suspend();assert.equal(state.playing,false);assert.equal(sources.at(-1).stopped,true);
-    audio.resume();audio.play(2,1,false,1.4);
-    assert.deepEqual(sources.at(-1).playbackRate.events,[['set',0,0],['ramp',1,1.4]]);
-    assert.deepEqual(gains.at(-1).gain.events,[['set',0,0],['ramp',NORMAL_VOLUME,1.4]]);
-  }finally{globalThis.AudioContext=original;}
+  const original = globalThis.AudioContext,
+    originalWindow = globalThis.window;
+  globalThis.AudioContext = Context;
+  globalThis.window = {
+    setTimeout(fn) {
+      timers.set(1, fn);
+      return 1;
+    },
+  };
+  const track = {
+    duration: 24,
+    async prepare() {},
+    release() {
+      released++;
+    },
+    async piece(at, direction) {
+      if (hold) await hold;
+      return {
+        buffer: { direction },
+        offset: ((at % 8) + 8) % 8,
+        remaining: 8 - (((at % 8) + 8) % 8),
+      };
+    },
+  };
+  try {
+    const audio = createCrawlAudio((next) => (state = next), track);
+    await audio.load();
+    audio.play(0);
+    await flush();
+    assert.equal(state.volume, 0.05);
+    assert.equal(state.playing, true);
+    assert.equal(sources.length, 2);
+    assert.equal(sources[0].stopAt, sources[1].when);
+    audio.play(4, -1, true);
+    await flush();
+    assert.equal(state.direction, -1);
+    assert.equal(sources.at(-1).buffer.direction, -1);
+    audio.toggleMuted();
+    assert.equal(state.playing, false);
+    audio.setVolume(0.2);
+    assert.equal(state.playing, true);
+    audio.play(12, 1, false, 1.4);
+    await flush();
+    assert.equal(sources.at(-2).playbackRate.events[0][1], 0);
+    let resolve;
+    hold = new Promise((done) => (resolve = done));
+    audio.play(20, -1);
+    audio.suspend();
+    const count = sources.length;
+    resolve();
+    await flush();
+    assert.equal(sources.length, count);
+    assert.equal(state.playing, false);
+    assert.equal(released, 1);
+    assert.equal(context.state, "suspended");
+  } finally {
+    globalThis.AudioContext = original;
+    globalThis.window = originalWindow;
+  }
 });

@@ -27,7 +27,7 @@ export function usePulseNavigation(deviceRef){
     };
     complete.current=finish;
     if(window.matchMedia('(prefers-reduced-motion: reduce)').matches||progress.current===target)return finish();
-    const from=progress.current,started=performance.now(),duration=350*Math.abs(target-from);
+    const from=progress.current,started=performance.now(),duration=300*Math.abs(target-from);
     deviceRef.current.dataset.pulseTransitioning='true';
     const tick=now=>{
       const elapsed=Math.min(1,Math.max(0,(now-started)/duration));

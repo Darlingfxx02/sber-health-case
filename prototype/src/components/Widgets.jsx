@@ -30,7 +30,7 @@ export function ActivityStrip({selected=ACTIVITY_DAYS[0].id,onOpen,onSelect,deta
     if(day.offsetLeft<rail.scrollLeft+padding)rail.scrollLeft=day.offsetLeft-padding;
     else if(day.offsetLeft+day.offsetWidth>rail.scrollLeft+rail.clientWidth-padding)rail.scrollLeft=day.offsetLeft+day.offsetWidth-rail.clientWidth+padding;
   },[selected]);
-  return <div ref={railRef} className={`activity-history-track${detail?' activity-center-track':''}${compact?' activity-chat-track':''}`} role="region" aria-label="Выбрать день" tabIndex={0} {...drag}>
+  return <div ref={railRef} className={`activity-history-track${detail?' activity-center-track':''}${compact?' activity-chat-track':''}`} data-interaction-hint="group" role="region" aria-label="Выбрать день" tabIndex={0} {...drag}>
     {[...ACTIVITY_DAYS].sort((a,b)=>a.id.localeCompare(b.id)).map(day=><button className="activity-ring-day" key={day.id} aria-pressed={selected===day.id} aria-label={`${day.date}. Показать данные`} aria-description={GOALS.map((goal,i)=>`${goal.title}: ${day.values[i]}`).join('. ')} onClick={()=>onSelect?onSelect(day):onOpen(activityContext(day))}>
       <span className="activity-date-number">{day.shortDate}</span><ActivityRings progress={day.progress}/>
     </button>)}
@@ -57,7 +57,7 @@ function CareCard({planned}){
   const days=appointmentDays(CARDS,planned);
   const drag=useHorizontalDrag();
   return <section className="medical-section" aria-label="Записи"><div className="medical-section-heading"><h2>Записи</h2><span className="medical-section-action"><Icon name="add"/>Записаться</span></div>
-    <div className="appointment-grid" role="region" aria-label="Лента записей по дням" tabIndex={0} {...drag}>
+    <div className="appointment-grid" data-interaction-hint="scroll" role="region" aria-label="Лента записей по дням" tabIndex={0} {...drag}>
       {days.map(day=><section className="appointment-entry" key={day.date} aria-label={`Записи: ${day.label}`}>
         <span className="appointment-day">{day.label}</span>
         <div className="appointment-day-cards">{day.entries.map(entry=><article className="appointment-card" key={entry.id} aria-label={entry.item?`${entry.item.title}, ${entry.item.meta}`:`${entry.title}, ${day.label}, ${entry.time}, ${entry.format}`}>

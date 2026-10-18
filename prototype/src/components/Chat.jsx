@@ -8,7 +8,7 @@ export function ChatView({chat,active,motionActive=active,onSend,onRemoveContext
   const bodyRef=useRef(null);
   useEffect(()=>{if(active)bodyRef.current?.scrollTo({top:chat.messages.length||chat.pending?bodyRef.current.scrollHeight:0,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});},[chat.id,chat.messages.length,chat.pending,active]);
   return <section className="chat-panel" id="chat-panel" role="tabpanel" aria-labelledby="tab-chat" aria-hidden={!active} inert={!active}>
-    <div className="chat-body" ref={bodyRef}><div className="conversation" aria-live="polite" aria-relevant="additions">{chat.messages.map((message,i)=><div className={`message ${message.role}`} key={i}>
+    <div className="chat-body" data-interaction-hint="scroll" ref={bodyRef}><div className="conversation" aria-live="polite" aria-relevant="additions">{chat.messages.map((message,i)=><div className={`message ${message.role}`} key={i}>
       {message.role==='user'&&message.contexts?.length>0&&<div className="message-context">{message.contexts.map(c=><span key={c.id}>{c.title}</span>)}</div>}<span>{message.text}</span>
     </div>)}{chat.pending>0&&<div className="message assistant"><span className="typing" aria-label="Помощник готовит ответ"><i/><i/><i/></span></div>}</div>
       {chat.messages.length===0&&<div className="empty-chat"><HealthMascot active={motionActive} onOpen={onOpenHero} notification={notification}/><div className="mascot-caption"><p>{notification?'Анализы готовы':'Чем помочь?'}</p></div></div>}

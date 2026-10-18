@@ -13,7 +13,7 @@ export function AppHeader({view,onView,onProfile,onHistory,disabled}){
     <GlassIconButton className="app-menu" disabled title="Вне сценария тестового" aria-label="Открыть чаты" onClick={onHistory}><span className="menu-lines" aria-hidden="true"><i/><i/></span></GlassIconButton>
     <div className="glass-switch-scene">
       <GlassTabsRoot value={view} onValueChange={onView}>
-        <GlassTabsList id="view-switch" className="view-switch" aria-label="Режим приложения" {...GLASS_PRESETS.navigation}>
+        <GlassTabsList id="view-switch" className="view-switch" data-interaction-hint="group" aria-label="Режим приложения" {...GLASS_PRESETS.navigation}>
           <GlassTabsIndicator className="glass-selection" {...GLASS_PRESETS.selection}/>
           <GlassTabsTrigger id="tab-chat" value="chat" aria-controls="chat-panel">Чат</GlassTabsTrigger>
           <GlassTabsTrigger id="tab-widgets" value="widgets" aria-controls="widget-panel">Виджеты</GlassTabsTrigger>

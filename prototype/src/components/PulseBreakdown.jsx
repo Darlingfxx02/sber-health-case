@@ -2,6 +2,7 @@ import {useId} from 'react';
 import {PULSE_STATES,PULSE_PERIODS,pulseBreakdown,pulseDuration,pulseDurationTrend,smoothPulsePath} from '../pulse-chart.js';
 import {MetricRange} from './MetricRange.jsx';
 import {Icon} from './Icon.jsx';
+import {useAnimatedReading} from '../hooks/useAnimatedReading.js';
 
 function DurationValue({minutes}){
   const hours=Math.floor(minutes/60),remainder=minutes%60;
@@ -28,11 +29,25 @@ function DurationTrend({metric,item}){
   </svg>;
 }
 
-function PulseRangeCard({title,icon,value,unit,low,high,latest,color,label,isEmpty=false,horizontal=false}){
+function PulseRangeCard({title,icon,low,high,latest,color,label,isEmpty=false,horizontal=false}){
+  const displayedLow=useAnimatedReading(isEmpty?null:low);
+  const displayedHigh=useAnimatedReading(isEmpty?null:high);
+  const displayedLatest=useAnimatedReading(latest);
+  const roundedLow=Math.round(displayedLow??low),roundedHigh=Math.round(displayedHigh??high);
+  const value=isEmpty?'Нет данных':roundedLow===roundedHigh?roundedLow:`${roundedLow}–${roundedHigh}`;
   return <div className={`pulse-state-card${horizontal?' is-horizontal':''}`} style={{'--state-color':color}}>
     <h2 className="pulse-state-title"><Icon name={icon}/><span>{title}</span></h2>
-    <span className={`pulse-state-value${isEmpty?' is-empty':''}`}><span>{value}</span>{unit&&<small>{unit}</small>}</span>
-    <MetricRange className="pulse-state-meter" values={isEmpty?[]:[low,high]} value={latest} label={label} horizontal={horizontal}/>
+    <span className={`pulse-state-value${isEmpty?' is-empty':''}`} aria-hidden="true"><span>{value}</span>{!isEmpty&&<small>уд/мин</small>}</span>
+    <MetricRange className="pulse-state-meter" values={isEmpty?[]:[low,high]} value={latest} displayValues={[displayedLow,displayedHigh]} displayValue={displayedLatest} label={label} horizontal={horizontal}/>
+  </div>;
+}
+
+function PulseDurationCard({metric,item}){
+  const minutes=Math.round(useAnimatedReading(item.minutes));
+  return <div className={`pulse-state-card is-counter${minutes>=6000?' has-long-duration':''}`} aria-label={`${item.label}: ${pulseDuration(item.minutes)}`}>
+    <h2 className="pulse-state-title"><Icon name={item.icon}/><span>{item.label}</span></h2>
+    <DurationTrend metric={metric} item={item}/>
+    <span className="pulse-state-value" aria-hidden="true"><DurationValue minutes={minutes}/></span>
   </div>;
 }
 
@@ -54,16 +69,12 @@ export function PulseBreakdown({metric,period,referenceRange}){
     const value=empty?'Нет данных':item.low===item.high?item.low:`${item.low}–${item.high}`;
     const latest=empty?null:item.current??latestFor(item.key);
     const label=empty?`${title}: нет данных`:`${title}: диапазон ${value} уд/мин${latest!==null?`; последнее измерение ${latest} уд/мин`:''}${item.count?`; диапазон за ${item.count} дней`:''}`;
-    return <PulseRangeCard title={title} icon={icon} value={value} unit={empty?null:'уд/мин'} low={item?.low} high={item?.high} latest={latest} color={item?.color||PULSE_STATES.rest.color} label={label} isEmpty={empty} horizontal={horizontal}/>;
+    return <PulseRangeCard title={title} icon={icon} low={item?.low} high={item?.high} latest={latest} color={item?.color||PULSE_STATES.rest.color} label={label} isEmpty={empty} horizontal={horizontal}/>;
   }
   return <section className="pulse-breakdown" aria-label={`Сводка ${PULSE_PERIODS[period].suffix}`}>
     {rangeCard(referenceRange,'Покой',PULSE_STATES.rest.icon)}
     {rangeCard(sleep,'Сон',PULSE_STATES.sleep.icon)}
     {rangeCard(activity,'Активность',PULSE_STATES.activity.icon,true)}
-    {items.filter(item=>['stress','recovery'].includes(item.key)).map(item=><div key={item.key} className={`pulse-state-card is-counter${item.minutes>=6000?' has-long-duration':''}`} aria-label={`${item.label}: ${pulseDuration(item.minutes)}`}>
-      <h2 className="pulse-state-title"><Icon name={item.icon}/><span>{item.label}</span></h2>
-      <DurationTrend metric={metric} item={item}/>
-      <span className="pulse-state-value"><DurationValue minutes={item.minutes}/></span>
-    </div>)}
+    {items.filter(item=>['stress','recovery'].includes(item.key)).map(item=><PulseDurationCard key={item.key} metric={metric} item={item}/>)}
   </section>;
 }

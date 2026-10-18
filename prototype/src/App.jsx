@@ -12,15 +12,18 @@ import {useHistoryDrawer} from './hooks/useHistoryDrawer.js';
 import {makeChats,demoReply,RESULTS,ACTIVITY_DAYS,metricsForDay} from './data.js';
 import {useCaseBridge} from './hooks/useCaseBridge.js';
 import {canOpenDetail} from './case-scope.js';
+import {usePulseNavigation} from './hooks/usePulseNavigation.js';
+import {InteractionHints} from './components/InteractionHints.jsx';
 
 export function App(){
   const [startView,setStartView]=useState(readStartView),[profileOpen,setProfileOpen]=useState(false);
   const [voiceOpen,setVoiceOpen]=useState(false);
   const [view,setView]=useState(startView),[section,setSection]=useState('home'),[chats,setChats]=useState(makeChats),[chatId,setChatId]=useState('chat-current');
-  const [detail,setDetail]=useState(null),[planned,setPlanned]=useState(null),[toast,setToast]=useState('');
+  const [planned,setPlanned]=useState(null),[toast,setToast]=useState('');
   const [pendingDocument,setPendingDocument]=useState(null);
   const [wireframe,setWireframe]=useState(new URLSearchParams(location.search).get('mode')==='wireframe'),[resetKey,setResetKey]=useState(0);
   const deviceRef=useRef(null),surfaceRef=useRef(null),trackRef=useRef(null),layerRef=useRef(null),drawerRef=useRef(null),homeRef=useRef(null),inputRef=useRef(null),fileRef=useRef(null);
+  const {detail,setDetail,open:showDetail,close:hideDetail}=usePulseNavigation(deviceRef);
   const scrollPosition=useRef(0),detailContext=useRef(null),detailReturn=useRef(null),profileReturn=useRef(null),voiceReturn=useRef(null),timers=useRef(new Set()),fileUrls=useRef(new Set()),sequence=useRef(0);
   const {diagnostic}=useGlassDiagnostics(surfaceRef);
   const [dockHeight,setDockHeight]=useState(118);
@@ -40,7 +43,7 @@ export function App(){
     fit();window.addEventListener('resize',fit);return()=>window.removeEventListener('resize',fit);
   },[]);
   useLayoutEffect(()=>{homeRef.current.scrollTop=section==='home'?scrollPosition.current:0;},[section,resetKey]);
-  const closeDetail=useCallback(()=>{setDetail(null);requestAnimationFrame(()=>{if(detailReturn.current?.isConnected&&!detailReturn.current.closest('[hidden],[inert]'))detailReturn.current.focus({preventScroll:true});});},[]);
+  const closeDetail=useCallback(()=>hideDetail(()=>requestAnimationFrame(()=>{if(detailReturn.current?.isConnected&&!detailReturn.current.closest('[hidden],[inert]'))detailReturn.current.focus({preventScroll:true});})),[hideDetail]);
   const closeProfile=useCallback(()=>{setProfileOpen(false);requestAnimationFrame(()=>profileReturn.current?.focus({preventScroll:true}));},[]);
   const closeVoice=useCallback(()=>{setVoiceOpen(false);requestAnimationFrame(()=>{if(voiceReturn.current?.isConnected&&!voiceReturn.current.closest('[hidden],[inert]'))voiceReturn.current.focus({preventScroll:true});});},[]);
   useEffect(()=>{const key=e=>{if(e.key==='Escape'&&!history.open){if(voiceOpen)closeVoice();else if(profileOpen)closeProfile();else if(detail)closeDetail();}};window.addEventListener('keydown',key);return()=>window.removeEventListener('keydown',key);},[detail,history.open,profileOpen,voiceOpen,closeDetail,closeProfile,closeVoice]);
@@ -51,7 +54,7 @@ voiceReturn.current=document.activeElement;inputRef.current?.blur();setVoiceOpen
   function openProfile(){return;/* Outside the assignment. */
 profileReturn.current=document.activeElement;setProfileOpen(true);}
   function changeStartView(next){if(saveStartView(next)){setStartView(next);notify('Стартовый экран сохранён');}else notify('Не удалось сохранить настройку');}
-  function openDetail(item){if(!canOpenDetail(item))return;if(!detail)detailReturn.current=document.activeElement;detailContext.current=item;setDetail(item);}
+  function openDetail(item){if(!canOpenDetail(item))return;if(!detail)detailReturn.current=document.activeElement;detailContext.current=item;showDetail(item);}
   function openHero(){
     if(pendingDocument){openDetail(pendingDocument);setPendingDocument(null);}
     else openVoice();
@@ -101,7 +104,7 @@ profileReturn.current=document.activeElement;setProfileOpen(true);}
   }});
   return <>
     <header className="workbench"><div><p className="overline">СБЕРЗДОРОВЬЕ / КОНЦЕПТ 02</p><p className="workbench-note">Демо</p></div><div className="workbench-actions"><a className="history-link" href="history/index.html" target="_blank" rel="noreferrer">История</a><div className="mode-switch" aria-label="Отображение прототипа"><button aria-pressed={wireframe} onClick={()=>setWireframe(true)}>Каркас</button><button aria-pressed={!wireframe} onClick={()=>setWireframe(false)}>С данными</button></div><button className="reset" onClick={reset}>Сбросить</button></div></header>
-    <main className="stage"><div className="device-size"><section className={`device ${view==='chat'?'assistant-mode':'overview-mode'}${wireframe?' is-wireframe':''}${detail?.kind==='metric'?' metric-detail-open':''}`} id="device" ref={deviceRef} data-overlay-open={overlayOpen||undefined} aria-label="Мобильный прототип помощника">
+    <main className="stage"><div className="device-size"><section className={`device ${view==='chat'?'assistant-mode':'overview-mode'}${wireframe?' is-wireframe':''}${detail?.kind==='metric'?' metric-detail-open':''}${detail?' pulse-navigation-active':''}`} id="device" ref={deviceRef} data-overlay-open={overlayOpen||undefined} aria-label="Мобильный прототип помощника">
       <img className="status-bar" src="assets/status-bar.png" width="400" height="62" alt="9:41, мобильная сеть, Wi-Fi, заряд батареи"/>
       <GlassScene className="page-surface" id="page-surface" ref={surfaceRef} tabIndex={-1} material="regular" appearance="light" maxSurfaces={8} data-glass-state="loading" onDiagnostic={diagnostic} style={{'--chat-dock-height':`${dockHeight}px`}}>
         <AppHeader view={view} onView={changeView} onProfile={openProfile} onHistory={()=>history.setOpen(true)} disabled={overlayOpen}/>
@@ -110,7 +113,7 @@ profileReturn.current=document.activeElement;setProfileOpen(true);}
             <ChatView chat={chat} active={view==='chat'} motionActive={view==='chat'&&!overlayOpen&&!history.open&&!wireframe} notification={pendingDocument} onOpenHero={openHero}/>
           </div>
           <div className="view-page widgets-page" inert={view!=='widgets'} aria-hidden={view!=='widgets'}>
-            <div className="home-scroll" id="home-scroll" ref={homeRef} onScroll={e=>{if(view==='widgets'&&section==='home')scrollPosition.current=e.currentTarget.scrollTop;}}>
+            <div className="home-scroll" id="home-scroll" data-interaction-hint="scroll" ref={homeRef} onScroll={e=>{if(view==='widgets'&&section==='home')scrollPosition.current=e.currentTarget.scrollTop;}}>
               <Widgets key={resetKey} active={view==='widgets'} motionActive={view==='widgets'&&!overlayOpen&&!history.open&&!wireframe} section={section} onOpen={openDetail} onAttach={pickFile} onVoice={openVoice} planned={planned}/>
             </div>
           </div>
@@ -127,6 +130,7 @@ profileReturn.current=document.activeElement;setProfileOpen(true);}
       </GlassScene>
       <HistoryDrawer layerRef={layerRef} drawerRef={drawerRef} chats={chats} chatId={chat.id} onClose={()=>history.setOpen(false)} onSection={openSection} onNew={newChat} onSwitch={switchChat}/>
       <img className="home-indicator" src="assets/home-indicator.png" width="400" height="34" alt=""/>
+      <InteractionHints deviceRef={deviceRef} contextKey={`${view}:${detail?.id||''}:${resetKey}`}/>
       <input ref={fileRef} type="file" multiple accept=".pdf,.txt,.csv,.jpg,.jpeg,.png,.webp" onChange={receiveFiles} hidden/>
     </section></div></main>
   </>;

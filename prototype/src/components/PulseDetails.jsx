@@ -64,7 +64,7 @@ export function PulseDetails({metric,onClose,onContext}){
         <GlassControlScene className="pulse-info-scene"><GlassButton {...GLASS_PRESETS.navigation} size="icon" className="pulse-info-button" aria-label="О графике пульса" disabled><Icon name="info"/></GlassButton></GlassControlScene>
       </div>
     </header>
-    <div className="pulse-detail-body">
+    <div className="pulse-detail-body" data-interaction-hint="scroll">
       <section className="pulse-chart-card" aria-label={`График пульса, ${pulsePeriodLabel(metric,period)}`}>
         <div className="pulse-reading-row"><div className="pulse-reading-main"><Icon name="heart-fill"/><p className={`pulse-reading${hasRanges?' is-range':''}`}><span>{displayedValue}</span><small>уд/мин</small></p></div><p className="pulse-reading-time">{pulseHeaderLabel(series,selected,period)}</p></div>
         <div ref={chartRef} className="pulse-chart" role="slider" tabIndex={0} aria-label="Выбрать измерение пульса" aria-orientation="horizontal" aria-valuemin={0} aria-valuemax={series.values.length-1} aria-valuenow={selected} aria-valuetext={`${aggregate?'Диапазон ':''}${displayedValue} уд/мин, ${selectedLabel}, ${observation?.label||''}`} onKeyDown={chartKey}
@@ -97,7 +97,7 @@ export function PulseDetails({metric,onClose,onContext}){
           </svg>
         </div>
       </section>
-      <div className="pulse-period" aria-label="Период графика" style={{'--period-count':periods.length}}>
+      <div className="pulse-period" data-interaction-hint="group" aria-label="Период графика" style={{'--period-count':periods.length}}>
         <span className="pulse-period-indicator" aria-hidden="true" style={{transform:`translateX(${periods.findIndex(([key])=>key===period)*100}%)`}}/>
         {periods.map(([key,item])=><button key={key} aria-pressed={period===key} onClick={()=>changePeriod(key)}>{item.label}</button>)}
       </div>

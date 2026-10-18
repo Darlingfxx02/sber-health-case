@@ -1,7 +1,7 @@
 import {useLayoutEffect,useRef,useState} from 'react';
 
 // Shared by the home widgets and pulse detail. Every range owns its scale.
-export function MetricRange({values,value,displayValue=value,goal,horizontal=false,className='metric-range',label}){
+export function MetricRange({values,value,displayValues=values,displayValue=value,goal,horizontal=false,className='metric-range',label}){
   const ref=useRef(null),[length,setLength]=useState(96);
   useLayoutEffect(()=>{
     const observer=new ResizeObserver(([entry])=>{
@@ -13,8 +13,10 @@ export function MetricRange({values,value,displayValue=value,goal,horizontal=fal
   },[horizontal]);
   const readings=values.filter(Number.isFinite),hasRange=readings.length>0;
   const low=Math.min(...readings),high=Math.max(...readings);
+  const displayedReadings=displayValues.filter(Number.isFinite);
+  const displayLow=Math.min(...displayedReadings),displayHigh=Math.max(...displayedReadings);
   // Observed prototype bounds, not clinical thresholds. Equal readings sit centrally.
-  const position=displayValue===null||!hasRange?null:Math.min(1,Math.max(0,goal?displayValue/goal:high===low?.5:(displayValue-low)/(high-low)));
+  const position=displayValue===null||!hasRange||!displayedReadings.length?null:Math.min(1,Math.max(0,goal?displayValue/goal:displayHigh===displayLow?.5:(displayValue-displayLow)/(displayHigh-displayLow)));
   const trackLength=length-32,end=length-16;
   return <svg ref={ref} className={className} viewBox={horizontal?`0 0 ${length} 24`:`0 0 24 ${length}`} fill="none" aria-hidden={label?undefined:true} role={label?'img':undefined} aria-label={label} data-low={hasRange?low:undefined} data-high={hasRange?high:undefined} data-value={value??undefined}>
     <g transform={horizontal?`translate(${length} 0) rotate(90)`:undefined}>

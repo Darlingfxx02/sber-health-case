@@ -352,3 +352,15 @@
 
 /* Shared pale neutral ink; state and brand accents keep their semantic colors. */
 .medical-section-action>.icon,.context-heading .icon,.context-chip button>.icon,.detail-head .icon,.detail-cta>.icon,.section-heading button>.icon,.metric-source>.icon,.pulse-all-readings>.icon{color:var(--icon-muted)}
+
+/* Pulse covers the widgets from the left; the background travels only 18%. */
+.pulse-navigation-active .view-viewport,.pulse-navigation-active .app-header{transform:translate3d(calc(var(--pulse-navigation-progress,0) * -18%),0,0)}
+.pulse-navigation-active .detail-panel.pulse-panel{transform:translate3d(calc((var(--pulse-navigation-progress,0) - 1) * 100%),0,0);transition:none;box-shadow:12px 0 32px #27313b14}
+.device[data-pulse-transitioning] .view-viewport,.device[data-pulse-transitioning] .app-header,.device[data-pulse-transitioning] .pulse-panel{will-change:transform}
+
+/* Figma-like hints reveal the available controls without intercepting input. */
+.interaction-hints{position:absolute;inset:0;z-index:60;pointer-events:none;animation:interaction-hint-flash 1s ease-out both}
+.interaction-hint{position:absolute;display:block;border:2px solid #008cff;background:#008cff1a;box-shadow:0 0 0 1px #ffffff99;pointer-events:none}
+.interaction-hint.is-scroll{border-color:#008cff8c;background:transparent;box-shadow:none}
+@keyframes interaction-hint-flash{0%{opacity:0}8%,65%{opacity:1}100%{opacity:0}}
+@media(prefers-reduced-motion:reduce){.interaction-hints{animation:none}}

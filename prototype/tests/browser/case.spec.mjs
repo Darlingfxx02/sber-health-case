@@ -37,26 +37,26 @@ test("tour, free prototype and pulse periods work with one persistent iframe", a
   page,
   isMobile,
 }) => {
-  const activate = (locator) => (isMobile ? locator.tap() : locator.click());
+  const activate = async (locator) => {
+    if (!isMobile) return locator.click();
+    await expect(locator).toBeVisible();
+    await expect(locator).toBeEnabled();
+    // WebKit's automated scrollIntoView moves our already-visible sticky tour
+    // controls by one viewport before dispatching tap. A physical screen tap
+    // has no such scroll step. Check the target is onscreen, then tap its center.
+    const box = await locator.boundingBox();
+    expect(box).not.toBeNull();
+    const viewport = page.viewportSize();
+    const x = box.x + box.width / 2;
+    const y = box.y + box.height / 2;
+    expect(x).toBeGreaterThan(0);
+    expect(x).toBeLessThan(viewport.width);
+    expect(y).toBeGreaterThan(0);
+    expect(y).toBeLessThan(viewport.height);
+    await page.touchscreen.tap(x, y);
+  };
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.addInitScript(() => {
-    window.caseTestClicks = [];
-    document.addEventListener(
-      "click",
-      (event) => {
-        const target = event.target.closest("button");
-        if (target)
-          window.caseTestClicks.push({
-            label: target.getAttribute("aria-label") || target.textContent,
-            x: event.clientX,
-            y: event.clientY,
-            scene: document.querySelector("#case")?.dataset.scene,
-          });
-      },
-      true,
-    );
-  });
   await page.goto("");
   await expect(
     page.getByRole("button", { name: "Исследовать макет", exact: true }),
@@ -72,20 +72,6 @@ test("tour, free prototype and pulse periods work with one persistent iframe", a
   await activate(
     page.getByRole("button", { name: "Исследовать макет", exact: true }),
   );
-  if (isMobile)
-    console.log(
-      "MOBILE_NAV",
-      await page.evaluate(() => ({
-        clicks: window.caseTestClicks,
-        state: { ...document.querySelector("#case").dataset },
-        buttons: [...document.querySelectorAll(".tour-controls button")].map(
-          (node) => ({
-            text: node.textContent,
-            rect: node.getBoundingClientRect().toJSON(),
-          }),
-        ),
-      })),
-    );
   await expect(page.locator("#case")).toHaveAttribute("data-free", "true");
   // A locator inside an iframe does not wait for its outer device's transition.
   // Wait for the real animation, then use touch input in the mobile project.

@@ -248,9 +248,6 @@
   padding-bottom: 24px;
   border-radius: 0;
 }
-.device.metric-detail-open {
-  --canvas: #fff;
-}
 .device.metric-detail-open .detail-panel {
   bottom: 0;
   padding-bottom: 50px;
@@ -1996,14 +1993,19 @@
   height: 62px;
   z-index: 30;
 }
-/* Detail screens own the status area too; the previous home must not show through. */
+/* Pulse brings its white status area with it; the widgets keep their own canvas. */
 .device[data-overlay-open]::before {
   content: "";
   position: absolute;
   inset: 0 0 auto;
   height: 62px;
   z-index: 29;
-  background: var(--canvas);
+  background: #fff;
+  transform: translate3d(
+    calc((1 - var(--pulse-navigation-progress, 0)) * 100%),
+    0,
+    0
+  );
   pointer-events: none;
 }
 .page-surface {
@@ -2134,7 +2136,8 @@
 }
 .device[data-pulse-transitioning] .view-viewport,
 .device[data-pulse-transitioning] .app-header,
-.device[data-pulse-transitioning] .pulse-panel {
+.device[data-pulse-transitioning] .pulse-panel,
+.device[data-pulse-transitioning]::before {
   will-change: transform;
 }
 .pulse-back-dragging {

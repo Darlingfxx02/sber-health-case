@@ -1445,13 +1445,16 @@
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
-.health-mascot img {
+.health-document-art {
   position: absolute;
   left: -11.2325px;
   top: 0;
   display: block;
   max-width: none;
   pointer-events: none;
+}
+.health-document-art > svg {
+  display: block;
 }
 .health-mascot:focus-visible {
   outline: 2px solid #3c83e7;
@@ -1462,7 +1465,7 @@
   padding: 24px 16px;
   text-align: center;
 }
-.is-wireframe .health-mascot img {
+.is-wireframe .health-document-art {
   visibility: hidden;
 }
 
@@ -1704,7 +1707,8 @@
   outline: 2px solid #3c83e7;
   outline-offset: 6px;
 }
-.widget-assistant.is-active .widget-activity-value {
+.widget-assistant.is-active .widget-activity-value,
+.health-mascot.is-active .mascot-activity-value {
   animation: widget-arc-fill 0.65s cubic-bezier(0.2, 0.7, 0.3, 1) backwards;
 }
 .widget-activity-value {
@@ -1800,7 +1804,8 @@
   font-weight: 500;
 }
 @media (prefers-reduced-motion: reduce) {
-  .widget-assistant.is-active .widget-activity-value {
+  .widget-assistant.is-active .widget-activity-value,
+  .health-mascot.is-active .mascot-activity-value {
     animation: none;
   }
   .widget-mascot-face,

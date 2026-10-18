@@ -18,7 +18,7 @@ export function withActivityProgress(source, progress) {
       const value = Math.min(100, Math.max(0, Number(progress[index]) || 0));
       return (
         `<path${attributes} opacity=".14"/>` +
-        `<path id="activity-${color}"${attributes} pathLength="100" stroke-dasharray="${value} 100"${value === 0 ? ' opacity="0"' : ""}/>`
+        `<path id="activity-${color}" class="mascot-activity-value"${attributes} pathLength="100" stroke-dasharray="${value} 100" style="animation-delay:${index * 45}ms"${value === 0 ? ' opacity="0"' : ""}/>`
       );
     },
   );

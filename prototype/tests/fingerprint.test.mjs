@@ -24,7 +24,7 @@ test("published HTML pins its iframe and all JS/CSS to the same content revision
     );
     await writeFile(
       path.join(dir, "case.bundle.js"),
-      'iframe.src="app.html?embed=case"',
+      'iframe.src="app.html?embed=case"; element.style.cssText="color:red"',
     );
     await writeFile(
       path.join(dir, "index.html"),
@@ -42,6 +42,7 @@ test("published HTML pins its iframe and all JS/CSS to the same content revision
     assert.ok(app.includes(names.get("app.bundle.js")));
     assert.ok(app.includes(names.get("app-shell.css")));
     assert.ok(bundle.includes(names.get("app.html") + "?embed=case"));
+    assert.ok(bundle.includes('element.style.cssText="color:red"'));
     for (const name of names.values()) {
       assert.match(name, /\.[a-f0-9]{12}\./);
       await readFile(path.join(dir, name));

@@ -7,6 +7,9 @@ import { caseScrollPosition, resizeCaseScroll } from "./case-scroll.mjs";
 import { createCaseTouchScroll } from "./case-touch-scroll.mjs";
 import { playInteractionDemo } from "./case-interaction-demo";
 import "./style.css";
+// The tour owns its scroll position. Browser restoration on a delayed iframe's
+// load would otherwise jump back to the previous scene after the user navigated.
+window.history.scrollRestoration = "manual";
 const root = document.querySelector<HTMLElement>("#case")!;
 const icon = (name: string) =>
   `<span class="case-icon" style="--icon:url('assets/iconsax/${name}.svg')" aria-hidden="true"></span>`;

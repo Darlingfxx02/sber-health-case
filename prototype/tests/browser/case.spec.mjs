@@ -3,13 +3,14 @@ import { test, expect } from "@playwright/test";
 test("late iframe load recovers automatically and preserves the current intro scene", async ({
   page,
 }) => {
+  await page.goto("");
   let release;
   const blocked = new Promise((resolve) => (release = resolve));
   await page.route("**/app.bundle.*.js", async (route) => {
     await blocked;
     await route.continue();
   });
-  await page.goto("", { waitUntil: "domcontentloaded" });
+  await page.reload({ waitUntil: "domcontentloaded" });
   await page
     .getByRole("button", { name: "Следующий этап", exact: true })
     .click();
@@ -75,6 +76,7 @@ test("music uses small PCM buffers, reverses, resumes and stops on close", async
     };
   });
   await page.goto("");
+  await page.locator(".case-outro").scrollIntoViewIfNeeded();
   await page.getByRole("button", { name: "Читать", exact: true }).click();
   const player = page.locator(".agent-epilogue");
   await expect(player).toHaveAttribute("data-phase", "open");

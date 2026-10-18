@@ -31,7 +31,10 @@ export async function fingerprintSite(directory) {
   // The case embeds a versioned app document, whose CSS/JS references are pinned.
   await fingerprint(
     "case.bundle.js",
-    rewrite(await readFile(path.join(directory, "case.bundle.js"), "utf8")),
+    (await readFile(path.join(directory, "case.bundle.js"), "utf8")).replaceAll(
+      "app.html?embed=case",
+      `${names.get("app.html")}?embed=case`,
+    ),
   );
   await writeFile(
     path.join(directory, "index.html"),

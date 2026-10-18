@@ -41,6 +41,8 @@ export function useHistoryDrawer({
       onView: (view) => latest.current.onView(view),
       isBlocked: () => latest.current.disabled,
       onSettled(visible) {
+        // Scripted tour gestures must not take focus from the case navigation.
+        if (window.frameElement?.inert) return;
         if (visible) drawerRef.current?.focus({ preventScroll: true });
         else if (
           drawerRef.current?.contains(document.activeElement) ||

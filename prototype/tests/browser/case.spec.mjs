@@ -22,9 +22,11 @@ test("late iframe load recovers automatically and preserves the current intro sc
     "Не удалось открыть этап",
   );
   release();
+  // This assertion checks eventual recovery, not a five-second startup budget.
+  // WebKit may still be rendering the released iframe on a shared CI runner.
   await expect(
     page.getByRole("button", { name: "Исследовать макет", exact: true }),
-  ).toBeEnabled();
+  ).toBeEnabled({ timeout: 15000 });
   await expect(page.locator(".case-error")).toBeHidden();
   await expect(page.locator("#case")).toHaveAttribute(
     "data-scene",

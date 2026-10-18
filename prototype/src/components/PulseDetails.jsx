@@ -23,7 +23,8 @@ export function PulseDetails({metric,onClose,onContext}){
   const aggregate=series.ranges?.[selected],hasRanges=Boolean(series.ranges?.length);
   const displayedValue=aggregate?`${aggregate.low}–${aggregate.high}`:value;
   const selectedLabel=pulseSelectionLabel(series,selected,period);
-  const range=pulseReferenceRange(metric,period,selected);
+  // The summary belongs to the displayed period, not the inspected chart point.
+  const range=useMemo(()=>pulseReferenceRange(metric,period,pulseInitialIndex(metric,period)),[metric,period]);
   const {readings,hasMore}=useMemo(()=>pulseReadingHistory(metric,7),[metric]);
   const periods=Object.entries(PULSE_PERIODS).filter(([key])=>metric.series[key]||metric.detailSeries?.[key]);
   useEffect(()=>{const frame=requestAnimationFrame(()=>panelRef.current?.querySelector('button')?.focus({preventScroll:true}));return()=>cancelAnimationFrame(frame);},[]);

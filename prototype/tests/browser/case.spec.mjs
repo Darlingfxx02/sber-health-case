@@ -40,6 +40,23 @@ test("tour, free prototype and pulse periods work with one persistent iframe", a
   const activate = (locator) => (isMobile ? locator.tap() : locator.click());
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
+  await page.addInitScript(() => {
+    window.caseTestClicks = [];
+    document.addEventListener(
+      "click",
+      (event) => {
+        const target = event.target.closest("button");
+        if (target)
+          window.caseTestClicks.push({
+            label: target.getAttribute("aria-label") || target.textContent,
+            x: event.clientX,
+            y: event.clientY,
+            scene: document.querySelector("#case")?.dataset.scene,
+          });
+      },
+      true,
+    );
+  });
   await page.goto("");
   await expect(
     page.getByRole("button", { name: "Исследовать макет", exact: true }),
@@ -55,6 +72,20 @@ test("tour, free prototype and pulse periods work with one persistent iframe", a
   await activate(
     page.getByRole("button", { name: "Исследовать макет", exact: true }),
   );
+  if (isMobile)
+    console.log(
+      "MOBILE_NAV",
+      await page.evaluate(() => ({
+        clicks: window.caseTestClicks,
+        state: { ...document.querySelector("#case").dataset },
+        buttons: [...document.querySelectorAll(".tour-controls button")].map(
+          (node) => ({
+            text: node.textContent,
+            rect: node.getBoundingClientRect().toJSON(),
+          }),
+        ),
+      })),
+    );
   await expect(page.locator("#case")).toHaveAttribute("data-free", "true");
   // A locator inside an iframe does not wait for its outer device's transition.
   // Wait for the real animation, then use touch input in the mobile project.

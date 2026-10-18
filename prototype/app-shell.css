@@ -259,6 +259,9 @@
   gap: 0;
   overflow: hidden;
   background: var(--canvas);
+  /* The navigation clock owns the only entrance motion: horizontal travel. */
+  animation: none;
+  transition: none;
 }
 .pulse-header {
   --canvas: #fff;

@@ -28,7 +28,15 @@ export function PulseDetails({metric,onClose,backSwipe,onContext}){
   const range=useMemo(()=>pulseReferenceRange(metric,period,pulseInitialIndex(metric,period)),[metric,period]);
   const {readings,hasMore}=useMemo(()=>pulseReadingHistory(metric,7),[metric]);
   const periods=Object.entries(PULSE_PERIODS).filter(([key])=>metric.series[key]||metric.detailSeries?.[key]);
-  useEffect(()=>{const frame=requestAnimationFrame(()=>panelRef.current?.querySelector('button')?.focus({preventScroll:true}));return()=>cancelAnimationFrame(frame);},[]);
+  useEffect(()=>{
+    const frame=requestAnimationFrame(()=>{
+      // A guided case keeps its iframe inert; scripted navigation must not
+      // steal focus or show a keyboard highlight on the back button.
+      if(window.frameElement?.inert)return;
+      panelRef.current?.querySelector('button')?.focus({preventScroll:true});
+    });
+    return()=>cancelAnimationFrame(frame);
+  },[]);
   useEffect(()=>{
     const gesture=createPulseBackGesture({panel:panelRef.current,onStart:backSwipe.start,onProgress:backSwipe.move,onFinish:commit=>commit?onClose():backSwipe.cancel()});
     return()=>gesture.dispose();

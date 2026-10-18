@@ -113,7 +113,7 @@ profileReturn.current=document.activeElement;setProfileOpen(true);}
             <ChatView chat={chat} active={view==='chat'} motionActive={view==='chat'&&!overlayOpen&&!history.open&&!wireframe} notification={pendingDocument} onOpenHero={openHero}/>
           </div>
           <div className="view-page widgets-page" inert={view!=='widgets'} aria-hidden={view!=='widgets'}>
-            <div className="home-scroll" id="home-scroll" data-interaction-hint="scroll" ref={homeRef} onScroll={e=>{if(view==='widgets'&&section==='home')scrollPosition.current=e.currentTarget.scrollTop;}}>
+            <div className="home-scroll" id="home-scroll" ref={homeRef} onScroll={e=>{if(view==='widgets'&&section==='home')scrollPosition.current=e.currentTarget.scrollTop;}}>
               <Widgets key={resetKey} active={view==='widgets'} motionActive={view==='widgets'&&!overlayOpen&&!history.open&&!wireframe} section={section} onOpen={openDetail} onAttach={pickFile} onVoice={openVoice} planned={planned}/>
             </div>
           </div>

@@ -8,7 +8,6 @@ import {PULSE_STATES,PULSE_PERIODS,pulseSeries,pulseInitialIndex,pulseSelectionL
 export function PulseDetails({metric,onClose,onContext}){
   const [period,setPeriod]=useState(metric.series.day?'day':'week');
   const [selected,setSelected]=useState(()=>pulseInitialIndex(metric,metric.series.day?'day':'week'));
-  const [historyDays,setHistoryDays]=useState(7);
   const [chartWidth,setChartWidth]=useState(402);
   const pointer=useRef(null),panelRef=useRef(null),chartRef=useRef(null);
   const gradient=`pulse-area-${useId().replaceAll(':','')}`;
@@ -25,7 +24,7 @@ export function PulseDetails({metric,onClose,onContext}){
   const displayedValue=aggregate?`${aggregate.low}–${aggregate.high}`:value;
   const selectedLabel=pulseSelectionLabel(series,selected,period);
   const range=pulseReferenceRange(metric,period,selected);
-  const {readings,hasMore}=useMemo(()=>pulseReadingHistory(metric,historyDays),[metric,historyDays]);
+  const {readings,hasMore}=useMemo(()=>pulseReadingHistory(metric,7),[metric]);
   const periods=Object.entries(PULSE_PERIODS).filter(([key])=>metric.series[key]||metric.detailSeries?.[key]);
   useEffect(()=>{const frame=requestAnimationFrame(()=>panelRef.current?.querySelector('button')?.focus({preventScroll:true}));return()=>cancelAnimationFrame(frame);},[]);
   useEffect(()=>{
@@ -64,7 +63,7 @@ export function PulseDetails({metric,onClose,onContext}){
         <GlassControlScene className="pulse-info-scene"><GlassButton {...GLASS_PRESETS.navigation} size="icon" className="pulse-info-button" aria-label="О графике пульса" disabled><Icon name="info"/></GlassButton></GlassControlScene>
       </div>
     </header>
-    <div className="pulse-detail-body" data-interaction-hint="scroll">
+    <div className="pulse-detail-body">
       <section className="pulse-chart-card" aria-label={`График пульса, ${pulsePeriodLabel(metric,period)}`}>
         <div className="pulse-reading-row"><div className="pulse-reading-main"><Icon name="heart-fill"/><p className={`pulse-reading${hasRanges?' is-range':''}`}><span>{displayedValue}</span><small>уд/мин</small></p></div><p className="pulse-reading-time">{pulseHeaderLabel(series,selected,period)}</p></div>
         <div ref={chartRef} className="pulse-chart" role="slider" tabIndex={0} aria-label="Выбрать измерение пульса" aria-orientation="horizontal" aria-valuemin={0} aria-valuemax={series.values.length-1} aria-valuenow={selected} aria-valuetext={`${aggregate?'Диапазон ':''}${displayedValue} уд/мин, ${selectedLabel}, ${observation?.label||''}`} onKeyDown={chartKey}
@@ -104,13 +103,13 @@ export function PulseDetails({metric,onClose,onContext}){
       <PulseBreakdown metric={metric} period={period} referenceRange={range}/>
       <section className="pulse-readings" aria-label="Измерения">
         <div className="pulse-section-heading"><h2>Измерения</h2><span>уд/мин</span></div>
-        <div className="pulse-measurement-list" id={readingsId}>{readings.map(({id,reading,index,period:readingPeriod,label,state})=>{
-          return <button key={id} aria-pressed={period===readingPeriod&&selected===index} aria-label={`${label}, ${reading} уд/мин${state?`, ${state.label}`:''}`} onClick={()=>{setPeriod(readingPeriod);setSelected(index);}}>
+        <ul className="pulse-measurement-list" id={readingsId}>{readings.map(({id,reading,index,period:readingPeriod,label,state})=>{
+          return <li key={id} data-selected={period===readingPeriod&&selected===index||undefined} aria-label={`${label}, ${reading} уд/мин${state?`, ${state.label}`:''}`}>
             <span className="pulse-measurement-time"><span className="pulse-measurement-state" style={{color:state?.color||'#89939b'}} title={state?.label||'Измерение'}><Icon name={state?.icon||'heart-beat-fill'}/></span><span>{label}</span></span>
             <strong>{reading}</strong>
-          </button>;
-        })}</div>
-        {hasMore&&<button className="pulse-all-readings" aria-controls={readingsId} onClick={()=>setHistoryDays(days=>days+7)}>Показать ещё</button>}
+          </li>;
+        })}</ul>
+        {hasMore&&<button className="pulse-all-readings" aria-controls={readingsId} disabled>Показать ещё</button>}
       </section>
     </div>
     <footer className="pulse-footer"><GlassControlScene className="pulse-discuss-scene"><GlassButton {...GLASS_PRESETS.navigation} size="icon" className="pulse-discuss" aria-label="Обсудить с помощником" disabled title="Вне сценария тестового"><Icon name="chat-fill"/></GlassButton></GlassControlScene></footer>

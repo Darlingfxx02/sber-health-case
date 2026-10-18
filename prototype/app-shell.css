@@ -107,9 +107,10 @@
 .pulse-readings{flex:none;padding:16px;border-radius:20px;background:#fff}
 .pulse-readings>.pulse-section-heading{margin-bottom:8px}
 .pulse-readings>.pulse-section-heading>span{font:var(--type-meta);color:var(--text-secondary)}
-.pulse-measurement-list>button{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:44px;padding:10px 0;background:transparent;font:var(--type-meta);text-align:left}
-.pulse-measurement-list>button+button{border-top:1px dashed #e3e8e7}
-.pulse-measurement-list>button[aria-pressed=true]{color:#298160}
+.pulse-measurement-list{margin:0;padding:0;list-style:none}
+.pulse-measurement-list>li{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:44px;padding:10px 0;background:transparent;font:var(--type-meta);text-align:left}
+.pulse-measurement-list>li+li{border-top:1px dashed #e3e8e7}
+.pulse-measurement-list>li[data-selected=true]{color:#298160}
 .pulse-measurement-time{display:flex;align-items:center;gap:10px;min-width:0}
 .pulse-measurement-state{display:flex;flex:none;width:18px;height:18px}
 .pulse-measurement-state>.icon{width:18px;height:18px}

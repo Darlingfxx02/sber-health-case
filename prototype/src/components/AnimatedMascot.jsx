@@ -4,6 +4,7 @@ import faceArt from "../../assets/mascot/health-mascot-face.svg";
 import widgetArt from "../../assets/mascot/health-mascot-semicircle.svg";
 import { useMascotBehavior } from "../hooks/useMascotBehavior.js";
 import { useMascotLighting } from "../hooks/useMascotLighting.js";
+import { withActivityProgress } from "../mascot-activity.js";
 import "../mascot.css";
 
 // Decorate the existing authored vectors; keep their contours, colours and orbit intact.
@@ -47,13 +48,21 @@ export function AnimatedMascot({
   cue,
   contextKey,
   emotion,
+  activityProgress,
 }) {
   const id = useId().replace(/[^a-zA-Z0-9_-]/g, "");
   const source =
     variant === "widget" ? widgetArt : variant === "chat" ? chatArt : faceArt;
   const markup = useMemo(
-    () => prepareArtwork(source, id, variant),
-    [source, id, variant],
+    () =>
+      prepareArtwork(
+        activityProgress
+          ? withActivityProgress(source, activityProgress)
+          : source,
+        id,
+        variant,
+      ),
+    [source, id, variant, activityProgress],
   );
   const behavior = useMascotBehavior({
     active,

@@ -2,6 +2,7 @@ import { useLayoutEffect, useRef, useState } from "react";
 import { canOpenDetail } from "../case-scope.js";
 import {
   ACTIVITY_DAYS,
+  TODAY_ACTIVITY,
   CARDS,
   RESULTS,
   activityContext,
@@ -53,7 +54,7 @@ function ActivityRings({ progress }) {
 }
 
 export function ActivityStrip({
-  selected = ACTIVITY_DAYS[0].id,
+  selected = TODAY_ACTIVITY.id,
   onOpen,
   onSelect,
   detail = false,
@@ -304,7 +305,7 @@ function Documents() {
   );
 }
 export function Widgets({ active, motionActive = active, onOpen }) {
-  const [selectedId, setSelectedId] = useState(ACTIVITY_DAYS[0].id);
+  const [selectedId, setSelectedId] = useState(TODAY_ACTIVITY.id);
   const day = ACTIVITY_DAYS.find((item) => item.id === selectedId),
     metrics = metricsForDay(day);
   return (

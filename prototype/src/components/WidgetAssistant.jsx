@@ -1,6 +1,6 @@
 import { AnimatedMascot } from "./AnimatedMascot.jsx";
 import { mascotCue } from "../mascot-behavior.js";
-import { ACTIVITY_DAYS } from "../data.js";
+import { TODAY_ACTIVITY } from "../data.js";
 import { GOALS } from "../../activity-model.js";
 
 export function WidgetAssistant({ active, motionActive = active, day }) {
@@ -60,7 +60,7 @@ export function WidgetAssistant({ active, motionActive = active, day }) {
             variant="widget"
             surface="widgets"
             active={motionActive}
-            cue={mascotCue(day, ACTIVITY_DAYS[0].id)}
+            cue={mascotCue(day, TODAY_ACTIVITY.id)}
             contextKey={day.id}
           />
         </span>

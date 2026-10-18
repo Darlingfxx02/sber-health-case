@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { ACTIVITY_DAYS, TODAY_ACTIVITY } from "../../src/data.js";
 
 test("late iframe load recovers automatically and preserves the current intro scene", async ({
   page,
@@ -83,11 +84,50 @@ test("tour, free prototype and pulse periods work with one persistent iframe", a
     );
   });
   const app = page.frameLocator("iframe");
+  const todayProgress = TODAY_ACTIVITY.progress.map((value) => `${value} 100`);
+  const chatProgress = () =>
+    Promise.all(
+      ["orange", "blue", "green"].map((color) =>
+        app
+          .locator(`.health-mascot [id$="-activity-${color}"]`)
+          .getAttribute("stroke-dasharray"),
+      ),
+    );
+  await expect.poll(chatProgress).toEqual(todayProgress);
   await activate(app.getByRole("tab", { name: "Главная", exact: true }));
   await expect(
     app.getByRole("tab", { name: "Главная", exact: true }),
   ).toHaveAttribute("aria-selected", "true");
   await expect(app.locator(".device")).not.toHaveClass(/navigation-settling/);
+  const homeProgress = () =>
+    app
+      .locator(".widget-activity-value")
+      .evaluateAll((arcs) =>
+        arcs.map((arc) => arc.getAttribute("stroke-dasharray")),
+      );
+  await expect.poll(homeProgress).toEqual(todayProgress);
+  const previousDay = ACTIVITY_DAYS[1];
+  const previousDate = app.getByRole("button", {
+    name: `${previousDay.date}. Показать данные`,
+    exact: true,
+  });
+  await activate(previousDate);
+  await expect
+    .poll(homeProgress)
+    .toEqual(previousDay.progress.map((value) => `${value} 100`));
+  await activate(app.getByRole("tab", { name: "Чат", exact: true }));
+  await expect(app.locator(".device")).not.toHaveClass(/navigation-settling/);
+  await expect.poll(chatProgress).toEqual(todayProgress);
+  await activate(app.getByRole("tab", { name: "Главная", exact: true }));
+  await expect(app.locator(".device")).not.toHaveClass(/navigation-settling/);
+  await expect(previousDate).toHaveAttribute("aria-pressed", "true");
+  await activate(
+    app.getByRole("button", {
+      name: `${TODAY_ACTIVITY.date}. Показать данные`,
+      exact: true,
+    }),
+  );
+  await expect.poll(homeProgress).toEqual(todayProgress);
   await activate(app.getByRole("button", { name: /^Пульс,/ }));
   await expect(app.locator(".pulse-panel")).toBeVisible();
   for (const name of ["Неделя", "Месяц", "Год", "День"]) {

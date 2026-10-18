@@ -13,7 +13,7 @@ import { Widgets } from "./components/Widgets.jsx";
 import { PulseDetails } from "./components/PulseDetails.jsx";
 import { readStartView } from "./preferences.js";
 import { useHistoryDrawer } from "./hooks/useHistoryDrawer.js";
-import { RESULTS, ACTIVITY_DAYS, metricsForDay } from "./data.js";
+import { RESULTS, TODAY_ACTIVITY, metricsForDay } from "./data.js";
 import { useCaseBridge } from "./hooks/useCaseBridge.js";
 import { canOpenDetail } from "./case-scope.js";
 import { usePulseNavigation } from "./hooks/usePulseNavigation.js";
@@ -134,7 +134,7 @@ export function App() {
     backSwipe,
     closeDetail,
     enter(state) {
-      const metric = metricsForDay(ACTIVITY_DAYS[0]).find(
+      const metric = metricsForDay(TODAY_ACTIVITY).find(
         (item) => item.id === "pulse",
       );
       conversation.restore(state, metric);

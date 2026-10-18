@@ -301,6 +301,9 @@ export const ACTIVITY_DAYS = [
   },
 ];
 
+// The latest recorded day is "today" in this fixed prototype dataset.
+export const TODAY_ACTIVITY = ACTIVITY_DAYS[0];
+
 export function demoReply(prompt, context) {
   const files = context.filter((c) => c.kind === "file");
   const metrics = context.filter((c) => c.kind === "metric");

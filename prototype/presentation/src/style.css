@@ -11,7 +11,6 @@
 
 .scene-body p+p{margin-top:22px}
 .demo-gesture-layer{position:absolute;inset:0;pointer-events:none;z-index:12}
-.interaction-demo-controls{margin-top:28px}.interaction-demo-controls[hidden]{display:none}.interaction-demo-controls p{font-size:14px;line-height:1.5;color:#7b7b7b;min-height:42px;margin:0 0 12px}.interaction-demo-controls>div{display:flex;gap:8px}.interaction-demo-controls button{min-height:40px;padding:0 18px;border-radius:24px;background:#f6f6f6;font-size:13px}.interaction-demo-controls button:hover:not(:disabled){background:#eee}.interaction-demo-controls button:disabled{color:#999}
 
 .free-controls{position:absolute;inset:0;pointer-events:none;z-index:55}.free-controls button{position:absolute;top:20px;left:24px;pointer-events:auto;background:#f6f6f6;padding:12px 20px;border-radius:24px;font-size:14px}.free-controls>span{position:absolute;bottom:16px;width:100%;text-align:center;font-size:11px;color:#a7a7a7}
 

@@ -20,7 +20,7 @@ root.innerHTML=`
   <div class="case-device before-device" aria-hidden="true"><div class="case-screen"><img class="comparison-image" alt=""/></div><img class="frame-art" src="${frameUrl}" alt=""/><span class="device-caption">Ранний вариант</span></div>
   <div class="case-device live-device"><div class="case-screen"><iframe src="app.html?embed=case" title="Живой прототип СберЗдоровья"></iframe><div class="case-shield"></div></div><img class="frame-art" src="${frameUrl}" alt="iPhone 17 Pro Max Deep Blue"/><span class="device-caption">Решение</span></div>
   <svg class="tour-overlay" aria-hidden="true"></svg>
-  <article class="case-copy" tabindex="0"><h1></h1><div class="scene-body"></div><div class="interaction-demo-controls" hidden><p data-demo-status></p><div><button data-demo-toggle aria-pressed="false">Пауза</button><button data-demo-replay>Повторить</button></div></div></article>
+  <article class="case-copy" tabindex="0"><h1></h1><div class="scene-body"></div></article>
   <div class="tour-controls"><button data-prev class="arrow-button" aria-label="Предыдущий этап">${icon('chevron-right')}</button><button data-explore>Исследовать макет</button><button data-next class="arrow-button" aria-label="Следующий этап">${icon('chevron-right')}</button><span class="tour-count"></span></div>
   <p class="case-error" role="alert" hidden></p>
   <div class="free-controls" hidden><button data-close-free>К кейсу</button></div>
@@ -40,6 +40,7 @@ const frame=$<HTMLIFrameElement>('iframe'),adapter=sameOriginAdapter(frame),stag
 const effects=createCaseEffects(stage);let focusFrame=0;
 let historyTimer=0,moving=false;
 let index=0,historyMode=false,free=false,operation=new AbortController(),resizeFrame=0,historyTop=0,focusTargets:HTMLElement[]=[],ready=false;
+let demoOperation:AbortController|null=null;
 let scrollGeometry:ReturnType<typeof caseScrollGeometry>|null=null;
 const compact=()=>window.innerWidth<1000;
 const place=(el:HTMLElement,box:any)=>Object.assign(el.style,{width:shell.width+'px',height:shell.height+'px',transform:`translate3d(${box.x}px,${box.y}px,0) scale(${box.scale})`});
@@ -76,7 +77,6 @@ function copyScene(){
  const scene=scenes[index];root.dataset.scene=scene.id;
  $('h1').textContent=scene.title;$('h1').hidden=!!scene.blocks;
  $('.scene-body').innerHTML=scene.blocks?scene.blocks.map(block=>`<section class="hypothesis-section"><h2>${block.title}</h2><p>${block.body}</p></section>`).join(''):scene.body.split('\n\n').map(p=>`<p>${p}</p>`).join('');
- $('.interaction-demo-controls').hidden=!scene.demo;
  copy.scrollTop=0;$('.tour-count').textContent=`${index+1} / ${scenes.length}`;
  $<HTMLButtonElement>('[data-prev]').disabled=index===0;
  $<HTMLButtonElement>('[data-next]').setAttribute('aria-label',index===scenes.length-1?'Перейти к истории':'Следующий этап');
@@ -93,15 +93,19 @@ function followFocus(){
 }
 
 async function enter(next:number){
- operation.abort();operation=new AbortController();const{signal}=operation;ready=false;$<HTMLButtonElement>('[data-explore]').disabled=true;index=Math.min(scenes.length-1,Math.max(0,next));setHistoryMode(false);hideFocus();copyScene();layout();
+ const target=Math.min(scenes.length-1,Math.max(0,next));
+ // Intro pages share one live demo, including its current gesture and pause state.
+ if(scenes[target].demo&&demoOperation===operation&&!operation.signal.aborted){index=target;copyScene();layout();return;}
+ operation.abort();operation=new AbortController();const{signal}=operation;ready=false;$<HTMLButtonElement>('[data-explore]').disabled=true;index=target;demoOperation=scenes[index].demo?operation:null;setHistoryMode(false);hideFocus();copyScene();layout();
  $('.case-error').hidden=true;
  try{
   const scene=scenes[index],anchors=typeof scene.focus==='string'?[scene.focus]:scene.focus??[];
   await adapter.ready(signal);await adapter.enter(scene.state,signal);await Promise.all(anchors.map(anchor=>adapter.settled(anchor,signal)));signal.throwIfAborted();
   const targets=await Promise.all(anchors.map(anchor=>adapter.find(anchor,signal)));signal.throwIfAborted();
   ready=true;$<HTMLButtonElement>('[data-explore]').disabled=false;focusTargets=targets;if(targets.length)followFocus();
-  if(scene.demo)await playInteractionDemo({frame,screen:device.querySelector<HTMLElement>('.case-screen')!,controls:$('.interaction-demo-controls'),signal});
+  if(scene.demo)await playInteractionDemo({frame,screen:device.querySelector<HTMLElement>('.case-screen')!,signal});
  }catch(error){if(signal.aborted)return;$('.case-error').textContent='Не удалось открыть этап. Попробуйте перейти к нему ещё раз.';$('.case-error').hidden=false;console.error(error);}
+ finally{if(demoOperation?.signal===signal)demoOperation=null;}
 }
 function navigate(next:number){
  textScroll.cancel();
@@ -135,7 +139,6 @@ let savedOverflow='';
 function explore(){if(!ready)return;textScroll.cancel();operation.abort();free=true;hideFocus();savedOverflow=document.documentElement.style.overflow;document.documentElement.style.overflow='hidden';$('.free-backdrop').hidden=false;layout();$('[data-close-free]').focus();}
 function closeFree(){free=false;document.documentElement.style.overflow=savedOverflow;$('.free-backdrop').hidden=true;void enter(index);$('[data-explore]').focus({preventScroll:true});}
 $('[data-prev]').onclick=()=>navigate(index-1);$('[data-next]').onclick=()=>navigate(index+1);$('[data-explore]').onclick=explore;$('[data-close-free]').onclick=closeFree;
-$('[data-demo-replay]').onclick=()=>void enter(index);
 $('[data-restart]').onclick=()=>navigate(0);
 function setEntry(entry:HTMLElement,open:boolean){entry.querySelector('button')!.setAttribute('aria-expanded',String(open));entry.querySelector<HTMLElement>('.entry-detail')!.hidden=!open;}
 root.querySelectorAll<HTMLElement>('.history-entry').forEach(entry=>entry.querySelector('button')!.onclick=()=>setEntry(entry,entry.querySelector('button')!.getAttribute('aria-expanded')!=='true'));

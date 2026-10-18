@@ -66,7 +66,7 @@ export function AppHeader({ view, onView, disabled }) {
               value="widgets"
               aria-controls="widget-panel"
             >
-              Виджеты
+              Главная
             </GlassTabsTrigger>
           </GlassTabsList>
         </GlassTabsRoot>

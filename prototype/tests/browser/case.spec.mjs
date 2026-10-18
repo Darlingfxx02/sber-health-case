@@ -83,9 +83,9 @@ test("tour, free prototype and pulse periods work with one persistent iframe", a
     );
   });
   const app = page.frameLocator("iframe");
-  await activate(app.getByRole("tab", { name: "Виджеты", exact: true }));
+  await activate(app.getByRole("tab", { name: "Главная", exact: true }));
   await expect(
-    app.getByRole("tab", { name: "Виджеты", exact: true }),
+    app.getByRole("tab", { name: "Главная", exact: true }),
   ).toHaveAttribute("aria-selected", "true");
   await expect(app.locator(".device")).not.toHaveClass(/navigation-settling/);
   await activate(app.getByRole("button", { name: /^Пульс,/ }));
